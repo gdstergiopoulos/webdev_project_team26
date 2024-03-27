@@ -1,0 +1,47 @@
+html{
+    background-color: #181515;
+}
+
+body{
+    background-color: #181515;
+    color: #c17379;
+}
+
+
+h1{
+    color: #c17379;
+    font-size: 2.5rem;
+    background-color: #181515;
+    padding-left: 3%;
+}
+
+form{
+    background-color: #181515;
+}
+
+
+legend{
+    background-color: #181515;
+}
+
+.form-control{
+    width: 10rem;
+    height: 2rem;
+}
+
+.btn{
+    background-color: #c17379;
+    border-color: #c17379;
+    color: #181515;
+    margin-left: 3%;
+}
+
+.btn:hover{
+    background-color: #ee08a9;
+    border-color: #c17379;
+    color: #c17379;
+}
+
+#shop_logo{
+    width: 32rem;
+}
