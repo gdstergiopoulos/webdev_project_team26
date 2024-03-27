@@ -12,10 +12,11 @@
     <div class="container">
         <h1>Fagadiko</h1>
         <div class="row">
-            <div class="col">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <div class="d-flex flex-column align-items-center">
                 <form>
-                    <fieldset>
-                        <legend>Welcome</legend>
+                    <fieldset class="text-center">
+                        <legend class="text-start">Welcome</legend>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                         <br><br>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
@@ -23,9 +24,10 @@
                         <input type="submit" class="btn btn-primary" value="Login">
                     </fieldset>
                 </form>
-                <b>Not a member? <a href="./register.html">Create</a> an account</b>
+                <p id="linktoreg">Not a member? <a href="./register.html">Create</a> an account</p>
+                </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <img id="shop_logo" class="image-fluid" src="./media/fagadiko_notext.jpg" alt="shop_logo">
             </div>
         </div>

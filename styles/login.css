@@ -11,11 +11,11 @@ body{
 h1{
     color: #c17379;
     font-size: 2.5rem;
-    background-color: #181515;
-    padding-left: 3%;
+    background-color: #181515; 
 }
 
 form{
+    padding-top: 25%;
     background-color: #181515;
 }
 
@@ -33,7 +33,6 @@ legend{
     background-color: #c17379;
     border-color: #c17379;
     color: #181515;
-    margin-left: 3%;
 }
 
 .btn:hover{
@@ -42,6 +41,15 @@ legend{
     color: #c17379;
 }
 
+a:link{
+    color: #ee08a9;
+}
+
 #shop_logo{
     width: 32rem;
+    padding-top: 20%;
+}
+
+#linktoreg{
+    padding-top: 5%;
 }
