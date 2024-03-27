@@ -15,7 +15,10 @@ body{
 h1{
     color: #c17379;
     font-size: 2.5rem;
-    background-color: #181515; 
+    background-color: #181515;
+    font-family: 'Newsreader', serif;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
 form{
@@ -61,3 +64,4 @@ a:hover{
 #linktoreg{
     padding-top: 5%;
 }
+ 
