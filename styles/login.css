@@ -65,3 +65,28 @@ a:hover{
     padding-top: 5%;
 }
  
+#homepg{
+    text-decoration: none;
+}
+
+#contactinfo,#accountinfo{
+    padding-top: 2rem;
+}
+
+#confirmpass{
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+}
+
+
+#nameinfo>div.col:first-child,#contactinfo>div:first-child,#accountinfo>div:first-child{
+    padding-right: 0rem;
+}
+
+#nameinfo>div:last-child,#contactinfo>div:last-child,#accountinfo>div:last-child{
+    padding-left: 0rem;
+}
+
+div.col:nth-child(2n){
+    padding-right: 0rem;
+}
