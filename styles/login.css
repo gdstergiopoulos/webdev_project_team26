@@ -43,16 +43,16 @@ legend{
 }
 
 .btn:hover{
-    background-color: #ee08a9;
-    border-color: #c17379;
-    color: #c17379;
+    background-color: #87b6cf;
+    border-color: #272f5d;
+    color: #272f5d;
 }
 
 a{
     color: #c17379;
 }
 a:hover{
-    color: #f883e5;
+    color: #87b6cf;
 }
 
 
