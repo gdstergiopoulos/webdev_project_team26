@@ -1,0 +1,112 @@
+html{
+    background-color: #181515;
+}
+
+body{
+    background-color: #181515;
+    color: #c17379;
+    background-image: url("./media/restaurant.jpg");
+}
+.container{
+    background-color: #181515;
+    color: #c17379;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+
+legend{
+    background-color: #181515;
+}
+
+
+
+.btn{
+    background-color: #c17379;
+    border-color: #c17379;
+    color: #181515;
+}
+
+
+a{
+    color: #c17379;
+}
+a:hover{
+    color: #87b6cf;
+}
+
+#reservationbtn{
+    background-color: #c17379;
+    color: rgb(99, 49, 3);
+    border-radius: 15px;
+}
+
+#reservationbtn:hover{
+    color:#87b6cf; 
+}
+
+.navbar{
+    width:100%;
+}
+
+.nav-link{
+    color: #c17379;
+    margin-left: 2rem;
+    
+}
+
+.nav-link:hover{
+    color: #87b6cf;
+}
+
+#homepage{
+    margin-right: 80%;
+    color: #c17379;
+    font-size: 2.5rem;
+    background-color: #181515;
+    font-family: 'Newsreader', serif;
+    padding-left: 10px;
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+#homepage:hover{
+    color: #87b6cf;
+}
+
+.image {
+    background-image: url("../media/restaurant.jpg");
+    background-size: cover; /* Adjusts the background image to cover the entire area of the div */
+    background-position: center; /* Centers the background image within the div */
+    height: 100rem; /* Adjust the height of the div as needed */
+}
+
+.centered{
+    font-family: 'Newsreader', serif;
+    color: #c17379;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content (optional) */
+    padding-top: 25rem;
+    font-weight: bold;
+}
+
+#view_menu_btn{
+    background-color: #c17379;
+    color: rgb(99, 49, 3);
+    border-radius: 15px;
+    text-align: center;
+    size: 2px;
+    width: 9rem;
+    height: 3.5rem;
+    margin-left: 46%;
+}
+
+#view_menu_btn:hover{
+    color:#87b6cf; 
+}
+
+t{
+    margin-top: 50%;
+}
