@@ -90,3 +90,7 @@ a:hover{
 div.col:nth-child(2n){
     padding-right: 0rem;
 }
+
+.navbar>h1{
+    padding-right: 70rem;
+}
