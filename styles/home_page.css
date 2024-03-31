@@ -102,10 +102,31 @@ a:hover{
     margin-left: 46%;
 }
 
+h1{
+    color: #c17379;
+    font-size: 2.5rem;
+    background-color: #181515;
+    font-family: 'Newsreader', serif;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
 #view_menu_btn:hover{
     color:#87b6cf; 
 }
 
 t{
     margin-top: 50%;
+}
+
+#confirmpass{
+    padding-top: 1rem;
+}
+
+#registerbtn{
+    padding-top: 1rem;
+}
+
+.navbar>h1{
+    padding-right: 70rem;
 }
