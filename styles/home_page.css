@@ -59,7 +59,7 @@ a:hover{
 }
 
 #homepage{
-    margin-right: 80%;
+    margin-right: 70rem;
     color: #c17379;
     font-size: 2.5rem;
     background-color: #181515;
@@ -130,3 +130,9 @@ t{
 .navbar>h1{
     padding-right: 70rem;
 }
+
+@media only screen and (max-width: 1580px) {
+    #homepage{
+        font-size: 2rem; /* reduce font size for smaller screens */
+        margin-right: 50rem; /* reduce margin for smaller screens */
+    }

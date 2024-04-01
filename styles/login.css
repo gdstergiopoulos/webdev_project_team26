@@ -11,6 +11,8 @@ body{
     color: #c17379;
     padding-left: 0;
     margin-left: 0;
+    margin-right: 2rem;
+    width: 2rem;
 }
 h1{
     color: #c17379;
@@ -19,6 +21,8 @@ h1{
     font-family: 'Newsreader', serif;
     padding-left: 10px;
     padding-top: 10px;
+    width: 2rem;
+    padding-right: 0%;
 }
 
 form{
@@ -92,5 +96,18 @@ div.col:nth-child(2n){
 }
 
 .navbar>h1{
-    padding-right: 70rem;
+    padding-right:83rem;
+}
+
+@media only screen and (max-width: 1580px) {
+    /*
+    #homepg{
+        font-size: 2rem; / reduce font size for smaller screens /
+        margin-right: -rem; / reduce margin for smaller screens /
+    }
+    */
+
+    .navbar>h1{
+        padding-right: 60rem;
+    }
 }
