@@ -1,80 +1,3 @@
-/* html{
-    background-color: #181515;
-} */
-
-/* #homepg{
-    background-color: #181515;
-    color: #c17379;
-    /* background-image: url("./media/restaurant.jpg"); 
-} */
-
-/* .container{
-    background-color: #181515;
-    color: #c17379;
-    padding-left: 0;
-    margin-left: 0;
-    width: 100%;
-} */
-
-/* 
-legend{
-    background-color: #181515;
-} */
-
-
-/* 
-.btn{
-    background-color: #c17379;
-    border-color: #c17379;
-    color: #181515;
-} */
-
-
-/* a{
-    color: #c17379;
-}
-a:hover{
-    color: #87b6cf;
-} */
-
-/* #reservationbtn{
-    background-color: #c17379;
-    color: rgb(99, 49, 3);
-    border-radius: 15px;
-} */
-/* 
-#reservationbtn:hover{
-    color:#87b6cf; 
-} */
-
-/* .navbar{
-    width:100%;
-}
-
-.nav-link{
-    color: #c17379;
-    margin-left: 2rem;    
-}
-
-.nav-link:hover{
-    color: #87b6cf;
-} */
-
-/* #homepage{
-    margin-right: 70rem;
-    color: #c17379;
-    font-size: 2.5rem;
-    background-color: #181515;
-    font-family: 'Newsreader', serif;
-    padding-left: 10px;
-    padding-top: 10px;
-    text-decoration: none;
-}
-
-#homepage:hover{
-    color: #87b6cf;
-} */
-
 .image {
     background-image: url("../media/restaurant.jpg");
     background-size: cover; /* Adjusts the background image to cover the entire area of the div */
@@ -104,34 +27,9 @@ a:hover{
     margin-left: 46%;
 }
 
-/* h1{
-    color: #c17379;
-    font-size: 2.5rem;
-    background-color: #181515;
-    font-family: 'Newsreader', serif;
-    padding-left: 10px;
-    padding-top: 10px;
-} */
-
 #view_menu_btn:hover{
     color:#87b6cf; 
 }
-
-/* t{
-    margin-top: 50%;
-} */
-
-/* #confirmpass{
-    padding-top: 1rem;
-}
-
-#registerbtn{
-    padding-top: 1rem;
-} */
-
-/* .navbar>h1{
-    padding-right: 70rem;
-} */
 
 @media only screen and (max-width: 1580px) {
     #homepage{

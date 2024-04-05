@@ -1,38 +1,3 @@
-/* .container{
-    background-color: #181515;
-    color: #c17379;
-    padding-left: 0;
-    margin-left: 0;
-    margin-right: 2rem;
-    width: 2rem;
-} */
-
-/* h1{
-    color: #c17379;
-    font-size: 2.5rem;
-    background-color: #181515;
-    font-family: 'Newsreader', serif;
-    padding-left: 10px;
-    padding-top: 10px;
-    width: 2rem;
-    padding-right: 0%;
-} */
-
-form{
-    padding-top: 25%;
-    background-color: #181515;
-}
-
-
-/* legend{
-    background-color: #181515;
-} */
-
-/* .form-control{
-    width: 10rem;
-    height: 2rem;
-} */
-
 #shop_logo{
     width: 32rem;
     padding-top: 20%;
@@ -65,14 +30,7 @@ div.col:nth-child(2n){
 }
 
 @media only screen and (max-width: 1580px) {
-    /*
-    #homepg{
-        font-size: 2rem; / reduce font size for smaller screens /
-        margin-right: -rem; / reduce margin for smaller screens /
-    }
-    */
-
-    .navbar>h1{
+     .navbar>h1{
         padding-right: 60rem;
     }
 }
