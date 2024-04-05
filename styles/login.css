@@ -3,7 +3,7 @@
     padding-top: 20%;
 }
 
-#linktoreg{
+#linktoreg,#linktolog{
     padding-top: 5%;
 }
  
@@ -29,8 +29,44 @@ div.col:nth-child(2n){
     padding-right: 0rem;
 }
 
-@media only screen and (max-width: 1580px) {
-     .navbar>h1{
-        padding-right: 60rem;
+#loginform{
+    padding-top: 7rem;
+    padding-right: 8rem;
+    padding-left: 8rem;
+}
+
+#shoplogocol{
+    padding-top: 3rem;
+    padding-left: 12rem;
+}
+
+#registerform{
+    padding-top: 4rem;
+    padding-right: 8rem;
+    padding-left: 8rem;
+}
+
+
+@media only screen and (max-width: 760px) {
+    #loginform{
+        padding-top: 3rem;
+        padding-left: 12rem;  
+        padding-right: 2rem;
+    }
+
+    #shoplogocol{
+        padding-top: 3rem;
+        padding-left: 7rem;
+    }
+
+    #registerform{
+        padding-top: 3rem;
+        padding-left: 15rem;  
+        padding-right: 4rem;
+    }
+
+    #linktolog{
+        padding-top: 2rem;
+        padding-left: 12rem;
     }
 }
