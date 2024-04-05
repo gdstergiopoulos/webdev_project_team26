@@ -1,21 +1,13 @@
-html{
-    background-color: #181515;
-}
-
-body{
-    background-color: #181515;
-    color: #c17379;
-}
-.container{
+/* .container{
     background-color: #181515;
     color: #c17379;
     padding-left: 0;
     margin-left: 0;
     margin-right: 2rem;
     width: 2rem;
-}
+} */
 
-h1{
+/* h1{
     color: #c17379;
     font-size: 2.5rem;
     background-color: #181515;
@@ -24,7 +16,7 @@ h1{
     padding-top: 10px;
     width: 2rem;
     padding-right: 0%;
-}
+} */
 
 form{
     padding-top: 25%;
@@ -32,34 +24,14 @@ form{
 }
 
 
-legend{
+/* legend{
     background-color: #181515;
-}
+} */
 
-.form-control{
+/* .form-control{
     width: 10rem;
     height: 2rem;
-}
-
-.btn{
-    background-color: #c17379;
-    border-color: #c17379;
-    color: #181515;
-}
-
-.btn:hover{
-    background-color: #87b6cf;
-    border-color: #272f5d;
-    color: #272f5d;
-}
-
-a{
-    color: #c17379;
-}
-a:hover{
-    color: #87b6cf;
-}
-
+} */
 
 #shop_logo{
     width: 32rem;
@@ -70,10 +42,6 @@ a:hover{
     padding-top: 5%;
 }
  
-#homepg{
-    text-decoration: none;
-}
-
 #contactinfo,#accountinfo{
     padding-top: 2rem;
 }
@@ -94,10 +62,6 @@ a:hover{
 
 div.col:nth-child(2n){
     padding-right: 0rem;
-}
-
-.navbar>h1{
-    padding-right:83rem;
 }
 
 @media only screen and (max-width: 1580px) {
