@@ -22,7 +22,7 @@
 }
 
 #nameinfo>div:last-child,#contactinfo>div:last-child,#accountinfo>div:last-child{
-    padding-left: 0rem;
+    padding-left: 1rem;
 }
 
 div.col:nth-child(2n){
