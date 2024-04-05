@@ -2,7 +2,7 @@ html{
     background-color: #181515;
 }
 
-body{
+#homepg{
     background-color: #181515;
     color: #c17379;
     background-image: url("./media/restaurant.jpg");
@@ -136,3 +136,4 @@ t{
         font-size: 2rem; /* reduce font size for smaller screens */
         margin-right: 50rem; /* reduce margin for smaller screens */
     }
+}

@@ -1,0 +1,32 @@
+html{
+    background-color: #181515;
+}
+
+body{
+    background-color: #181515;
+    color: #c17379;
+}
+
+h1{
+    color: #c17379;
+    font-size: 2.5rem;
+    background-color: #181515;
+    font-family: 'Newsreader', serif;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 2rem;
+    padding-right: 0%;
+}
+
+.navbar{
+    width:100%;
+}
+
+.nav-link{
+    color: #c17379;
+    margin-left: 2rem;    
+}
+
+.nav-link:hover{
+    color: #87b6cf;
+}
