@@ -1,5 +1,38 @@
-#map{
+.container {
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    margin:0%;
+}
+
+h1{
+    width:100%;
+}
+
+p{
+    padding-left:3%;
+    width: 100%;
+}
+#map {
     height: 500px;
-    width: 500px;
-    padding-left: 50px;
+    width:50%;
+    margin-left: 0%;   
+    flex:1;
+    padding-top: 5rem;
+}
+
+#locpg{
+    padding-top: 3%;
+    
+}
+
+#shoplogocol{
+    padding-top: rem;
+    padding-right: 40rem;
+    padding-left: 1rem;
+    margin-right: 15rem;
+}
+
+#shop_logo{
+    padding-top: 5rem;
 }
