@@ -1,38 +1,46 @@
-.container {
+#locpg{
     display: flex;
-    justify-content: space-between;
     width:100%;
     margin:0%;
+    margin-top: 3rem;
 }
 
-h1{
+/* h1{
     width:100%;
-}
+} */
 
 p{
     padding-left:3%;
     width: 100%;
 }
 #map {
-    height: 500px;
-    width:50%;
-    margin-left: 0%;   
+    flex-grow: 1;
+    height: 100%;
+    width:100%;
+    margin-left: 20%;   
     flex:1;
     padding-top: 5rem;
 }
 
-#locpg{
-    padding-top: 3%;
-    
-}
 
 #shoplogocol{
-    padding-top: rem;
-    padding-right: 40rem;
+    flex-grow: 0;
+    padding-right: 0rem;
     padding-left: 1rem;
-    margin-right: 15rem;
+    margin-right: 0rem;
 }
 
 #shop_logo{
     padding-top: 5rem;
+    width: 35rem;
+}
+
+.row{
+    width: 100%;
+    flex-grow: 1;
+}
+
+#shoplogocol>h1{
+    width:100%;
+    padding-left: 3%;
 }
