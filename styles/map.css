@@ -1,46 +1,42 @@
-#locpg{
-    display: flex;
-    width:100%;
-    margin:0%;
-    margin-top: 3rem;
+div>h1{
+    padding-left:3%;
+    padding-top: 5%;
+    width: 70%;
 }
-
-/* h1{
-    width:100%;
-} */
 
 p{
     padding-left:3%;
+    padding-top: 1%;
+    width: 70%;
+    color:white
+}
+
+#txtandlogo{
+    display: flex;
     width: 100%;
-}
-#map {
-    flex-grow: 1;
     height: 100%;
-    width:100%;
-    margin-left: 20%;   
-    flex:1;
-    padding-top: 5rem;
+    padding-left: 0;
+    margin-left: 0;
 }
 
-
-#shoplogocol{
-    flex-grow: 0;
-    padding-right: 0rem;
-    padding-left: 1rem;
-    margin-right: 0rem;
+#mapcont{
+    display: flex;
+    width: 64%;
+    height: 30rem;
+    padding-left: 0;
+    margin-left: 0;
+    margin-left: 33%;
+    /* margin-left: 33%; comment this for prev version */
 }
 
 #shop_logo{
-    padding-top: 5rem;
-    width: 35rem;
-}
-
-.row{
-    width: 100%;
-    flex-grow: 1;
-}
-
-#shoplogocol>h1{
+    flex:1;
     width:100%;
-    padding-left: 3%;
+    margin-left: 39rem;
+}
+#map {
+    height: 100%;
+    width:100%;
+    margin-left: 2%;   
+    padding-top: 5rem;
 }
