@@ -11,8 +11,13 @@ document.addEventListener("DOMContentLoaded", function() {
     var map = L.map("map").setView([38.29, 21.7946], 14);
 
     
-
-    var marker = L.marker([38.28864841960415, 21.788658751750393]).addTo(map);
+    custom=L.ExtraMarkers.icon({
+        icon: 'fa-number',
+        markerColor: 'red',
+        shape: 'circle',
+        prefix: 'fa'
+      });
+    var marker = L.marker([38.28864841960415, 21.788658751750393],{icon:custom}).addTo(map);
     marker.bindPopup("FAGADIKO").addEventListener(this.onclick, function() {
         marker.bindPopup("FAGADIKO").openPopup();});
 
@@ -25,11 +30,15 @@ document.addEventListener("DOMContentLoaded", function() {
             accessToken: 'pk.eyJ1IjoiZ2RzdGVyZ2lvcG91bG9zIiwiYSI6ImNsdW1wdWxhYzB4ZmkyaWxuaDFjZjhoYnUifQ.M331BKPLXLd5K1jl6nFHcQ'
           }).addTo(map);
         
-          var layer2=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?access_token={accessToken}", {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            accessToken: "pk.eyJ1IjoiZ2RzdGVyZ2lvcG91bG9zIiwiYSI6ImNsdW1wdWxhYzB4ZmkyaWxuaDFjZjhoYnUifQ.M331BKPLXLd5K1jl6nFHcQ"
+        var layer2 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox/dark-v11',
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken: 'pk.eyJ1IjoiZ2RzdGVyZ2lvcG91bG9zIiwiYSI6ImNsdW1wdWxhYzB4ZmkyaWxuaDFjZjhoYnUifQ.M331BKPLXLd5K1jl6nFHcQ'
         }).addTo(map);
+            
         
           var layer3=L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -41,9 +50,9 @@ document.addEventListener("DOMContentLoaded", function() {
           }).addTo(map); 
 
         baseMap = {
-            "OpenStreetMap": layer2,
             "Mapbox Satellite": layer3,
             "Mapbox Streets": layer1,
+            "Mapbox Dark": layer2,
 
         };
 
