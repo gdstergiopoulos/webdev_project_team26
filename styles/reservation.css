@@ -10,12 +10,21 @@
     flex-grow: 1;
     width: 100%;
     margin-right:5%;
+    padding-left: 8%;
+    padding-top: 5%
 }
 
+#floorplan{
+    padding-top: 5%;
+    flex-grow: 1;
+    margin-left: 20%;
+}
 #txtandform>h1{
     padding-left:2%;
     padding-top: 5%;
     width: 100%;
+    font-weight: bold;
+    padding-bottom: 5%;;
 }
 
 #floorplan{
@@ -48,7 +57,7 @@ form {
     margin-bottom: 5px;
 }
 .form-field input, .form-field textarea {
-    width: 30%;
+    width: 50%;
     padding: 5px;
 }
 .form-field input[type="submit"] {
@@ -103,3 +112,17 @@ form {
     margin-top: 20px;
 }
 
+fieldset{
+    width:100%;
+}
+
+#registerform{
+    margin-left:0%
+}
+
+#makereservbtn{
+    width: 36%;
+    height: 50%;
+    margin-top: 12%;
+    margin-left: 7%;
+}
