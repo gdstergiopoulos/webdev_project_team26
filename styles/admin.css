@@ -7,3 +7,35 @@
 #navbarSupportedContent{
     margin-left: 10%;
 }
+
+#adminpanel{
+    display: flex;
+    width: 100%;
+    padding-left: 3%;
+    margin-left: 0;
+    padding-top: 5%;
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+#adminpanel>h1{
+    width: 100%;
+}
+
+#adminpanel>div>.btn{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 5%;
+    margin-left: 3%;
+}
+
+#adminpanel>div>h1{
+    width: 100%;
+    margin-bottom:8%
+}
+
+#imgcont{
+    flex-grow: 1;
+    margin-left: 47%;
+    margin-top: 10%;
+}
