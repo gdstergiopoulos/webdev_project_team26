@@ -1,0 +1,50 @@
+#adminnavbarcont{
+    width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#navbarSupportedContent{
+    margin-left: 10%;
+}
+
+#reservelist{
+    width: 100%;
+    height: 100%;
+}
+
+.task-list>li{
+    display: flex;
+    list-style-type: none;
+    padding-bottom: 1%;
+}
+
+li>span{
+    flex-grow: 1;
+    margin:1%;
+}
+
+li>button{
+    margin-right:1%
+}
+
+.remove{
+    background-color: #F83544;
+    border-color: #F83544;
+}
+
+.reject{
+    background-color: #eb0014;
+    border-color: #eb0014;
+
+}
+
+hr{
+    border-color: #E0E0E0;
+    width: 100%;
+    margin-top: 0%;
+    margin-bottom: 1%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+}
+
