@@ -12,6 +12,14 @@
     width: 100%;
     height: 100%;
 }
+#confirmedlist{
+    width: 100%;
+    height: 100%;
+}
+#changelist{
+    width: 100%;
+    height: 100%;
+}
 
 .task-list>li{
     display: flex;
