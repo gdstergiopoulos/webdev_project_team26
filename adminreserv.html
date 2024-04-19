@@ -36,14 +36,14 @@
             </div>
         </nav>
       </div>
-    <div class="container" id="reservelist">
+    <div class="container" id="pendinglist">
         <div class="tasks">
-            <h1>Reservations</h1>
+            <h1>New Reservations</h1>
             <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
                <li>
                   <span>Να λύσω ξανά την άσκηση αυτή την επόμενη εβδομάδα, που θα ξέρω πώς χειριζόμαστε τα συμβάντα</span>
-                  <button class="btn btn-primary edit">Edit</button class="btn btn-primary">
-                  <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+                  <button class="btn btn-primary edit">Assign Table</button>
+                  <button class="btn btn-primary reject">Reject</button class="btn btn-primary">
                </li>
                <hr>
                <li class="done">
@@ -54,25 +54,65 @@
                 <hr>
                <li>
                 <span>Να διαβάσω JS</span>
-                <button class="btn btn-primary edit">Edit</button>
-                <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+                <button class="btn btn-primary edit">Assign Table</button>
+                <button class="btn btn-primary reject">Reject</button class="btn btn-primary">
                 </li>
                 <hr>
                <li class="done">
                 <span>Να ταΐσω τη γάτα</span>
-                <button class="btn btn-primary edit">Edit</button>
-                <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+                <button class="btn btn-primary edit">Assign Table</button>
+                <button class="btn btn-primary reject">Reject</button class="btn btn-primary">
                </li>
                <hr>
                <li>
                 <span>Να μαγειρέψω</span>
-                <button class="btn btn-primary edit">Edit</button>
-                <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+                <button class="btn btn-primary edit">Assign Table</button>
+                <button class="btn btn-primary reject">Reject</button class="btn btn-primary">
                 </li>
                 <hr>
             </ul>
             <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
             <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
     </div>
+    <div class="container" id="confirmedlist">
+      <div class="tasks">
+          <h1>Confirmed Reservations</h1>
+          <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+             <li>
+              <span>Να διαβάσω JS</span>
+              <button class="btn btn-primary edit">Edit</button>
+              <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+              </li>
+              <hr>
+             <li class="done">
+              <span>Να ταΐσω τη γάτα</span>
+              <button class="btn btn-primary edit">Edit</button>
+              <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+             </li>
+             <hr>
+             <li>
+              <span>Να μαγειρέψω</span>
+              <button class="btn btn-primary edit">Edit</button>
+              <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+              </li>
+              <hr>
+          </ul>
+          <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
+          <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
+  </div>
+  <div class="container" id="confirmedlist">
+    <div class="tasks">
+        <h1>Changes</h1>
+        <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+           <li>
+            <span>Να διαβάσω JS</span>
+            <button class="btn btn-primary remove">Cancel</button class="btn btn-primary">
+              <button class="btn btn-primary approve">Approve Changes</button>
+            </li>
+            <hr>
+        </ul>
+        <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
+        <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
+</div>
 </body>
 </html>
