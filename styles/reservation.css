@@ -3,7 +3,8 @@
     width: 100%;
     height: 100%;
     padding-left: 0;
-    margin-left: 0;
+    margin: 0;
+    margin-left:1%
 }
 
 #txtandform{
@@ -11,17 +12,17 @@
     width: 100%;
     margin-right:5%;
     padding-left: 8%;
-    padding-top: 5%
+    padding-top:3%;
 }
 
 #floorplan{
-    padding-top: 5%;
+    padding-top: 3%;
     flex-grow: 1;
     margin-left: 20%;
 }
 #txtandform>h1{
     padding-left:2%;
-    padding-top: 5%;
+    padding-top: 3%;
     width: 100%;
     font-weight: bold;
     padding-bottom: 5%;;
@@ -30,20 +31,17 @@
 #floorplan{
     flex-grow: 1;
     width:100%;
+    margin-left: 0%;
 }
 
 #floorplan>h1{
     padding-left:0%;
-    padding-top: 5%;
+    padding-top: 3%;
     width: 100%;
 }
 
 input{
     width:40%;
-}
-
-body {
-    font-family: Arial, sans-serif;
 }
 
 form {
@@ -73,6 +71,10 @@ form {
     height:100px;
     margin-bottom: 7px;
     margin-right: 2px;
+}
+
+#floorplan>button:hover{
+    background-color: #f8f696;
 }
 
 #bararea{
@@ -125,4 +127,49 @@ fieldset{
     height: 50%;
     margin-top: 12%;
     margin-left: 7%;
+}
+
+#shop_logo{
+    width: 30%;
+    height: 30%;
+    margin-left:70%;
+    margin-top:0%;
+}
+
+#shop_logo>img{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1580px) {
+    #reservation{
+        width: 80%;
+        height: 70%;
+    }
+    #txtandform{
+        width: 80%;
+        height: 70%;
+    }
+
+    #makereservbtn{
+        width: 36%;
+        height: 50%;
+        margin-top: 5%;
+        margin-left: 7%;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    #reservation {
+        flex-direction: column;
+    }
+
+    #txtandform {
+        order: 1;
+    }
+
+    #floorplan {
+        order: 2;
+        margin-left: 0;
+    }
+    
 }
