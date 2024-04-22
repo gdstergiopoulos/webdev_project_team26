@@ -1,0 +1,396 @@
+.container{
+    margin:0;
+    width: 100%;
+}
+
+html{
+    background-color: #181515;
+}
+
+body{
+    background-color: #181515;
+    color: #c17379;
+}
+
+h1{
+    color: #c17379;
+    font-size: 2.5rem;
+    background-color: #181515;
+    font-family: 'Newsreader', serif;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 100%;
+    padding-right: 0%;
+}
+
+h1>a{
+    text-decoration: none;
+}
+
+#navbarcont{
+    width: 100%;
+}
+
+.navbar{
+    width:100%;
+}
+
+.navbar>h1{
+    padding-right: 100%;
+    height:100%;
+    color: #c17379;
+}
+
+.navbar>h1>a{
+    color: #c17379;
+    height:100%;
+    width:100%;
+    font-size: 100%;
+}
+
+.navbar>h1>a:hover{
+    color: #87b6cf;
+}
+
+.nav-link{
+    color: #c17379;
+    margin-left: 2rem;    
+}
+
+#reservationbtn{
+    background-color: #c17379;
+    color: rgb(99, 49, 3);
+    border-radius: 15px;
+}
+
+#reservationbtn:hover{
+    color: #87b6cf;
+    border-color: #87b6cf;
+}
+
+.nav-link:hover{
+    color: #87b6cf;
+}
+
+#navbarcont{
+    background-color: #181515;
+    color: #c17379;
+    padding-left: 0;
+    margin-left: 0;
+    width: 100%;
+}
+
+.btn{
+    background-color: #c17379;
+    border-color: #c17379;
+    color: #181515;
+}
+
+.btn:hover{
+    background-color: #87b6cf;
+    border-color: #87b6cf;
+    color: #272f5d;
+}
+
+a{
+    color: #c17379;
+}
+
+a:hover{
+    color: #87b6cf;
+}
+
+@media only screen and (max-width: 1580px) {
+    .navbar>h1{
+        padding-right: 55%;
+    }
+}
+
+.image {
+    background-image: url("/media/restaurant.jpg");
+    background-size: cover; /* Adjusts the background image to cover the entire area of the div */
+    background-position: center; /* Centers the background image within the div */
+    height: 100rem; /* Adjust the height of the div as needed */
+    width = 100%;
+}
+
+.centered{
+    font-family: 'Newsreader', serif;
+    color: #c17379;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content (optional) */
+    padding-top: 25rem;
+    font-weight: bold;
+}
+
+#view_menu_btn{
+    background-color: #c17379;
+    color: rgb(99, 49, 3);
+    border-radius: 15px;
+    text-align: center;
+    size: 2px;
+    width: 9rem;
+    height: 3.5rem;
+    margin-left: 46%;
+}
+
+#view_menu_btn:hover{
+    color:#87b6cf; 
+}
+
+@media only screen and (max-width: 1580px) {
+    #homepage{
+        font-size: 2rem; /* reduce font size for smaller screens */
+        margin-right: 50rem; /* reduce margin for smaller screens */
+    }
+}
+
+#shop_logo{
+    width: 32rem;
+    padding-top: 20%;
+}
+
+#linktoreg,#linktolog{
+    padding-top: 5%;
+}
+ 
+#contactinfo,#accountinfo{
+    padding-top: 2rem;
+}
+
+#confirmpass{
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+}
+
+
+#nameinfo>div.col:first-child,#contactinfo>div:first-child,#accountinfo>div:first-child{
+    padding-right: 0rem;
+}
+
+#nameinfo>div:last-child,#contactinfo>div:last-child,#accountinfo>div:last-child{
+    padding-left: 1rem;
+}
+
+div.col:nth-child(2n){
+    padding-right: 0rem;
+}
+
+#loginform{
+    padding-top: 7rem;
+    padding-right: 8rem;
+    padding-left: 8rem;
+}
+
+#shoplogocol{
+    padding-top: 3rem;
+    padding-left: 12rem;
+}
+
+#registerform{
+    padding-top: 4rem;
+    padding-right: 8rem;
+    padding-left: 8rem;
+}
+
+
+@media only screen and (max-width: 760px) {
+    #loginform{
+        padding-top: 3rem;
+        padding-left: 12rem;  
+        padding-right: 2rem;
+    }
+
+    #shoplogocol{
+        padding-top: 3rem;
+        padding-left: 7rem;
+    }
+
+    #registerform{
+        padding-top: 3rem;
+        padding-left: 15rem;  
+        padding-right: 4rem;
+    }
+
+    #linktolog{
+        padding-top: 2rem;
+        padding-left: 12rem;
+    }
+}
+#reservation{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding-left: 0;
+    margin: 0;
+    margin-left:1%
+}
+
+#txtandform{
+    flex-grow: 1;
+    width: 100%;
+    margin-right:5%;
+    padding-left: 8%;
+    padding-top:3%;
+}
+
+#floorplan{
+    padding-top: 3%;
+    flex-grow: 1;
+    margin-left: 20%;
+}
+#txtandform>h1{
+    padding-left:2%;
+    padding-top: 3%;
+    width: 100%;
+    font-weight: bold;
+    padding-bottom: 5%;;
+}
+
+#floorplan{
+    flex-grow: 1;
+    width:100%;
+    margin-left: 0%;
+}
+
+#floorplan>h1{
+    padding-left:0%;
+    padding-top: 3%;
+    width: 100%;
+}
+
+input{
+    width:40%;
+}
+
+form {
+    margin-left:0%;
+}
+.form-field {
+    margin-bottom: 20px;
+}
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-field input, .form-field textarea {
+    width: 50%;
+    padding: 5px;
+}
+.form-field input[type="submit"] {
+    width: 10rem;
+    cursor: pointer;
+}
+
+#insidemain{
+    background-color:#156082;
+    border-color: #156082;
+    color:black;
+    width:350px;
+    height:100px;
+    margin-bottom: 7px;
+    margin-right: 2px;
+}
+
+#floorplan>button:hover{
+    background-color: #f8f696;
+}
+
+#bararea{
+    background-color:#104862;
+    border-color: #104862;
+    color:black;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 7px;
+}
+
+#outsidemain{
+    background-color:#f2aa84;
+    border-color: #f2aa84;
+    color:#6B431F;
+    width:200px;
+    height:150px;
+    margin-bottom: 7px;
+    margin-right: 2px;
+}
+
+#opensky{
+    background-color:#f6c6ad;
+    border-color: #f6c6ad;
+    color:#6B431F;
+    height: 150px;
+    width: 250px;
+    margin-bottom: 7px;
+}
+
+#bythesea{
+    background-color:#96dcf8;
+    border-color: #96dcf8;
+    color:#6B431F;
+    width:455px;
+    height:50px;
+    margin-top: 20px;
+}
+
+fieldset{
+    width:100%;
+}
+
+#registerform{
+    margin-left:0%
+}
+
+#makereservbtn{
+    width: 36%;
+    height: 50%;
+    margin-top: 12%;
+    margin-left: 7%;
+}
+
+#shop_logo{
+    width: 30%;
+    height: 30%;
+    margin-left:70%;
+    margin-top:0%;
+}
+
+#shop_logo>img{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1580px) {
+    #reservation{
+        width: 80%;
+        height: 70%;
+    }
+    #txtandform{
+        width: 80%;
+        height: 70%;
+    }
+
+    #makereservbtn{
+        width: 36%;
+        height: 50%;
+        margin-top: 5%;
+        margin-left: 7%;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    #reservation {
+        flex-direction: column;
+    }
+
+    #txtandform {
+        order: 1;
+    }
+
+    #floorplan {
+        order: 2;
+        margin-left: 0;
+    }
+    
+}
