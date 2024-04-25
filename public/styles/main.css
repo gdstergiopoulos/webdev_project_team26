@@ -1,39 +1,43 @@
 .container{
-    margin:0;
-    width: 100%;
+    margin-right: 100%;
+
 }
 
 html{
     background-color: #181515;
+    font-size: 16px;
 }
 
 body{
     background-color: #181515;
     color: #c17379;
+    width: 100%;
 }
 
 h1{
-    color: #c17379;
-    font-size: 2.5rem;
+    
     background-color: #181515;
     font-family: 'Newsreader', serif;
-    padding-left: 10px;
-    padding-top: 10px;
+    padding-left: 1%;
+    padding-top: 1%;
     width: 100%;
     padding-right: 0%;
 }
 
 h1>a{
     text-decoration: none;
+    color: #c17379;
 }
 
 #navbarcont{
+    background-color: #181515;
+    color: #c17379;
+    margin-right:20%;
     width: 100%;
 }
-
-.navbar{
+/* .navbar{
     width:100%;
-}
+} */
 
 .navbar>h1{
     padding-right: 100%;
@@ -41,11 +45,27 @@ h1>a{
     color: #c17379;
 }
 
-.navbar>h1>a{
+@media only screen and (max-width: 1900px) {
+    .navbar>h1{
+        padding-right: 60%;
+    }
+}
+
+@media only screen and (max-width: 1580px) {
+    .navbar>h1{
+        padding-right: 10%;
+    }
+}
+
+/* .navbar>h1>a{
     color: #c17379;
     height:100%;
     width:100%;
     font-size: 100%;
+} */
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(193,115,121, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .navbar>h1>a:hover{
@@ -53,8 +73,12 @@ h1>a{
 }
 
 .nav-link{
-    color: #c17379;
+    color: rgb(193, 115, 121);
     margin-left: 2rem;    
+}
+
+.nav-link:hover{
+    color: #87b6cf;
 }
 
 #reservationbtn{
@@ -66,18 +90,6 @@ h1>a{
 #reservationbtn:hover{
     color: #87b6cf;
     border-color: #87b6cf;
-}
-
-.nav-link:hover{
-    color: #87b6cf;
-}
-
-#navbarcont{
-    background-color: #181515;
-    color: #c17379;
-    padding-left: 0;
-    margin-left: 0;
-    width: 100%;
 }
 
 .btn{
@@ -92,26 +104,23 @@ h1>a{
     color: #272f5d;
 }
 
-a{
+/* a{
     color: #c17379;
 }
 
 a:hover{
     color: #87b6cf;
-}
+} */
 
-@media only screen and (max-width: 1580px) {
-    .navbar>h1{
-        padding-right: 55%;
-    }
-}
+/*----------------HOME PAGE-------------------*/
 
 .image {
     background-image: url("/media/restaurant.jpg");
     background-size: cover; /* Adjusts the background image to cover the entire area of the div */
     background-position: center; /* Centers the background image within the div */
     height: 100rem; /* Adjust the height of the div as needed */
-    width = 100%;
+    width : 155%;
+    margin-left: -5%;
 }
 
 .centered{
@@ -140,21 +149,33 @@ a:hover{
     color:#87b6cf; 
 }
 
-@media only screen and (max-width: 1580px) {
-    #homepage{
-        font-size: 2rem; /* reduce font size for smaller screens */
-        margin-right: 50rem; /* reduce margin for smaller screens */
-    }
+/*----------------LOGIN & REGISTER PAGE-------------------*/
+#login_body{
+    background-color: #181515;
+    color: #c17379;
+    width: 100%;
+    height: 100%;
+    padding-top: 5%;
 }
-
 #shop_logo{
-    width: 32rem;
+    width: 200%;
     padding-top: 20%;
 }
 
 #linktoreg,#linktolog{
     padding-top: 5%;
 }
+
+#linktoreg>a,#linktolog>a{
+    padding-top: 5%;
+    color: #c17379;
+}
+
+#linktoreg>a:hover,#linktolog>a:hover{
+    padding-top: 5%;
+    color:#87b6cf; 
+}
+
  
 #contactinfo,#accountinfo{
     padding-top: 2rem;
@@ -349,13 +370,13 @@ fieldset{
     margin-top: 12%;
     margin-left: 7%;
 }
-
+/* 
 #shop_logo{
     width: 30%;
     height: 30%;
     margin-left:70%;
     margin-top:0%;
-}
+} */
 
 #shop_logo>img{
     width: 100%;

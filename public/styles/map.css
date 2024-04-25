@@ -23,8 +23,7 @@ p{
     width: 64%;
     height: 30rem;
     padding-left: 0;
-    margin-left: 0;
-    margin-left: 19%;
+    margin-left: 3%;
     /* margin-left: 33%; comment this for prev version */
 }
 #imgcont{
@@ -43,4 +42,8 @@ p{
     width:100%;
     margin-left: 2%;   
     padding-top: 5rem;
+}
+
+#location_body{
+    width: 1920px;
 }
