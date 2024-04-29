@@ -1,12 +1,24 @@
 #adminnavbarcont{
     width: 100%;
-    padding-left: 0;
-    margin-left: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
 }
 
-#navbarSupportedContent{
-    margin-left: 10%;
+/* .navbar{
+    display: flex;
 }
+
+.navbar>h1{
+    padding-right: auto;
+    height: 100%;
+    color: #c17379;
+} */
+
+/* #navbarSupportedContent{
+    margin-left: 10%;
+} */
 
 #adminpanel{
     display: flex;
@@ -18,9 +30,9 @@
     margin-top: 4%;
 }
 
-#adminpanel>h1{
+/* #adminpanel>h1{
     width: 100%;
-}
+} */
 
 #adminpanel>div>.btn{
     margin-top: 2%;
