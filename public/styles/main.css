@@ -132,13 +132,16 @@ a:hover{
 }
 
 .centered{
-    font-family: 'Newsreader', serif;
-    color: #c17379;
-    font-size: 2.5rem;
     display: flex;
     justify-content: center; /* Horizontally centers the content */
     align-items: center; /* Vertically centers the content (optional) */
+}
+
+#home_text{
     padding-top: 25rem;
+    color: #c17379;
+    font-size: 2.5rem;
+    font-family: 'Newsreader', serif;
     font-weight: bold;
 }
 
@@ -157,7 +160,60 @@ a:hover{
     color:#87b6cf; 
 }
 
+#desc{
+    padding-top: 20rem;
+    font-family: 'Newsreader', serif;
+    width: 100%;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#short_description{
+    font-family: 'Newsreader', serif;
+    padding-top: 5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1rem;
+    color:#a3aaad;
+}
+
+/* #imgcont{
+    justify-content: center;
+    margin-top: 0%;
+} */
+
+#shop_logo_home{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 45rem;
+  }
+  
+  .footer-section {
+    flex: 1;
+  }
+  
+  .footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .footer-section p, .footer-section a {
+    margin-bottom: 0px;
+  }
+
+  .footer-section img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
 /*----------------LOGIN & REGISTER PAGE-------------------*/
+
 #loginpg{
     width:100%;
 }
