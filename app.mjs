@@ -132,6 +132,9 @@ function goAdminReserv(req,res){
     res.render('adminreserv', { layout: 'admin_layout' });
 }
 
+function goAssignTable(req,res){ 
+    res.render('assign_table', { layout: 'admin_layout' });
+}
 router.route('/').get(loadPage);
 router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
@@ -144,7 +147,7 @@ router.route('/reservation').get(goReservation);
 router.route('/location').get(goLocation);
 router.route('/adminhome').get(goAdminHome);
 router.route('/adminreserv').get(goAdminReserv);
-
+router.route('/assigntable').get(goAssignTable);
 
 // Επίσης έτσι: 
 // Could also be done like this:

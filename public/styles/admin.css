@@ -76,7 +76,7 @@ li>span{
     margin:1%;
 }
 
-li>button{
+li>a{
     margin-right:1%
 }
 
@@ -103,4 +103,11 @@ hr{
     padding-top: 0%;
     padding-bottom: 0%;
 }
+
+/* Assign Tables  */
+
+#assigntables{
+    display: flex;
+}
+
 
