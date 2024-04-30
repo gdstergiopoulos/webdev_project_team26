@@ -509,3 +509,33 @@ fieldset{
     color: #a3aaad;
     margin-right: 15rem;
 }
+
+#aboutpg>h1{
+    font-family: 'Newsreader', serif;
+    padding-left: 1%;
+    padding-top: 1%;
+    width: 100%;
+    padding-right: 0%;
+}
+
+#aboutpg>p{
+    color:beige;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+#aboutimg{
+    display: flex;
+    justify-content: flex-end; /* Aligns the image to the right side */
+}
+
+#aboutimg>img{
+    width: 30%;
+    height: 30%;
+}
+
+#aboutpg>h2{
+    padding-left: 3%;
+    font-size: medium;
+}
+
