@@ -283,6 +283,7 @@ div.col:nth-child(2n){
 
 #registerform{
     width: 100%;
+    padding-top: 12%;
 }
 
 #reservationpg{

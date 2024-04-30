@@ -80,6 +80,10 @@ li>a{
     margin-right:1%
 }
 
+li>button{
+    margin-right:1%
+}
+
 .remove{
     background-color: #F83544;
     border-color: #F83544;
@@ -110,4 +114,27 @@ hr{
     display: flex;
 }
 
+#activemenu>ul,#fooditems>ul{
+    list-style-type: none;
+    padding-bottom: 1%;
+}
 
+.addmenu{
+    background-color: chartreuse;
+    border-color: chartreuse;
+}
+
+#newitemhead{
+    display: flex;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+#newitemhead>h2{
+    margin-right: auto;
+}
+
+.newitembtn{
+    background-color: lawngreen;
+    border-color: lawngreen;
+}
