@@ -208,12 +208,15 @@ a:hover{
     margin-bottom: 0px;
   }
 
-  .footer-section img {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+  .fa{
+    color: #c17379;
+    width: 10%;
   }
-/*----------------LOGIN & REGISTER PAGE-------------------*/
+
+  .fa:hover{
+    color: #87b6cf;
+  }
+/*---------------LOGIN & REGISTER PAGE-------------------*/
 
 #loginpg{
     width:100%;
