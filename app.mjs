@@ -2,6 +2,10 @@
 import express from 'express'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
+
+import Handlebars from './helpers.js'; // Import Handlebars from helpers.js
+
+
 const app = express()
 const router = express.Router();
 const port = process.env.PORT || '3000';
@@ -27,6 +31,11 @@ app.use(router);
 // Όρισε δύο διαδρομές
 // Define two routes
 
+app.get('/assign_table', (req, res) => {
+    let area_id = req.query['area_id'];
+    console.log('area_id:', area_id); // This will log the area_id to the console
+    res.render('assign_table', { area_id: area_id });
+});
 
 let foods = [
     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
@@ -132,6 +141,25 @@ function goAdminReserv(req,res){
     res.render('adminreserv', { layout: 'admin_layout' });
 }
 
+function goAssignTable(req,res){
+    let area_id;
+    if (!req.query['area_id']) {
+        area_id = 'insidemain';
+    }
+    else {
+        area_id = req.query['area_id'];
+    }
+    console.log('area_id:', area_id); // This will log the area_id to the console
+    res.render('assign_table', { area_id: area_id, layout: 'admin_layout' });
+}
+function goPickArea(req,res){
+    let area_id = req.query['id'];
+    res.redirect('/assign_table?area_id=' + area_id);
+
+}
+
+
+
 router.route('/').get(loadPage);
 router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
@@ -144,6 +172,8 @@ router.route('/reservation').get(goReservation);
 router.route('/location').get(goLocation);
 router.route('/adminhome').get(goAdminHome);
 router.route('/adminreserv').get(goAdminReserv);
+router.route('/assign_table').get(goAssignTable);
+router.route('/pickarea').get(goPickArea);
 
 
 // Επίσης έτσι: 

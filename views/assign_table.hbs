@@ -1,0 +1,40 @@
+<div class="assign_table_container">
+<div class="assign_table" id="floorplan_assign">
+{{>floorplan}}
+</div>
+{{#if (eq area_id "insidemain")}}
+<div class="assign_table" id="inside_assign">
+{{>insidemain}}
+</div>
+{{/if}}
+
+{{#if (eq area_id "bararea")}}
+<div class="assign_table" id="inside_assign">
+
+{{>bararea}}
+</div>
+{{/if}}
+
+{{#if (eq area_id "outsidemain")}}
+<div class="assign_table" id="inside_assign">
+ 
+{{>outsidemain}}
+</div>
+{{/if}}
+
+{{#if (eq area_id "opensky")}}
+<div class="assign_table" id="inside_assign">
+
+{{>opensky}}
+</div>
+{{/if}}
+
+{{#if (eq area_id "bythesea")}}
+<div class="assign_table" id="inside_assign">
+
+{{>bythesea}}
+</div>
+{{/if}}
+
+</div>
+
