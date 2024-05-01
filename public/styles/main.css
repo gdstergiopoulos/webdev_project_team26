@@ -65,6 +65,7 @@ h1>a{
 
 #pagebody{
     padding-top: 4.792%;
+    width: 100%;
 }
 
 @media screen and (max-width: 1000px) {
@@ -207,12 +208,15 @@ a:hover{
     margin-bottom: 0px;
   }
 
-  .footer-section img {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+  .fa{
+    color: #c17379;
+    width: 10%;
   }
-/*----------------LOGIN & REGISTER PAGE-------------------*/
+
+  .fa:hover{
+    color: #87b6cf;
+  }
+/*---------------LOGIN & REGISTER PAGE-------------------*/
 
 #loginpg{
     width:100%;
@@ -279,6 +283,7 @@ div.col:nth-child(2n){
 
 #registerform{
     width: 100%;
+    padding-top: 12%;
 }
 
 #reservationpg{
@@ -508,3 +513,33 @@ fieldset{
     color: #a3aaad;
     margin-right: 15rem;
 }
+
+#aboutpg>h1{
+    font-family: 'Newsreader', serif;
+    padding-left: 1%;
+    padding-top: 1%;
+    width: 100%;
+    padding-right: 0%;
+}
+
+#aboutpg>p{
+    color:beige;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+#aboutimg{
+    display: flex;
+    justify-content: flex-end; /* Aligns the image to the right side */
+}
+
+#aboutimg>img{
+    width: 30%;
+    height: 30%;
+}
+
+#aboutpg>h2{
+    padding-left: 3%;
+    font-size: medium;
+}
+

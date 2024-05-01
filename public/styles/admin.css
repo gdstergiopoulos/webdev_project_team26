@@ -76,6 +76,10 @@ li>span{
     margin:1%;
 }
 
+li>a{
+    margin-right:1%
+}
+
 li>button{
     margin-right:1%
 }
@@ -104,138 +108,3 @@ hr{
     padding-bottom: 0%;
 }
 
-#floorplan_assign{
-    margin-left: 5rem;
-    margin-top:10rem;
-
-}
-
-.assign_table_container{
-    display: flex;
-}
-
-.table{
-    width: 9%;
-    height: 9%;
-}
-#table1{
-    position: absolute;
-    top: 0.2%;
-    left: 3.5%;
-
-}
-
-#table2{
-    position: absolute;
-    top: 0.2%;
-    left: 20.5%;
-}
-
-#table3{
-    position: absolute;
-    top: 0.2%;
-    left: 38.5%;
-
-}
-
-#table4{
-    position: absolute;
-    top: 0.2%;
-    left: 53.5%;
-
-}
-
-#table5{
-    position: absolute;
-    top: 17%;
-    left: 6.5%;
-    rotate: 45deg;
- 
-}
-
-#table6{
-    position: absolute;
-    top: 17%;
-    left: 21%;
-    rotate: 45deg;
- 
-}
-#table7{
-    position: absolute;
-    top: 17%;
-    left: 36.5%;
-    rotate: 45deg;
- 
-}
-#table8{
-    position: absolute;
-    top: 17%;
-    left: 52%;
-    rotate: 45deg;
- 
-}
-#table9{
-    position: absolute;
-    top: 33%;
-    left: 45%;
-    rotate: 45deg;
- 
-}
-#table10{
-    position: absolute;
-    top: 33%;
-    left: 60%;
-    rotate: 45deg;
- 
-}
-
-#table11{
-    position: absolute;
-    top: 50%;
-    left: 42%;
-    border-radius: 50%;
-}
-
-#table12{
-    position: absolute;
-    top: 50%;
-    left: 59%;
-    border-radius: 50%;
-}
-
-#table13{
-    position: absolute;
-    top: 50%;
-    left: 76%;
-    border-radius: 50%;
-}
-
-#table14{
-    position: absolute;
-    top: 65%;
-    left: 32%;
-    border-radius: 50%;
-}
-#table15{
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    border-radius: 50%;
-}
-#table16{
-    position: absolute;
-    top: 65%;
-    left: 68%;
-    border-radius: 50%;
-}
-#table17{
-    position: absolute;
-    top: 65%;
-    left: 86%;
-    border-radius: 50%;
-}
-
-#inside_assign{
-    margin-left: 10rem;
-    margin-top:10rem;
-}
