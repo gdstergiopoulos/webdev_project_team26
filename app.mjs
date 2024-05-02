@@ -31,11 +31,11 @@ app.use(router);
 // Όρισε δύο διαδρομές
 // Define two routes
 
-app.get('/assign_table', (req, res) => {
-    let area_id = req.query['area_id'];
-    console.log('area_id:', area_id); // This will log the area_id to the console
-    res.render('assign_table', { area_id: area_id });
-});
+// app.get('/assign_table', (req, res) => {
+//     let area_id = req.query['area_id'];
+//     console.log('area_id:', area_id); // This will log the area_id to the console
+//     res.render('assign_table', { area_id: area_id });
+// });
 
 let foods = [
     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
@@ -137,6 +137,10 @@ function goAdminHome(req,res){
     res.render('admin_home', { layout: 'admin_layout' });
 }
 
+function goAdminMenu(req,res){
+    res.render('admin_menu', { layout: 'admin_layout' });
+}
+
 function goAdminReserv(req,res){
     res.render('adminreserv', { layout: 'admin_layout' });
 }
@@ -149,13 +153,16 @@ function goAssignTable(req,res){
     else {
         area_id = req.query['area_id'];
     }
-    console.log('area_id:', area_id); // This will log the area_id to the console
+    // console.log('area_id:', area_id); // This will log the area_id to the console
     res.render('assign_table', { area_id: area_id, layout: 'admin_layout' });
 }
 function goPickArea(req,res){
     let area_id = req.query['id'];
     res.redirect('/assign_table?area_id=' + area_id);
+}
 
+function goAddEditFoodItem(req,res){
+    res.render('addFoodItem', { layout: 'admin_layout' });
 }
 
 
@@ -172,9 +179,10 @@ router.route('/reservation').get(goReservation);
 router.route('/location').get(goLocation);
 router.route('/adminhome').get(goAdminHome);
 router.route('/adminreserv').get(goAdminReserv);
+router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table').get(goAssignTable);
 router.route('/pickarea').get(goPickArea);
-
+router.route('/addFoodItem').get(goAddEditFoodItem);
 
 // Επίσης έτσι: 
 // Could also be done like this:

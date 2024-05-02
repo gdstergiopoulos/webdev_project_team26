@@ -95,10 +95,12 @@ li>button{
 
 }
 
-.approve{
+.approve, .newitembtn{
     background-color: greenyellow;
     border-color: greenyellow;
 }
+
+
 hr{
     border-color: #E0E0E0;
     width: 100%;
@@ -242,4 +244,11 @@ hr{
 #inside_assign{
     margin-left: 10rem;
     margin-top:10rem;
+}
+
+
+#addEditFoodItem>form{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
 }

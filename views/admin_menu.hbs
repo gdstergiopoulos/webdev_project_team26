@@ -2,22 +2,30 @@
     <h1>Manage Menu</h1>
     <div class="container" id="activemenu">
         <h2>Current Menu</h2>
+        <ul class="task-list menuheader">
+        <li>
+                <span>Food Name</span>
+                <span>Price</span>
+                <span>Actions</span>
+        </li>
+        </ul>
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
             <li>
-                <span>Να διαβάσω JS</span>
-                <button class="onmenu btn btn-primary edit">Edit</button>
+                <span>Burger</span>
+                <span>7</span>
+                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
                 <button class="btn btn-primary remove">Remove</button>
             </li>
             <hr>
             <li class="done">
                 <span>Να ταΐσω τη γάτα</span>
-                <button class="btn btn-primary edit">Edit</button>
+                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
                 <button class="btn btn-primary remove">Remove</button>
             </li>
             <hr>
             <li>
                 <span>Να μαγειρέψω</span>
-                <button class="btn btn-primary edit">Edit</button>
+                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
                 <button class="btn btn-primary remove">Remove</button>
             </li>
             <hr>
@@ -25,28 +33,35 @@
     </div>
     <hr>
     <div class="container" id="fooditems">
-        <div id="newitemhead">
-            <h2 style="display: flex">Food Items</h2>
-            <a class="btn btn-primary newitembtn">Create New</a>
+        <div style="display: flex" id="newitemhead">
+            <h2 style="margin-right:auto">Food Items not on menu</h2>
+            <a class="btn btn-primary newitembtn" href="/addFoodItem">Create New</a>
         </div>
+        <ul class="task-list menuheader">
+        <li>
+                <span>Food Name</span>
+                <span>Price</span>
+                <span>Actions</span>
+        </li>
+        </ul>
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
             <li>
                 <span>Να διαβάσω JS</span>
-                <button class="btn btn-primary edit">Edit</button>
+                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
                 <button class="btn btn-primary remove">Delete</button>
                 <button class="btn btn-primary addmenu">Add to menu</button>
             </li>
             <hr>
             <li class="done">
                 <span>Να ταΐσω τη γάτα</span>
-                <button class="btn btn-primary edit">Edit</button>
+                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
                 <button class="btn btn-primary remove">Delete</button>
                 <button class="btn btn-primary addmenu">Add to menu</button>
             </li>
             <hr>
             <li>
                 <span>Να μαγειρέψω</span>
-                <button class="btn btn-primary edit">Edit</button>
+                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
                 <button class="btn btn-primary remove">Delete</button>
                 <button class="btn btn-primary addmenu">Add to menu</button>
             </li>
