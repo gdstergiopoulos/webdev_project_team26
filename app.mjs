@@ -165,6 +165,9 @@ function goAddEditFoodItem(req,res){
     res.render('addFoodItem', { layout: 'admin_layout' });
 }
 
+function goMyProfile(req,res){
+    res.render('userprofile', { layout: 'main' });
+}
 
 
 router.route('/').get(loadPage);
@@ -183,7 +186,7 @@ router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table').get(goAssignTable);
 router.route('/pickarea').get(goPickArea);
 router.route('/addFoodItem').get(goAddEditFoodItem);
-
+router.route('/myprofile').get(goMyProfile);
 // Επίσης έτσι: 
 // Could also be done like this:
 // app.route('/api/tasks').get(listAllTasks);
