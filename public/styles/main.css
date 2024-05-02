@@ -548,14 +548,6 @@ fieldset{
     display: flex;
     padding-top: 5%;
 }
-#userprofile{
-    width: 20%;
-    box-sizing: border-box;
-    border:5px solid #c17379;
-    border-color: #c17379;
-    border-radius: 50px;
-    margin-right: auto;
-}
 
 #royaltypoints{
     width: 20%;
@@ -615,7 +607,40 @@ li>span{
     height: 100%;
     position: fixed;
     z-index: 1;
-    padding-top: 3%;
+    padding-top: 7%;
+}
+
+@media screen and (max-width: 1000px){
+    .sidenav{
+        padding-top: 12%;
+    }
+
+    #myprofilepg{
+        padding-left: 30%;
+        padding-top: 6%;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .sidenav{
+        padding-top: 16%;
+    }
+
+    #myprofilepg{
+        padding-left: 30%;
+        padding-top: 9%;
+    }
+}
+
+@media screen and (max-width: 501px){
+    .sidenav{
+        padding-top: 19%;
+    }
+
+    #myprofilepg{
+        padding-left: 30%;
+        padding-top: 15%;
+    }
 }
 
 .sidenav a {
@@ -631,7 +656,11 @@ li>span{
     color: #c17379;
   }
 
-a:focus {
-    color:#c17379;
+.current_page_item{
+    color: #ff0000;
 }
-  
+
+#myprofilepg{
+    padding-left: 30%;
+    padding-top: 2%;
+}

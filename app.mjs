@@ -166,7 +166,17 @@ function goAddEditFoodItem(req,res){
 }
 
 function goMyProfile(req,res){
-    res.render('userprofile', { layout: 'main' });
+    let profilepage;
+    if(req.params.page=='info'){
+        profilepage='userprofile';
+    }
+    else if(req.params.page=='reservations'){
+        profilepage='userreserv';
+    }
+    else if(req.params.page=='history'){
+        profilepage='reservhistory';
+    }
+    res.render('userprofile', {profilepage: profilepage, layout: 'profile_layout' });
 }
 
 
@@ -186,7 +196,8 @@ router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table').get(goAssignTable);
 router.route('/pickarea').get(goPickArea);
 router.route('/addFoodItem').get(goAddEditFoodItem);
-router.route('/myprofile').get(goMyProfile);
+router.route('/myprofile/page/:page').get(goMyProfile);
+router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
 // Επίσης έτσι: 
 // Could also be done like this:
 // app.route('/api/tasks').get(listAllTasks);

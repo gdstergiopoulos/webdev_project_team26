@@ -1,91 +1,42 @@
-<div class="sidenav">
-    <a href="/myprofile/info">My Profile</a>
-    <a href="/myprofile/reservations">Active Reservations</a>
-    <a href="/myprofile/history">Old Reservations</a>
-    <a href="/myprofile/royalty">Royalty Points</a>
-    <a href="#">My Reviews</a>
+{{!-- <div class="sidenav" id="example-one">
+    <a href="/myprofile/page/info">My Profile</a>
+    <a href="/myprofile/page/reservations">Active Reservations</a>
+    <a href="/myprofile/page/history">Old Reservations</a>
+    <a href="/myprofile/page/royalty">Royalty Points</a>
+    <a href="/home">My Reviews</a>
     <a href="/home">Logout</a>
 </div>
-{{!-- <div>
-{{#if (eq path '/myprofile/info')}}
-    {{> infoPartial}}
-{{/if}}
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+<script>
+    $('#example-one a').click(function(e) {
+    $('#example-one a').removeClass('current_page_item');
+    $(this).addClass('current_page_item');
+});
+</script> --}}
+<div id="myprofilepg">
+    {{#if (eq profilepage 'userprofile')}}
+        {{>profileinfo}}
+    {{/if}}
 
-{{#if (eq path '/myprofile/reservations')}}
-    {{> reservationsPartial}}
-{{/if}}
+    {{#if (eq profilepage 'userreserv')}}
+        {{> reservationsPartial}}
+    {{/if}}
 
-{{#if (eq path '/myprofile/history')}}
-    {{> historyPartial}}
-{{/if}}
+    {{#if (eq profilepage 'reservhistory')}}
+        {{> history}}
+    {{/if}}
 
-{{#if (eq path '/myprofile/royalty')}}
-    {{> royaltyPartial}}
-{{/if}}
+    {{#if (eq profilepage '/myprofile/royalty')}}
+        {{> royaltyPartial}}
+    {{/if}}
 
-{{#if (eq path '/myprofile/reviews')}}
-    {{> reviewsPartial}}
-{{/if}}
+    {{#if (eq profilepage '/myprofile/reviews')}}
+        {{> reviewsPartial}}
+    {{/if}}
 
-{{#if (eq path '/home')}}
-    {{> logoutPartial}}
-{{/if}}
-</div> --}}
-{{!-- 
-<div id="userinfo">
-    <div id="userprofile">
-        <div id="userdetails">
-            <h2>User Details</h2>
-            <p>First Name: <span>{{firstname}}</span></p>
-            <p>Last Name: <span>{{lastname}}</span></p>
-            <p>Email: <span>{{email}}</span></p>
-            <p>Phone: <span>{{phone}}</span></p>
-        </div>
-    </div>
-    <div id="royaltypoints">
-        <h2>Royalty Points</h2>
-        <p>Points: <span>{{points}}</span></p>
-    </div>
-</div>
-<hr style="color:beige">
-<div id="myReserv">
-        <div class="tasks">
-            <h1>Active Reservations</h1>
-            <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
-               <li>
-                  <span>Να λύσω ξανά την άσκηση αυτή την επόμενη εβδομάδα, που θα ξέρω πώς χειριζόμαστε τα συμβάντα</span>
-                  <a href="/reservation" class="btn btn-primary edit">Edit</a>
-                  <button class="btn btn-primary cancel">Cancel</button>
-               </li>
-               <hr>
-               <li class="done">
-                <span>Να πάρω τα χάπια μου</span>
-                <a href="/reservation" class="btn btn-primary edit">Edit</a>
-                <button class="btn btn-primary cancel">Cancel</button>
-                </li>
-                <hr>
-            </ul>
-            <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
-            <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
-    </div>
-    </div>
-    <hr style="color:beige">
-    <div  id="oldResev">
-      <div class="tasks">
-          <h1>Old Reservations</h1>
-          <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
-             <li>
-              <span>Να διαβάσω JS</span>
-              <button class="btn btn-primary review">Review</button>
-              </li>
-              <hr>
-             <li class="done">
-              <span>Να ταΐσω τη γάτα</span>
-              <button class="btn btn-primary review">Review</button>
-             </li>
-             <hr>
-          </ul>
-          <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
-          <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
-  </div>
-  </div> --}}
+    {{#if (eq profilepage '/home')}}
+        {{> logoutPartial}}
+    {{/if}}
+</div> 
