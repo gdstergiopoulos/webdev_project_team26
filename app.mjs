@@ -28,6 +28,7 @@ app.set('view engine', 'hbs');
 // Model - our data model is stored in RAM.
 
 app.use(router); 
+router.use(express.urlencoded({ extended: true }));
 
 router.use(session({
     name: process.env.SESS_NAME,
@@ -120,16 +121,56 @@ function goLogin(req,res){
     res.render('login');
 }
 
-
-router.route('/login').post((req, res) => {
+async function checkLogin(req,res){
     let username = req.body.username;
     let password = req.body.password;
     console.log(username, password);
-    console.log(model.getuser(username));
-    req.session.loggedin = true;
-    // Handle the user login logic here
-});
+    //elegxos edw login klp
+    // console.log(model.getuser(username));
+    let user = await model.getuser(username);
+    if(user.length==0){
+        console.log('Create an account first');    
+        res.redirect('/login');
+    }
+    else{
+        let storedpass = user[0].password;
+        let role=user[0].role;
+        if (storedpass === password) {
+            console.log('Logged in', username);
+            req.session.loggedin = true;
+            if(role=='admin'){
+                res.redirect('/adminhome');
+            }
+            else{
+                res.redirect('/home');
+            }
+        } else {
+            console.log('Invalid username or password');
+            // Handle the error or redirect to an error page
+        }
+    }
+}
 
+function registerUser(req,res){
+    let username = req.body.username;
+    let password = req.body.password;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let email = req.body.email;
+    let phone = req.body.phone;
+    let confpass= req.body.confpass;
+
+    if(password!=confpass){
+        console.log('Passwords do not match');
+        res.redirect('/register');
+    }
+    else{
+        model.adduser(username, password, firstname, lastname, email, phone);
+        res.redirect('/login');
+    }
+}
+router.route('/login').post(checkLogin);
+router.route('/register').post(registerUser);
 
 function goHome(req,res){
     // console.log(model.getuser('gster'));

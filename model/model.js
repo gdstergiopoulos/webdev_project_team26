@@ -29,7 +29,8 @@ async function getuser(userID) {
         const client = await connect();
         const res = await client.query(sql)
         await client.release()
-        console.log(res.rows) // επιστρέφει array
+        // console.log(res.rows)
+        return res.rows;
         // callback(null, res.rows) // επιστρέφει array
     }
     catch (err) {
@@ -38,6 +39,22 @@ async function getuser(userID) {
     }
 }
 
+async function adduser(username,password,Fname,Lname,email,phone){
+    const sql = `INSERT INTO "USER" (username,password,"Fname","Lname",mail,phone,role) VALUES ('${username}','${password}','${Fname}','${Lname}','${email}','${phone}','user');`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        console.log("Inserted succesfully") // επιστρέφει array
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+
+}
 
 
-export{getuser}
+
+export{getuser,adduser}
