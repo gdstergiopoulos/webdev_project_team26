@@ -578,6 +578,7 @@ fieldset{
 .tasks{
     width: 70%;
 }
+
 li>span{
     flex-grow: 1;
     margin:1%;

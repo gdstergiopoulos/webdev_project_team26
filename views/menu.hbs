@@ -6,8 +6,8 @@
     <ul>
         {{#each foods}}
             <li>
-                <div><img src="{{this.img}}" alt="{{this.name}}" style="width: 200px; height: 200px;"></div>
-                <div id="food_name">{{this.name}} - {{this.price}} <p id="food_description"> {{this.description}}</p> </div>
+                <div><img src="{{this.img}}" alt="{{this.foodname}}" style="width: 200px; height: 200px;"></div>
+                <div id="food_name">{{this.foodname}} - {{this.price}} <p id="food_description"> {{this.description}}</p> </div>
                 </li>
         {{/each}}
     </ul>

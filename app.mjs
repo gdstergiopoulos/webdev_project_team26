@@ -50,62 +50,63 @@ router.use(session({
 
 
 
-let foods = [
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-    { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-    { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+// let foods = [
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
+//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
+//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
+//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
     
-    // Add more items as needed
-  ];
+//     // Add more items as needed
+//   ];
 
-let getAllFoods = function (callback) {
-    callback(null, foods);
-};
+// let getAllFoods = function (callback) {
+//     callback(null, foods);
+// };
 
-  let listMenu = function (req, res) {
-    getAllFoods(function (err, foods) {
-        if (err) {
-            res.send(err);
-        }
-        // console.log('res', tasks);
-        res.send(foods); // sends the object to the client
-    });
-};
+//   let listMenu = function (req, res) {
+//     getAllFoods(function (err, foods) {
+//         if (err) {
+//             res.send(err);
+//         }
+//         // console.log('res', tasks);
+//         res.send(foods); // sends the object to the client
+//     });
+// };
 
-let listAllFoodsRender = function (req, res) {
-    getAllFoods(function (err, foods) {
-        if (err) {
-            res.send(err);
-        }
-        console.log('foods', foods);
+let listAllFoodsRender = async function (req, res) {
+    // getAllFoods(function (err, foods) {
+    //     if (err) {
+    //         res.send(err);
+    //     }
+        // console.log('foods', foods);
         // στέλνει το object "tasks" στο template "tasks"
         // sends the "tasks" object to the "tasks" template
-        res.render('menu', { foods: foods }); 
-    });
+        let foodsq= await model.getMenuActive()
+        // console.log(foodsq);
+        res.render('menu', { foods: foodsq }); 
 }
 
 // let loadPage = function(req,res){
@@ -184,10 +185,10 @@ function goHome(req,res){
 
 }
 
-function goMenu(req,res){
-    res.render('menu');
+// function goMenu(req,res){
+//     res.render('menu');
 
-}
+// }
 
 function goRegister(req,res){
     res.render('register');
@@ -213,8 +214,10 @@ function goAdminHome(req,res){
     res.render('admin_home', { layout: 'admin_layout' });
 }
 
-function goAdminMenu(req,res){
-    res.render('admin_menu', { layout: 'admin_layout' });
+async function goAdminMenu(req,res){
+    let foodsactive= await model.getMenuActive();
+    let foodsinactive= await model.getMenuInactive();
+    res.render('admin_menu', { layout: 'admin_layout', foodsactive: foodsactive, foodsinactive: foodsinactive});
 }
 
 function goAdminReserv(req,res){
@@ -257,12 +260,12 @@ function goMyProfile(req,res){
 
 
 router.route('/').get((req,res)=>res.redirect('/home'));
-router.route('/api/menu').get(listMenu);
+// router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
 router.route('/login').get(goLogin);
 router.route('/home').get(goHome);
-router.route('/menu').get(goMenu);
+// router.route('/menu').get(goMenu);
 router.route('/register').get(goRegister);
 router.route('/reservation').get(goReservation);
 router.route('/location').get(goLocation);

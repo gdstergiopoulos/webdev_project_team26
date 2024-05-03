@@ -10,27 +10,17 @@
         </li>
         </ul>
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+            {{#each foodsactive}}
             <li>
-                <span>Burger</span>
-                <span>7</span>
-                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
+                <span>{{this.foodname}}</span>
+                <span>{{this.price}}</span>
+                <a class="btn btn-primary edit" href="/addFoodItem/{{this.itemID}}">Edit</a>
                 <button class="btn btn-primary remove">Remove</button>
             </li>
             <hr>
-            <li class="done">
-                <span>Να ταΐσω τη γάτα</span>
-                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
-                <button class="btn btn-primary remove">Remove</button>
-            </li>
-            <hr>
-            <li>
-                <span>Να μαγειρέψω</span>
-                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
-                <button class="btn btn-primary remove">Remove</button>
-            </li>
-            <hr>
+            {{/each}}
         </ul>
-    </div>
+    </div> 
     <hr>
     <div class="container" id="fooditems">
         <div style="display: flex" id="newitemhead">
@@ -45,27 +35,15 @@
         </li>
         </ul>
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+            {{#each foodsinactive}}
             <li>
-                <span>Να διαβάσω JS</span>
-                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
-                <button class="btn btn-primary remove">Delete</button>
-                <button class="btn btn-primary addmenu">Add to menu</button>
+                <span>{{this.foodname}}</span>
+                <span>{{this.price}}</span>
+                <a class="btn btn-primary edit" href="/addFoodItem/{{this.itemID}}">Edit</a>
+                <button class="btn btn-primary remove">Remove</button>
             </li>
             <hr>
-            <li class="done">
-                <span>Να ταΐσω τη γάτα</span>
-                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
-                <button class="btn btn-primary remove">Delete</button>
-                <button class="btn btn-primary addmenu">Add to menu</button>
-            </li>
-            <hr>
-            <li>
-                <span>Να μαγειρέψω</span>
-                <a class="btn btn-primary edit" href="/addFoodItem">Edit</a>
-                <button class="btn btn-primary remove">Delete</button>
-                <button class="btn btn-primary addmenu">Add to menu</button>
-            </li>
-            <hr>
+            {{/each}}
         </ul>
     </div>
 </div>

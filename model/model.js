@@ -55,6 +55,38 @@ async function adduser(username,password,Fname,Lname,email,phone){
 
 }
 
+async function getMenuActive(){
+    const sql = `SELECT * FROM "FOODITEM" WHERE "onmenu" = 'true';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        // console.log(res.rows)
+        return res.rows;
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+async function getMenuInactive(){
+    const sql = `SELECT * FROM "FOODITEM" WHERE "onmenu" = 'false';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        //console.log(res.rows)
+        return res.rows;
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
 
 
-export{getuser,adduser}
+
+export{getuser,adduser,getMenuActive,getMenuInactive}
