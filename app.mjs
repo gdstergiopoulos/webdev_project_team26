@@ -28,18 +28,18 @@ app.set('view engine', 'hbs');
 // Model - our data model is stored in RAM.
 
 app.use(router); 
-// app.use(session({
-//     name: process.env.SESS_NAME,
-//     secret: process.env.SESSION_SECRET || "PynOjAuHetAuWawtinAytVunar", // κλειδί για κρυπτογράφηση του cookie
-//     resave: false, // δεν χρειάζεται να αποθηκεύεται αν δεν αλλάξει
-//     saveUninitialized: false, // όχι αποθήκευση αν δεν έχει αρχικοποιηθεί
-//     cookie: {
-//       maxAge: 2 * 60 * 60 * 1000, //TWO_HOURS χρόνος ζωής του cookie σε ms
-//       sameSite: true
-//     }
-//   }));
-// Όρισε δύο διαδρομές
-// Define two routes
+
+router.use(session({
+    name: process.env.SESS_NAME,
+    secret: process.env.SESSION_SECRET || "PynOjAuHetAuWawtinAytVunar", // κλειδί για κρυπτογράφηση του cookie
+    resave: false, // δεν χρειάζεται να αποθηκεύεται αν δεν αλλάξει
+    saveUninitialized: false, // όχι αποθήκευση αν δεν έχει αρχικοποιηθεί
+    cookie: {
+      maxAge: 2 * 60 * 60 * 1000, //TWO_HOURS χρόνος ζωής του cookie σε ms
+      sameSite: true
+    }
+  }));
+
 
 // app.get('/assign_table', (req, res) => {
 //     let area_id = req.query['area_id'];
@@ -118,14 +118,27 @@ function goAbout(req,res){
 
 function goLogin(req,res){
     res.render('login');
-
 }
+
+
+router.route('/login').post((req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(username, password);
+    console.log(model.getuser(username));
+    req.session.loggedin = true;
+    // Handle the user login logic here
+});
+
 
 function goHome(req,res){
     // console.log(model.getuser('gster'));
     // if(!req.session.userID){
     //     res.redirect('/login');
     // }
+    if(req.session.loggedin==undefined){
+        req.session.loggedin = false;
+    }
     res.render('home_page');
 
 }
@@ -141,9 +154,15 @@ function goRegister(req,res){
 }
 
 function goReservation(req,res){
-    res.render('reservation');
-
+    if(req.session.loggedin===false){
+        res.redirect('/login');
+    }
+    else{
+        console.log(req.session.loggedin)
+        res.render('reservation');
+    }
 }
+
 
 function goLocation(req,res){
     res.render('location', { layout: 'loc_layout' });
