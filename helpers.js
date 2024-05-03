@@ -1,8 +1,8 @@
-const Handlebars = require('handlebars');
+import Handlebars from 'handlebars';
 
 Handlebars.registerHelper('eq', function(a, b) {
     // console.log(a, b);
     return a === b;
 });
 
-module.exports = Handlebars;
+export default Handlebars;

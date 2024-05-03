@@ -2,8 +2,9 @@
 import express from 'express'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
-
-import Handlebars from './helpers.js'; // Import Handlebars from helpers.js
+import * as model from './model/model.js';
+import session from 'express-session';
+import Handlebars from './helpers.js'; 
 
 
 const app = express()
@@ -27,7 +28,16 @@ app.set('view engine', 'hbs');
 // Model - our data model is stored in RAM.
 
 app.use(router); 
-
+// app.use(session({
+//     name: process.env.SESS_NAME,
+//     secret: process.env.SESSION_SECRET || "PynOjAuHetAuWawtinAytVunar", // κλειδί για κρυπτογράφηση του cookie
+//     resave: false, // δεν χρειάζεται να αποθηκεύεται αν δεν αλλάξει
+//     saveUninitialized: false, // όχι αποθήκευση αν δεν έχει αρχικοποιηθεί
+//     cookie: {
+//       maxAge: 2 * 60 * 60 * 1000, //TWO_HOURS χρόνος ζωής του cookie σε ms
+//       sameSite: true
+//     }
+//   }));
 // Όρισε δύο διαδρομές
 // Define two routes
 
@@ -36,6 +46,8 @@ app.use(router);
 //     console.log('area_id:', area_id); // This will log the area_id to the console
 //     res.render('assign_table', { area_id: area_id });
 // });
+
+
 
 let foods = [
     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
@@ -95,9 +107,9 @@ let listAllFoodsRender = function (req, res) {
     });
 }
 
-let loadPage = function(req,res){
-    res.render('home_page',{layout: 'main'});
-}
+// let loadPage = function(req,res){
+//     res.render('home_page',{layout: 'main'});
+// }
 
 function goAbout(req,res){
     res.render('about');
@@ -110,6 +122,10 @@ function goLogin(req,res){
 }
 
 function goHome(req,res){
+    // console.log(model.getuser('gster'));
+    // if(!req.session.userID){
+    //     res.redirect('/login');
+    // }
     res.render('home_page');
 
 }
@@ -180,7 +196,7 @@ function goMyProfile(req,res){
 }
 
 
-router.route('/').get(loadPage);
+router.route('/').get((req,res)=>res.redirect('/home'));
 router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
@@ -203,5 +219,5 @@ router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')}
 // app.route('/api/tasks').get(listAllTasks);
 // app.route('/').get(listAllTasksRender);
 
-
-const server = app.listen(port, () => { console.log(`http://127.0.0.1:${port}`) });
+const PORT=process.env.PORT || 3000;
+const server = app.listen(PORT, () => { console.log(`http://127.0.0.1:${PORT}`) });

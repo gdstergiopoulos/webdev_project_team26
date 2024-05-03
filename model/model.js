@@ -2,14 +2,7 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Path to the .env file
-const envPath = path.resolve(path.resolve(), '../.env');
-
-// Load environment variables from the .env file
-dotenv.config({ path: envPath });
-
-// Now you can access the environment variables
-console.log(process.env.DB_USER);
+dotenv.config();
 
 const pool = new pg.Pool({
     user: process.env.DB_USER,
@@ -46,4 +39,5 @@ async function getuser(userID) {
 }
 
 
-getuser('gster');
+
+export{getuser}
