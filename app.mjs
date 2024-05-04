@@ -315,7 +315,7 @@ async function removeItem(req,res){
 async function moveToMenu(req,res){
     let itemId=req.params.id;
     // we will toggle status from true to false (onmenu)
-    let removeditem = await model.addOnMenu(itemId);
+    let removeditem = await model.addOnMenu (itemId);
     res.redirect('/adminmenu');
 }
 
