@@ -119,7 +119,12 @@ function goAbout(req,res){
 }
 
 function goLogin(req,res){
-    res.render('login');
+    if(req.session.loggedin==true){
+        res.redirect('/myprofile');
+    }
+    else{
+        res.render('login');
+    }
 }
 
 async function checkLogin(req,res){
@@ -240,12 +245,21 @@ function goPickArea(req,res){
     res.redirect('/assign_table?area_id=' + area_id);
 }
 
-function goAddEditFoodItem(req,res){
-    res.render('addFoodItem', { layout: 'admin_layout' });
+function goAddFoodItem(req,res){
+    res.render('addFoodItem', { method: 'add',layout: 'admin_layout' });
 }
 
-function goMyProfile(req,res){
+async function goEditFoodItem(req,res){
+    let fooditeminfo= await model.getFoodItemInfo(req.params.id);
+    console.log(fooditeminfo);
+    res.render('addFoodItem', { method: 'edit' ,fooditeminfo: fooditeminfo,layout: 'admin_layout' });
+}
+
+
+async function goMyProfile(req,res){
     let profilepage;
+    let info= await model.getProfileInfo('gster');
+    // console.log(info);
     if(req.params.page=='info'){
         profilepage='userprofile';
     }
@@ -255,9 +269,55 @@ function goMyProfile(req,res){
     else if(req.params.page=='history'){
         profilepage='reservhistory';
     }
-    res.render('userprofile', {profilepage: profilepage, layout: 'profile_layout' });
+    res.render('userprofile', {profilepage: profilepage,info: info, layout: 'profile_layout' });
 }
 
+async function EditFoodItem(req,res){
+    let itemID = req.params.id;
+    let name = req.body.name;
+    let price = req.body.price;
+    let description = req.body.description;
+    let img=null;
+    // let onmenu = req.body.onmenu;
+    // let img = req.body.img;
+    // let category = req.body.category;
+    let newitem = await model.updateFoodItem(itemID, name, price, description,img);
+    res.redirect('/adminmenu');
+}
+
+async function AddFoodItem(req,res){
+    let name = req.body.name;
+    let price = req.body.price;
+    let description = req.body.description;
+    let img='default.png';
+    console.log(img);
+    // let onmenu = req.body.onmenu;
+    // let img = req.body.img;
+    // let category = req.body.category;
+    let newitem = await model.addFoodItem(name, price, description,img);
+    res.redirect('/adminmenu');
+}
+
+async function deleteItem(req,res){
+    let itemID = req.params.id;
+    console.log(itemID);
+    let deleteditem = await model.deleteFoodItem(itemID);
+    res.redirect('/adminmenu');
+}
+
+async function removeItem(req,res){
+    let itemId=req.params.id;
+    // we will toggle status from true to false (onmenu)
+    let removeditem = await model.removeFoodItem(itemId);
+    res.redirect('/adminmenu');
+}
+
+async function moveToMenu(req,res){
+    let itemId=req.params.id;
+    // we will toggle status from true to false (onmenu)
+    let removeditem = await model.addOnMenu(itemId);
+    res.redirect('/adminmenu');
+}
 
 router.route('/').get((req,res)=>res.redirect('/home'));
 // router.route('/api/menu').get(listMenu);
@@ -274,7 +334,13 @@ router.route('/adminreserv').get(goAdminReserv);
 router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table').get(goAssignTable);
 router.route('/pickarea').get(goPickArea);
-router.route('/addFoodItem').get(goAddEditFoodItem);
+router.route('/addFoodItem').get(goAddFoodItem);
+router.route('/addFoodItem').post(AddFoodItem);
+router.route('/addFoodItem/:id').get(goEditFoodItem);
+router.route('/addFoodItem/:id').post(EditFoodItem);
+router.route('/deleteItem/:id').get(deleteItem);
+router.route('/removeItem/:id').get(removeItem);
+router.route('/addOnMenu/:id').get(moveToMenu);
 router.route('/myprofile/page/:page').get(goMyProfile);
 router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
 // Επίσης έτσι: 

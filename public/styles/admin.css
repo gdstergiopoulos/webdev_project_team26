@@ -89,6 +89,16 @@ li>button{
     border-color: #F83544;
 }
 
+.movetomenu{
+    background-color: #FFD700;
+    border-color: #FFD700;
+}
+
+.delete{
+    background-color: #ff0015;
+    border-color: #ff0015;
+}
+
 .reject{
     background-color: #eb0014;
     border-color: #eb0014;

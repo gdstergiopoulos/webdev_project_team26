@@ -1,6 +1,7 @@
 <div id="addEditFoodItem">
-    <h1>Edit or Add Food Item</h1>
-    <form action="/saveFoodItem" method="POST">
+    {{#if (eq  method 'add')}}
+    <h1>Add Food Item</h1>
+    <form method="POST">
         <label for="name">Food Item Name:</label>
         <input type="text" id="name" name="name" class="form-control" required>
 
@@ -9,9 +10,30 @@
 
         <label for="description">Description:</label>
         <textarea id="description" name="description" class="form-control" required></textarea>
-
+        
+        <label for="img">Image:</label>
+        <input type="file" id="img" name="img" class="form-control" accept="image/*">
         <div style="text-align: center; margin-top:2%">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
+    {{else}}
+        {{#each fooditeminfo}}
+        <h1>Edit Food Item</h1>
+        <form method="POST">
+            <label for="name">Food Item Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required placeholder="{{foodname}}" value="{{foodname}}">
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" step="0.5" class="form-control" placeholder="{{price}}" value="{{price}}" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control" placeholder="{{description}}">{{description}}</textarea>
+
+            <div style="text-align: center; margin-top:2%">
+                <button type="submit" class="btn btn-primary">Save Edits</button>
+            </div>
+        </form>
+        {{/each}}
+    {{/if}}
 </div>

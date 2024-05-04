@@ -15,7 +15,7 @@
                 <span>{{this.foodname}}</span>
                 <span>{{this.price}}</span>
                 <a class="btn btn-primary edit" href="/addFoodItem/{{this.itemID}}">Edit</a>
-                <button class="btn btn-primary remove">Remove</button>
+                <a class="btn btn-primary remove" href="removeItem/{{this.itemID}}">Remove</a>
             </li>
             <hr>
             {{/each}}
@@ -39,8 +39,10 @@
             <li>
                 <span>{{this.foodname}}</span>
                 <span>{{this.price}}</span>
+                <a class="btn btn-primary movetomenu" href="/addOnMenu/{{this.itemID}}">Move to Menu</a>
                 <a class="btn btn-primary edit" href="/addFoodItem/{{this.itemID}}">Edit</a>
-                <button class="btn btn-primary remove">Remove</button>
+                {{!-- <button class="btn btn-primary remove">Remove</button> --}}
+                <a class="btn btn-primary delete" href="deleteItem/{{this.itemID}}">Delete</a>
             </li>
             <hr>
             {{/each}}

@@ -87,6 +87,113 @@ async function getMenuInactive(){
     }
 }
 
+async function getProfileInfo(username){
+    const sql = `SELECT * FROM "USER" WHERE "username" = '${username}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        // console.log(res.rows)
+        return res.rows;
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
 
+}
 
-export{getuser,adduser,getMenuActive,getMenuInactive}
+async function getFoodItemInfo(id){
+    const sql = `SELECT * FROM "FOODITEM" WHERE "itemID" = '${id}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        // console.log(res.rows)
+        return res.rows;
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+async function updateFoodItem(itemID,name,price,description,img){
+    const sql = `UPDATE "FOODITEM" SET "foodname" = '${name}', "price" = '${price}', "description" = '${description}', "img" = '${img}' WHERE "itemID" = '${itemID}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        console.log("Updated succesfully") // επιστρέφει array
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+async function addFoodItem(name,price,description,img){
+    const sql = `INSERT INTO "FOODITEM" ("foodname","price","description","img","onmenu") VALUES ('${name}','${price}','${description}','/media/menu/${img}','false');`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        console.log("Inserted succesfully") // επιστρέφει array
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+async function deleteFoodItem(itemID){
+    const sql = `DELETE FROM "FOODITEM" WHERE "itemID" = '${itemID}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        console.log("Deleted succesfully") // επιστρέφει array
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+async function removeFoodItem(itemID){
+    // we will toggle status from true to false (onmenu)
+    const sql = `UPDATE "FOODITEM" SET "onmenu" = 'false' WHERE "itemID" = '${itemID}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        console.log("Removed from menu succesfully") // επιστρέφει array
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+async function addOnMenu(itemID){
+    // we will toggle status from false to true (onmenu)
+    const sql = `UPDATE "FOODITEM" SET "onmenu" = 'true' WHERE "itemID" = '${itemID}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        console.log("Added to menu succesfully") // επιστρέφει array
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu}

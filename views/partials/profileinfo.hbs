@@ -1,9 +1,11 @@
 <div id="userprofile">
         <div id="userdetails">
             <h2>User Details</h2>
-            <p>First Name: <span>{{firstname}}</span></p>
-            <p>Last Name: <span>{{lastname}}</span></p>
-            <p>Email: <span>{{email}}</span></p>
+            {{#each info}}
+            <p>First Name: <span>{{Fname}}</span></p>
+            <p>Last Name: <span>{{Lname}}</span></p>
+            <p>Email: <span>{{mail}}</span></p>
             <p>Phone: <span>{{phone}}</span></p>
+            {{/each}}
         </div>
 </div>
