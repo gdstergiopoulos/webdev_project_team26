@@ -258,7 +258,8 @@ async function goEditFoodItem(req,res){
 
 async function goMyProfile(req,res){
     let profilepage;
-    let info= await model.getProfileInfo('gster');
+    //take username from session
+    let userinfo= await model.getProfileInfo('testuser');
     // console.log(info);
     if(req.params.page=='info'){
         profilepage='userprofile';
@@ -268,8 +269,9 @@ async function goMyProfile(req,res){
     }
     else if(req.params.page=='history'){
         profilepage='reservhistory';
+        userinfo= await model.getReservHistory('testuser');
     }
-    res.render('userprofile', {profilepage: profilepage,info: info, layout: 'profile_layout' });
+    res.render('userprofile', {profilepage: profilepage,info: userinfo, layout: 'profile_layout' });
 }
 
 async function EditFoodItem(req,res){

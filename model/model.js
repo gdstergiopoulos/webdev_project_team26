@@ -196,4 +196,22 @@ async function addOnMenu(itemID){
         console.log(err)
     }
 }
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu}
+
+async function getReservHistory(username){
+    const sql = `SELECT * FROM "RESERVATION" WHERE "username" = '${username}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        // console.log(res.rows)
+        return res.rows;
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory}

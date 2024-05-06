@@ -1,7 +1,7 @@
 <div  id="oldResev">
       <div class="tasks">
           <h1>Old Reservations</h1>
-          <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+          {{!-- <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
              <li>
               <span>Να διαβάσω JS</span>
               <button class="btn btn-primary review">Review</button>
@@ -12,6 +12,29 @@
               <button class="btn btn-primary review">Review</button>
              </li>
              <hr>
-          </ul>
+          </ul> --}}
+          <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+            {{#each info}}
+            <li>
+              <span>{{reservID}}</span>
+              <span>{{date}}</span>
+              <span>{{time}}</span>
+              <span>{{numofpeople}}</span>
+              <a class="btn btn-primary review" href="/review/{{reservID}}">Review</a>
+              </li>
+              <hr>
+            {{/each}}
+             {{!-- <li>
+              <span>Να διαβάσω JS</span>
+              <button class="btn btn-primary review">Review</button>
+              </li>
+              <hr>
+             <li class="done">
+              <span>Να ταΐσω τη γάτα</span>
+              <button class="btn btn-primary review">Review</button>
+             </li>
+             <hr>
+          </ul> --}}
+          
       </div>
     </div>
