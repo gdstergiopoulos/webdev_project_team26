@@ -1,20 +1,5 @@
-{{!-- <div class="sidenav" id="example-one">
-    <a href="/myprofile/page/info">My Profile</a>
-    <a href="/myprofile/page/reservations">Active Reservations</a>
-    <a href="/myprofile/page/history">Old Reservations</a>
-    <a href="/myprofile/page/royalty">Royalty Points</a>
-    <a href="/home">My Reviews</a>
-    <a href="/home">Logout</a>
-</div>
-<script src=
-"https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-    </script>
-<script>
-    $('#example-one a').click(function(e) {
-    $('#example-one a').removeClass('current_page_item');
-    $(this).addClass('current_page_item');
-});
-</script> --}}
+{{>navbar loggname=loggname}}
+<div id="pagebody">
 <div id="myprofilepg">
     {{#if (eq profilepage 'userprofile')}}
         {{> profileinfo info=info}}
@@ -40,3 +25,4 @@
         {{> logoutPartial}}
     {{/if}}
 </div> 
+</div>

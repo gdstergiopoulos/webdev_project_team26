@@ -1,3 +1,5 @@
+{{>navbar loggname=loggname}}
+<div id="pagebody">
 <div id="reservationpg">
 <div  id="txtandform">
       <h1>Make a Reservation</h1>
@@ -32,7 +34,8 @@
         </form>
     </div>
 </div>
-    {{>floorplan}}
+    {{>floorplan page='userreserv'}}
+</div>
 </div>
 {{!-- <div id="shop_logo">
     <img src="/media/fagadiko_notext.jpg">

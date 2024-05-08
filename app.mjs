@@ -106,7 +106,7 @@ let listAllFoodsRender = async function (req, res) {
         // sends the "tasks" object to the "tasks" template
         let foodsq= await model.getMenuActive()
         // console.log(foodsq);
-        res.render('menu', { foods: foodsq }); 
+        res.render('menu', { loggname: req.session.username ,foods: foodsq }); 
 }
 
 // let loadPage = function(req,res){
@@ -114,7 +114,7 @@ let listAllFoodsRender = async function (req, res) {
 // }
 
 function goAbout(req,res){
-    res.render('about');
+    res.render('about',{layout: 'main', loggname: req.session.username});
 
 }
 
@@ -187,7 +187,7 @@ function goHome(req,res){
     if(req.session.loggedin==undefined){
         req.session.loggedin = false;
     }
-    res.render('home_page');
+    res.render('home_page',{layout: 'main', loggname: req.session.username});
 
 }
 
@@ -207,27 +207,27 @@ function goReservation(req,res){
     }
     else{
         console.log(req.session.loggedin)
-        res.render('reservation');
+        res.render('reservation',{layout: 'main', loggname: req.session.username});
     }
 }
 
 
 function goLocation(req,res){
-    res.render('location', { layout: 'loc_layout' });
+    res.render('location', { layout: 'loc_layout', loggname: req.session.username});
 }
 
 function goAdminHome(req,res){
-    res.render('admin_home', { layout: 'admin_layout' });
+    res.render('admin_home', {loggname: req.session.username,layout: 'admin_layout' });
 }
 
 async function goAdminMenu(req,res){
     let foodsactive= await model.getMenuActive();
     let foodsinactive= await model.getMenuInactive();
-    res.render('admin_menu', { layout: 'admin_layout', foodsactive: foodsactive, foodsinactive: foodsinactive});
+    res.render('admin_menu', { layout: 'admin_layout',loggname: req.session.username,foodsactive: foodsactive, foodsinactive: foodsinactive});
 }
 
 function goAdminReserv(req,res){
-    res.render('adminreserv', { layout: 'admin_layout' });
+    res.render('adminreserv', {loggname: req.session.username,layout: 'admin_layout' });
 }
 
 function goAssignTable(req,res){
@@ -239,7 +239,7 @@ function goAssignTable(req,res){
         area_id = req.query['area_id'];
     }
     // console.log('area_id:', area_id); // This will log the area_id to the console
-    res.render('assign_table', { area_id: area_id, layout: 'admin_layout' });
+    res.render('assign_table', { area_id: area_id,loggname: req.session.username,layout: 'admin_layout' });
 }
 function goPickArea(req,res){
     let area_id = req.query['id'];
@@ -247,13 +247,13 @@ function goPickArea(req,res){
 }
 
 function goAddFoodItem(req,res){
-    res.render('addFoodItem', { method: 'add',layout: 'admin_layout' });
+    res.render('addFoodItem', { method: 'add',loggname: req.session.username,layout: 'admin_layout' });
 }
 
 async function goEditFoodItem(req,res){
     let fooditeminfo= await model.getFoodItemInfo(req.params.id);
     console.log(fooditeminfo);
-    res.render('addFoodItem', { method: 'edit' ,fooditeminfo: fooditeminfo,layout: 'admin_layout' });
+    res.render('addFoodItem', { method: 'edit' ,fooditeminfo: fooditeminfo,loggname: req.session.username,layout: 'admin_layout' });
 }
 
 
@@ -272,7 +272,7 @@ async function goMyProfile(req,res){
         profilepage='reservhistory';
         userinfo= await model.getReservHistory(req.session.username);
     }
-    res.render('userprofile', {profilepage: profilepage,info: userinfo, layout: 'profile_layout' });
+    res.render('userprofile', {profilepage: profilepage,info: userinfo, loggname: req.session.username,layout: 'profile_layout'});
 }
 
 async function EditFoodItem(req,res){
@@ -346,6 +346,7 @@ router.route('/removeItem/:id').get(removeItem);
 router.route('/addOnMenu/:id').get(moveToMenu);
 router.route('/myprofile/page/:page').get(goMyProfile);
 router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
+router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.username=undefined; res.redirect('/home')});
 // Επίσης έτσι: 
 // Could also be done like this:
 // app.route('/api/tasks').get(listAllTasks);
