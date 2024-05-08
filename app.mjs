@@ -144,6 +144,7 @@ async function checkLogin(req,res){
         if (storedpass === password) {
             console.log('Logged in', username);
             req.session.loggedin = true;
+            req.session.username=username;
             if(role=='admin'){
                 res.redirect('/adminhome');
             }
@@ -259,7 +260,7 @@ async function goEditFoodItem(req,res){
 async function goMyProfile(req,res){
     let profilepage;
     //take username from session
-    let userinfo= await model.getProfileInfo('test');
+    let userinfo= await model.getProfileInfo(req.session.username);
     // console.log(info);
     if(req.params.page=='info'){
         profilepage='userprofile';
@@ -269,7 +270,7 @@ async function goMyProfile(req,res){
     }
     else if(req.params.page=='history'){
         profilepage='reservhistory';
-        userinfo= await model.getReservHistory('test');
+        userinfo= await model.getReservHistory(req.session.username);
     }
     res.render('userprofile', {profilepage: profilepage,info: userinfo, layout: 'profile_layout' });
 }
