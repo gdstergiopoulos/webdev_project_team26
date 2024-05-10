@@ -4,6 +4,11 @@ import path from 'path';
 
 dotenv.config();
 
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+  
 const pool = new pg.Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -150,6 +155,21 @@ async function addFoodItem(name,price,description,img){
     }
 }
 
+async function addReservation(date,time,people,comments,username,area_id){
+    const sql = `INSERT INTO "RESERVATION" ("reservID","desired_area","numofpeople","date","time","username","comments") VALUES ('${getRandomInt(10000)}','${area_id}','${people}','${date}','${time}','${username}','${comments}');`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        console.log("Inserted succesfully") // επιστρέφει array
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
 async function deleteFoodItem(itemID){
     const sql = `DELETE FROM "FOODITEM" WHERE "itemID" = '${itemID}';`;
     try {
@@ -214,4 +234,4 @@ async function getReservHistory(username){
 }
 
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory}
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory, addReservation}

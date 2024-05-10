@@ -1,13 +1,13 @@
 {{#if (eq page 'userreserv')}}
 <div  id="floorplan">
       <h1>Select Desired Seating Area</h1>
-      <a class="btn btn-primary" id="insidemain" href="#">Inside Main Area</a>
-      <a class="btn btn-primary" id="bararea" href="#">Inside Bar Area</a>
+      <a class="btn btn-primary" id="insidemain" href="/userpickarea?id=insidemain">Inside Main Area</a>
+      <a class="btn btn-primary" id="bararea" href="/userpickarea?id=bararea">Inside Bar Area</a>
       <br>
-      <a class="btn btn-primary" id="outsidemain" href="#">Outside Main Area</a>
-      <a class="btn btn-primary" id="opensky" href="#">Outside Open Sky</a>
+      <a class="btn btn-primary" id="outsidemain" href="/userpickarea?id=outsidemain">Outside Main Area</a>
+      <a class="btn btn-primary" id="opensky" href="/userpickarea?id=opensky">Outside Open Sky</a>
       <br>
-      <a class="btn btn-primary" id="bythesea" href="#">By the sea</a>
+      <a class="btn btn-primary" id="bythesea" href="/userpickarea?id=bythesea">By the sea</a>
     </div>
 {{/if}}
 {{#if (eq page 'assigntable')}}

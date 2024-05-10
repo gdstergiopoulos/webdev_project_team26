@@ -4,7 +4,7 @@
 <div  id="txtandform">
       <h1>Make a Reservation</h1>
       <div id="registerform">
-        <form>
+        <form action = "/reservation" method = "post">
           <fieldset>
               <legend>When?</legend>
               <div class="form-field">
@@ -28,13 +28,15 @@
                   <textarea id="comments" class="form-control" name="comments" placeholder="Feel free to tell us"></textarea>
               </div>
             </fieldset>
+            
             <div class="form-field">
               <input class="btn btn-primary" id="makereservbtn" type="submit" value="Make Reservation">
           </div>
+          
         </form>
     </div>
 </div>
-    {{>floorplan page='userreserv'}}
+  {{>floorplan page='userreserv'}}  
 </div>
 </div>
 {{!-- <div id="shop_logo">
