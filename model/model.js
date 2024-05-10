@@ -156,7 +156,8 @@ async function addFoodItem(name,price,description,img){
 }
 
 async function addReservation(date,time,people,comments,username,area_id){
-    const sql = `INSERT INTO "RESERVATION" ("reservID","desired_area","numofpeople","date","time","username","comments") VALUES ('${getRandomInt(10000)}','${area_id}','${people}','${date}','${time}','${username}','${comments}');`;
+    const currentDate = new Date();
+    const sql = `INSERT INTO "RESERVATION" ("reservID","desired_area","numofpeople","date","time","username","comments","datetimemade") VALUES ('${getRandomInt(10000)}','${area_id}','${people}','${date}','${time}','${username}','${comments}','${currentDate.toISOString()}');`;
     try {
         const client = await connect();
         const res = await client.query(sql)

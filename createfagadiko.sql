@@ -32,7 +32,7 @@ CREATE TABLE public."RESERVATION" (
     numofpeople integer,
     date date,
     "time" time without time zone,
-    datatimemade timestamp without time zone,
+    datetimemade timestamp without time zone,
     "tableID" character varying,
     username character varying
 );
