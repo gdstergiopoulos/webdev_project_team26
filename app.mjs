@@ -11,6 +11,16 @@ const app = express()
 const router = express.Router();
 const port = process.env.PORT || '3000';
 
+//TODO remove the comments not needed
+//TODO dont let a non admin user to access the admin pages
+//TODO fix the rediriction when someone presses make reserv when not logged in, the logs in, move him to the reservation page not the home page
+//TODO add the ability to delete/edit reservations
+//TODO add the ability to review old reservations
+
+//TODO add the ability for the admin to assign tables to reservations
+//TODO inform the user for avaibality
+//TODO make the non available table not clickable for the admin
+
 // Δηλώνουμε πως ο φάκελος "public" θα περιέχει τα στατικά αρχεία, π.χ. το http://127.0.0.1:3000/style.css θα επιστρέψει, το αρχείο /public/style.css
 // Specify that the "public" folder will contain the static files, e.g. http://127.0.0.1:3000/style.css will return, the file /public/style.css
 app.use(express.static('public'))

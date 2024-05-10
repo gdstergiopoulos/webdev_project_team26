@@ -2,6 +2,7 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
 
+//TODO remove the comments that do not need to be there
 dotenv.config();
 
 
@@ -219,6 +220,7 @@ async function addOnMenu(itemID){
 }
 
 async function updateReservStatus(username){
+    //TODO fix this function to update the status of the reservation to active or old depending on the current date and the date of the reservation
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0];
     const formattedTime = currentDate.toISOString().split('T')[1].split('.')[0];
