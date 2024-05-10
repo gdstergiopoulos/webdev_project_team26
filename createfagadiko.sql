@@ -106,3 +106,5 @@ INSERT INTO public."TABLE" ("tableID", area, capacity) VALUES (1, 'insidemain', 
 INSERT INTO public."RESERVATION" ("desired_area", "numofpeople", "date", "time", "datatimemade", "tableID", "username")
 VALUES ('insidemain', 2, '2022-12-31', '20:00', '2022-12-28 19:08', '1', 'test');
 
+ALTER TABLE public."RESERVATION"
+    ADD COLUMN comments text;

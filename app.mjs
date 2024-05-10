@@ -183,7 +183,7 @@ async function makeResv(req,res){
     let people = req.body.people;
     let comments = req.body.comments;
     let username = req.session.username;
-    let area_id = req.session.user_area_id;
+    let area_id = req.body.area;
     
     if(req.session.loggedin==true){
         if(area_id!=undefined && time!=undefined && date!=undefined && people){
@@ -273,12 +273,12 @@ function goPickArea(req,res){
     res.redirect('/assign_table?area_id=' + area_id);
 }
 
-function goUserPickArea(req,res){
-    console.log("hello ");
-    req.session.user_area_id = req.query['id'];
-    let area_id = req.query['id'];
-    res.redirect('/reservation?area_id=' + area_id);
-}
+// function goUserPickArea(req,res){
+//     console.log("hello ");
+//     req.session.user_area_id = req.query['id'];
+//     let area_id = req.query['id'];
+//     res.redirect('/reservation?area_id=' + area_id);
+// }
 
 function goAddFoodItem(req,res){
     res.render('addFoodItem', { method: 'add',loggname: req.session.username,layout: 'admin_layout' });
@@ -372,7 +372,7 @@ router.route('/adminreserv').get(goAdminReserv);
 router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table').get(goAssignTable);
 router.route('/pickarea').get(goPickArea);
-router.route('/userpickarea').get(goUserPickArea);
+// router.route('/userpickarea').get(goUserPickArea);
 router.route('/addFoodItem').get(goAddFoodItem);
 router.route('/addFoodItem').post(AddFoodItem);
 router.route('/addFoodItem/:id').get(goEditFoodItem);
