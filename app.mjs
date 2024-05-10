@@ -295,12 +295,15 @@ async function goMyProfile(req,res){
     let profilepage;
     //take username from session
     let userinfo= await model.getProfileInfo(req.session.username);
+    //update reserv statys
+    // await model.updateReservStatus();
     // console.log(info);
     if(req.params.page=='info'){
         profilepage='userprofile';
     }
     else if(req.params.page=='reservations'){
         profilepage='userreserv';
+        userinfo= await model.getActiveReserv(req.session.username);
     }
     else if(req.params.page=='history'){
         profilepage='reservhistory';

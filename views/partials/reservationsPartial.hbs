@@ -2,18 +2,17 @@
         <div class="tasks">
             <h1>Active Reservations</h1>
             <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
-               <li>
-                  <span>Να λύσω ξανά την άσκηση αυτή την επόμενη εβδομάδα, που θα ξέρω πώς χειριζόμαστε τα συμβάντα</span>
-                  <a href="/reservation" class="btn btn-primary edit">Edit</a>
-                  <button class="btn btn-primary cancel">Cancel</button>
-               </li>
-               <hr>
-               <li class="done">
-                <span>Να πάρω τα χάπια μου</span>
-                <a href="/reservation" class="btn btn-primary edit">Edit</a>
-                <button class="btn btn-primary cancel">Cancel</button>
-                </li>
-                <hr>
+            {{#each info}}
+            <li>
+              <span>{{reservID}}</span>
+              <span>{{date}}</span>
+              <span>{{time}}</span>
+              <span>{{numofpeople}}</span>
+              <a href="/reservation/edit/{{reservID}}" class="btn btn-primary edit">Edit</a>
+              <a href="/reservation/cancel/{{reservID}}" class="btn btn-primary cancel">Cancel</a>
+              </li>
+              <hr>
+            {{/each}}
             </ul>
             <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
             <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->

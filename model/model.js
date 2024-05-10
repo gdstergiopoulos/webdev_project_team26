@@ -218,8 +218,27 @@ async function addOnMenu(itemID){
     }
 }
 
+async function updateReservStatus(username){
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    const formattedTime = currentDate.toISOString().split('T')[1].split('.')[0];
+    const sql = `UPDATE "RESERVATION" SET "status" = 'active' WHERE "username" = '${username}' AND "date" > '${formattedDate}' AND ("date" = '${formattedDate}' AND "time" > '${formattedTime}');`;
+    //const sql = `UPDATE "RESERVATION" SET "status" = 'active' WHERE "username" = '${username}' AND "date" > '${currentDate.toISOString()}' AND ("date" = '${currentDate.toISOString()}' AND "time" > '${currentDate.getHours()}:${currentDate.getMinutes()}');`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        console.log("Reservation status updated successfully");
+        // callback(null, res.rows) // επιστρέφει array
+    } catch (err) {
+        // callback(err, null);
+        console.log(err);
+    }
+}
+
+
 async function getReservHistory(username){
-    const sql = `SELECT * FROM "RESERVATION" WHERE "username" = '${username}';`;
+    const sql = `SELECT * FROM "RESERVATION" WHERE "username" = '${username}' AND "status" = 'old';`;
     try {
         const client = await connect();
         const res = await client.query(sql)
@@ -234,5 +253,22 @@ async function getReservHistory(username){
     }
 }
 
+async function getActiveReserv(username){
+    {
+        const sql = `SELECT * FROM "RESERVATION" WHERE "username" = '${username}' AND "status" = 'active';`;
+        try {
+            const client = await connect();
+            const res = await client.query(sql)
+            await client.release()
+            // console.log(res.rows)
+            return res.rows;
+            // callback(null, res.rows) // επιστρέφει array
+        }
+        catch (err) {
+            // callback(err, null);
+            console.log(err)
+        }
+    }
+}
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory, addReservation}
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getActiveReserv, addReservation, updateReservStatus}
