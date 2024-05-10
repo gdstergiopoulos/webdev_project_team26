@@ -187,7 +187,7 @@ async function makeResv(req,res){
     
     if(req.session.loggedin==true){
         if(area_id!=undefined && time!=undefined && date!=undefined && people){
-            model.addReservation(date,time,people,comments,username,area_id);
+            await model.addReservation(date,time,people,comments,username,area_id);
             res.redirect('/reservation');
         }
         else{
