@@ -277,30 +277,31 @@ async function goAdminMenu(req,res){
     }
 }
 
-function goAdminReserv(req,res){
+async function goAdminReserv(req,res){
     if(req.session.role!='admin'){
         console.log('You are not an admin');
         res.redirect('/home');
     }
     else{
-        res.render('adminreserv', {loggname: req.session.username,layout: 'admin_layout' });
+        let reservations= await model.getAllActiveReserv();
+        res.render('adminreserv', {loggname: req.session.username,reservations:reservations,layout: 'admin_layout' });
     }
 }
 
-function goAssignTable(req,res){
+async function goAssignTable(req,res){
     let area_id;
-    if (!req.query['area_id']) {
-        area_id = 'insidemain';
-    }
-    else {
-        area_id = req.query['area_id'];
-    }
-    // console.log('area_id:', area_id); // This will log the area_id to the console
-    res.render('assign_table', { area_id: area_id,loggname: req.session.username,layout: 'admin_layout' });
+    let reservID = req.params.reservID;
+    let reservInfo= await model.getReservInfo(reservID);
+    area_id=reservInfo[0].desired_area;
+
+    res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,loggname: req.session.username,layout: 'admin_layout' });
 }
-function goPickArea(req,res){
-    let area_id = req.query['id'];
-    res.redirect('/assign_table?area_id=' + area_id);
+async function goPickArea(req,res){
+    let area_id;
+    let reservID = req.params.reservID;
+    let reservInfo= await model.getReservInfo(reservID);
+    area_id=req.params.area;
+    res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,loggname: req.session.username,layout: 'admin_layout' });
 }
 
 // function goUserPickArea(req,res){
@@ -326,7 +327,7 @@ async function goMyProfile(req,res){
     //take username from session
     let userinfo= await model.getProfileInfo(req.session.username);
     //update reserv statys
-    // await model.updateReservStatus();
+    await model.updateReservStatus();
     // console.log(info);
     if(req.params.page=='info'){
         profilepage='userprofile';
@@ -403,8 +404,8 @@ router.route('/location').get(goLocation);
 router.route('/adminhome').get(goAdminHome);
 router.route('/adminreserv').get(goAdminReserv);
 router.route('/adminmenu').get(goAdminMenu);
-router.route('/assign_table').get(goAssignTable);
-router.route('/pickarea').get(goPickArea);
+router.route('/assign_table/:reservID').get(goAssignTable);
+router.route('/assign_table/:reservID/pickarea/:area').get(goPickArea);
 // router.route('/userpickarea').get(goUserPickArea);
 router.route('/addFoodItem').get(goAddFoodItem);
 router.route('/addFoodItem').post(AddFoodItem);

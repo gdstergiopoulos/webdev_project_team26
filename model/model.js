@@ -130,8 +130,9 @@ async function updateFoodItem(itemID,name,price,description,img){
     const sql = `UPDATE "FOODITEM" SET "foodname" = '${name}', "price" = '${price}', "description" = '${description}' WHERE "itemID" = '${itemID}';`;
     try {
         const client = await connect();
-        const res = await client.query(sql)
+        // const res = await client.query(sql)
         await client.release()
+        return await client.query(sql)
         console.log("Updated succesfully") // επιστρέφει array
         // callback(null, res.rows) // επιστρέφει array
     }
@@ -158,7 +159,7 @@ async function addFoodItem(name,price,description,img){
 
 async function addReservation(date,time,people,comments,username,area_id){
     const currentDate = new Date();
-    const sql = `INSERT INTO "RESERVATION" ("reservID","desired_area","numofpeople","date","time","username","comments","datetimemade") VALUES ('${getRandomInt(10000)}','${area_id}','${people}','${date}','${time}','${username}','${comments}','${currentDate.toISOString()}');`;
+    const sql = `INSERT INTO "RESERVATION" ("desired_area","numofpeople","date","time","username","comments","datetimemade") VALUES ('${area_id}','${people}','${date}','${time}','${username}','${comments}','${currentDate.toISOString()}');`;
     try {
         const client = await connect();
         const res = await client.query(sql)
@@ -221,16 +222,13 @@ async function addOnMenu(itemID){
 
 async function updateReservStatus(username){
     //TODO fix this function to update the status of the reservation to active or old depending on the current date and the date of the reservation
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    const formattedTime = currentDate.toISOString().split('T')[1].split('.')[0];
-    const sql = `UPDATE "RESERVATION" SET "status" = 'active' WHERE "username" = '${username}' AND "date" > '${formattedDate}' AND ("date" = '${formattedDate}' AND "time" > '${formattedTime}');`;
-    //const sql = `UPDATE "RESERVATION" SET "status" = 'active' WHERE "username" = '${username}' AND "date" > '${currentDate.toISOString()}' AND ("date" = '${currentDate.toISOString()}' AND "time" > '${currentDate.getHours()}:${currentDate.getMinutes()}');`;
+    const sql = `UPDATE "RESERVATION" SET "status" = 'active' WHERE "username" = '${username}' AND date > CURRENT_DATE;`;
+    
     try {
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log("Reservation status updated successfully");
+        console.log("Reservation status updated successfully",res.rows);
         // callback(null, res.rows) // επιστρέφει array
     } catch (err) {
         // callback(err, null);
@@ -273,4 +271,39 @@ async function getActiveReserv(username){
     }
 }
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getActiveReserv, addReservation, updateReservStatus}
+async function getAllActiveReserv(username){
+    {
+        const sql = `SELECT * FROM "RESERVATION" WHERE "status" = 'active';`;
+        try {
+            const client = await connect();
+            const res = await client.query(sql)
+            await client.release()
+            // console.log(res.rows)
+            return res.rows;
+            // callback(null, res.rows) // επιστρέφει array
+        }
+        catch (err) {
+            // callback(err, null);
+            console.log(err)
+        }
+    }
+}
+
+async function getReservInfo(reservID){
+    const sql = `SELECT * FROM "RESERVATION" WHERE "reservID" = '${reservID}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        // console.log(res.rows)
+        return res.rows;
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getActiveReserv, addReservation, updateReservStatus, getAllActiveReserv,getReservInfo}

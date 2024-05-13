@@ -4,36 +4,23 @@
         <div class="tasks">
             <h1>New Reservations</h1>
             <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
-               <li>
-                  <span>Να λύσω ξανά την άσκηση αυτή την επόμενη εβδομάδα, που θα ξέρω πώς χειριζόμαστε τα συμβάντα</span>
-                  <a href='/assign_table' class="btn btn-primary edit">Assign Table</a>
-                  <button class="btn btn-primary reject">Reject</button>
-               </li>
-               <hr>
-               <li class="done">
-                <span>Να πάρω τα χάπια μου</span>
-                <a href='/assign_table' class="btn btn-primary edit">Assign Table</a>
-                <button class="btn btn-primary reject">Reject</button>
-                </li>
-                <hr>
-               <li>
-                <span>Να διαβάσω JS</span>
-                <a href='/assign_table' class="btn btn-primary edit">Assign Table</a>
-                <button class="btn btn-primary reject">Reject</button>
-                </li>
-                <hr>
-               <li class="done">
-                <span>Να ταΐσω τη γάτα</span>
-                <a href='/assign_table' class="btn btn-primary edit">Assign Table</a>
-                <button class="btn btn-primary reject">Reject</button>
-               </li>
-               <hr>
-               <li>
-                <span>Να μαγειρέψω</span>
-                <a href='/assign_table' class="btn btn-primary edit">Assign Table</a>
-                <button class="btn btn-primary reject">Reject</button>
-                </li>
-                <hr>
+              {{#each reservations}}
+                <li>
+                  <span>{{username}}</span>
+                  <span>{{date}}</span>
+                  <span>{{time}}</span>
+                  <span>{{people}}</span>
+                  {{#if (neq tableID 'null')}}
+                    <span>{{tableID}}</span>
+                  {{else}}
+                      <span>Not Assigned</span>
+                  {{/if}}
+                  <a href="assign_table/{{reservID}}" class="btn btn-primary edit">Assign Table</a>
+                  <button class="btn btn-primary remove">Cancel</button>
+                  <button class="btn btn-primary approve">Approve</button>
+                  </li>
+                  <hr>
+              {{/each}} 
             </ul>
             <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
             <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->

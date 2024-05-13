@@ -12,13 +12,15 @@
 {{/if}}
 {{#if (eq page 'assigntable')}}
 <div  id="floorplan">
+      {{#each reservInfo}}
       <h1>Select Desired Seating Area</h1>
-      <a class="btn btn-primary" id="insidemain" href="/pickarea?id=insidemain">Inside Main Area</a>
-      <a class="btn btn-primary" id="bararea" href="/pickarea?id=bararea">Inside Bar Area</a>
+      <a class="btn btn-primary" id="insidemain" href="/assign_table/{{reservID}}/pickarea/insidemain">Inside Main Area</a>
+      <a class="btn btn-primary" id="bararea" href="/assign_table/{{reservID}}/pickarea/bararea">Inside Bar Area</a>
       <br>
-      <a class="btn btn-primary" id="outsidemain" href="/pickarea?id=outsidemain">Outside Main Area</a>
-      <a class="btn btn-primary" id="opensky" href="/pickarea?id=opensky">Outside Open Sky</a>
+      <a class="btn btn-primary" id="outsidemain" href="/assign_table/{{reservID}}/pickarea/outsidemain">Outside Main Area</a>
+      <a class="btn btn-primary" id="opensky" href="/assign_table/{{reservID}}/pickarea/opensky">Outside Open Sky</a>
       <br>
-      <a class="btn btn-primary" id="bythesea" href="/pickarea?id=bythesea">By the sea</a>
+      <a class="btn btn-primary" id="bythesea" href="/assign_table/{{reservID}}/pickarea/bythesea">By the sea</a>
     </div>
+    {{/each}}
 {{/if}}

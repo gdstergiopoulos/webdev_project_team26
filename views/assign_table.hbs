@@ -1,42 +1,50 @@
 {{>adminnav loggname=loggname}}
 <div id="pagebody">
-<div class="assign_table_container">
-<div class="assign_table" id="floorplan_assign">
-{{>floorplan page='assigntable'}}
-</div>
-{{#if (eq area_id "insidemain")}}
-<div class="assign_table" id="inside_assign">
-{{>insidemain}}
-</div>
-{{/if}}
+    {{#each reservInfo}}
+        <div style="display:flex;">
+            <p style="margin-right:auto">{{username}}</p>
+            <p style="margin-right:auto">{{date}}</p>
+            <p style="margin-right:auto">{{time}}</p>
+            <p style="margin-right:auto">{{people}}</p>
+        </div>
+    {{/each}}
+    <div class="assign_table_container">
+        <div class="assign_table" id="floorplan_assign">
+        {{>floorplan page='assigntable' reservID=reservInfo.reservID}}
+        </div>
+        {{#if (eq area_id "insidemain")}}
+        <div class="assign_table" id="inside_assign">
+        {{>insidemain}}
+        </div>
+        {{/if}}
 
-{{#if (eq area_id "bararea")}}
-<div class="assign_table" id="inside_assign">
+        {{#if (eq area_id "bararea")}}
+        <div class="assign_table" id="inside_assign">
 
-{{>bararea}}
-</div>
-{{/if}}
+        {{>bararea}}
+        </div>
+        {{/if}}
 
-{{#if (eq area_id "outsidemain")}}
-<div class="assign_table" id="inside_assign">
- 
-{{>outsidemain}}
-</div>
-{{/if}}
+        {{#if (eq area_id "outsidemain")}}
+        <div class="assign_table" id="inside_assign">
+        
+        {{>outsidemain}}
+        </div>
+        {{/if}}
 
-{{#if (eq area_id "opensky")}}
-<div class="assign_table" id="inside_assign">
+        {{#if (eq area_id "opensky")}}
+        <div class="assign_table" id="inside_assign">
 
-{{>opensky}}
-</div>
-{{/if}}
+        {{>opensky}}
+        </div>
+        {{/if}}
 
-{{#if (eq area_id "bythesea")}}
-<div class="assign_table" id="inside_assign">
+        {{#if (eq area_id "bythesea")}}
+        <div class="assign_table" id="inside_assign">
 
-{{>bythesea}}
-</div>
-{{/if}}
+        {{>bythesea}}
+        </div>
+        {{/if}}
 
-</div>
+    </div>
 </div>
