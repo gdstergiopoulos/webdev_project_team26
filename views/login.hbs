@@ -4,7 +4,7 @@
         <div class="row" id="login_body">
             <div class="align-items-center" id="loginform">
                 <div class="d-flex flex-column align-items-center" >
-                <form action="/login" method="post">
+                <form {{#if (eq src undefined)}} action="/login" {{else}} action="/login/redirect/{{src}}"{{/if}} method="post">
                     <fieldset class="text-center">
                         <legend class="text-start">Welcome</legend>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">

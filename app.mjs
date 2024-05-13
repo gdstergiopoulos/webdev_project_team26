@@ -129,11 +129,12 @@ function goAbout(req,res){
 }
 
 function goLogin(req,res){
+   
     if(req.session.loggedin==true){
         res.redirect('/myprofile');
     }
     else{
-        res.render('login');
+        res.render('login',{src: req.params.page,layout: 'main'});
     }
 }
 
@@ -153,6 +154,7 @@ async function checkLogin(req,res){
         let role=user[0].role;
         if (storedpass === password) {
             console.log('Logged in', username);
+            console.log(req.params.src)
             req.session.loggedin = true;
             req.session.username=username;
             req.session.role=role;
@@ -208,12 +210,46 @@ async function makeResv(req,res){
         }}
     else{
         console.log('Login Required to make a reservation');
-        res.redirect('/login');
+        res.redirect('/login/redirect/reservation');
     }
 
 }
 
+async function checkLoginRedirect(req,res){
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(username, password);
+    //elegxos edw login klp
+    // console.log(model.getuser(username));
+    let user = await model.getuser(username);
+    if(user.length==0){
+        console.log('Create an account first');    
+        res.redirect('/login');
+    }
+    else{
+        let storedpass = user[0].password;
+        let role=user[0].role;
+        if (storedpass === password) {
+            console.log('Logged in', username);
+            console.log(req.params.src)
+            req.session.loggedin = true;
+            req.session.username=username;
+            req.session.role=role;
+            if(role=='admin'){
+                res.redirect('/adminhome');
+            }
+            else{
+                    res.redirect('/reservation');
+                }
+        } else {
+            console.log('Invalid username or password');
+            // Handle the error or redirect to an error page
+        }
+    }
+}
+
 router.route('/login').post(checkLogin);
+router.route('/login/redirect/:page').post(checkLoginRedirect);
 router.route('/register').post(registerUser);
 router.route('/reservation').post(makeResv);
 
@@ -241,7 +277,7 @@ function goRegister(req,res){
 
 function goReservation(req,res){
     if(req.session.loggedin===false){
-        res.redirect('/login');
+        res.redirect('/login/redirect/reservation');
     }
     else{
         console.log(req.session.loggedin)
@@ -396,6 +432,7 @@ router.route('/').get((req,res)=>res.redirect('/home'));
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
 router.route('/login').get(goLogin);
+router.route('/login/redirect/:page').get(goLogin);
 router.route('/home').get(goHome);
 // router.route('/menu').get(goMenu);
 router.route('/register').get(goRegister);
