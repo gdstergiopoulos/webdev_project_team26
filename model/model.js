@@ -127,7 +127,7 @@ async function getFoodItemInfo(id){
 }
 
 async function updateFoodItem(itemID,name,price,description,img){
-    const sql = `UPDATE "FOODITEM" SET "foodname" = '${name}', "price" = '${price}', "description" = '${description}', "img" = '${img}' WHERE "itemID" = '${itemID}';`;
+    const sql = `UPDATE "FOODITEM" SET "foodname" = '${name}', "price" = '${price}', "description" = '${description}' WHERE "itemID" = '${itemID}';`;
     try {
         const client = await connect();
         const res = await client.query(sql)

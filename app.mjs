@@ -155,6 +155,7 @@ async function checkLogin(req,res){
             console.log('Logged in', username);
             req.session.loggedin = true;
             req.session.username=username;
+            req.session.role=role;
             if(role=='admin'){
                 res.redirect('/adminhome');
             }
@@ -254,17 +255,36 @@ function goLocation(req,res){
 }
 
 function goAdminHome(req,res){
-    res.render('admin_home', {loggname: req.session.username,layout: 'admin_layout' });
+    if(req.session.role!='admin'){
+        console.log('You are not an admin');
+        res.redirect('/home');
+    }
+    else{
+        res.render('admin_home', {loggname: req.session.username,layout: 'admin_layout' });
+    }
+    
 }
 
 async function goAdminMenu(req,res){
-    let foodsactive= await model.getMenuActive();
-    let foodsinactive= await model.getMenuInactive();
-    res.render('admin_menu', { layout: 'admin_layout',loggname: req.session.username,foodsactive: foodsactive, foodsinactive: foodsinactive});
+    if(req.session.role!='admin'){
+        console.log('You are not an admin');
+        res.redirect('/home');
+    }
+    else{
+        let foodsactive= await model.getMenuActive();
+        let foodsinactive= await model.getMenuInactive();
+        res.render('admin_menu', { layout: 'admin_layout',loggname: req.session.username,foodsactive: foodsactive, foodsinactive: foodsinactive});
+    }
 }
 
 function goAdminReserv(req,res){
-    res.render('adminreserv', {loggname: req.session.username,layout: 'admin_layout' });
+    if(req.session.role!='admin'){
+        console.log('You are not an admin');
+        res.redirect('/home');
+    }
+    else{
+        res.render('adminreserv', {loggname: req.session.username,layout: 'admin_layout' });
+    }
 }
 
 function goAssignTable(req,res){
