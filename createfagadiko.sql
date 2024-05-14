@@ -108,3 +108,6 @@ VALUES ('insidemain', 2, '2022-12-31', '20:00', '2022-12-28 19:08', '1', 'test')
 
 ALTER TABLE public."RESERVATION"
     ADD COLUMN comments text;
+
+ALTER TABLE public."RESERVATION"
+    ADD COLUMN status text;
