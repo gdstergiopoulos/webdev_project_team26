@@ -243,6 +243,8 @@ async function checkLoginRedirect(req,res){
                 }
         } else {
             console.log('Invalid username or password');
+            //TODO wrong password message
+            
             // Handle the error or redirect to an error page
         }
     }
