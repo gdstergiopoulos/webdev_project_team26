@@ -1,19 +1,9 @@
 <div id="insidemain" style="position: relative; background: url('/media/insidemain.png') no-repeat; background-size: contain; width: 600px; height: 600px;">
-    <button class="table btn btn-primary" id="table1" href="/assign_table/{{reservID}}/pickarea/{{area}}/table/1">1</button>
-    <button class="table btn btn-primary" id="table2">2</button>
-    <button class="table btn btn-primary" id="table3">3</button>
-    <button class="table btn btn-primary" id="table4">4</button>
-    <button class="table btn btn-primary" id="table5">5</button>
-    <button class="table btn btn-primary" id="table6">6</button>
-    <button class="table btn btn-primary" id="table7">7</button>
-    <button class="table btn btn-primary" id="table8">8</button>
-    <button class="table btn btn-primary" id="table9">9</button>
-    <button class="table btn btn-primary" id="table10">10</button>
-    <button class="table btn btn-primary" id="table11">11</button>
-    <button class="table btn btn-primary" id="table12">12</button>
-    <button class="table btn btn-primary" id="table13">13</button>
-    <button class="table btn btn-primary" id="table14">14</button>
-    <button class="table btn btn-primary" id="table15">15</button>
-    <button class="table btn btn-primary" id="table16">16</button>
-    <button class="table btn btn-primary" id="table17">17</button>
+    {{#each tablesUsed}}
+        {{#if @index}}
+            {{#if (lt @index 18)}}
+                <a class="table btn btn-primary" id="table{{@index}}" {{#if (eq this 2)}} style="background-color: green; " {{else if this}}style="background-color: red; pointer-events: none;"{{/if}} href="/assign_table/{{../reservInfo.[0].reservID}}/toggletable/table{{@index}}/insidemain">{{@index}}</a>
+            {{/if}}
+        {{/if}}
+    {{/each}}
 </div>

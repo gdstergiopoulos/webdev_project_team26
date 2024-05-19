@@ -1,12 +1,9 @@
-<div id="insidemain" style="position: relative; background: url('/media/opensky.png') no-repeat; background-size: contain; width: 600px; height: 600px;">
-    <button class="table btn btn-primary" id="table1" >1</button>
-    <button class="table btn btn-primary" id="table2">2</button>
-    <button class="table btn btn-primary" id="table3">3</button>
-    <button class="table btn btn-primary" id="table4">4</button>
-    <button class="table btn btn-primary" id="table5">5</button>
-    <button class="table btn btn-primary" id="table6">6</button>
-    <button class="table btn btn-primary" id="table7">7</button>
-    <button class="table btn btn-primary" id="table8">8</button>
-    <button class="table btn btn-primary" id="table9">9</button>
-    <button class="table btn btn-primary" id="table10">10</button>
+<div id="opensky" style="position: relative; background: url('/media/opensky.png') no-repeat; background-size: contain; width: 600px; height: 600px;">
+    {{#each tablesUsed}}
+        {{#if (gt @index 42)}} 
+        {{#if (lt @index 53)}}
+                <a class="table btn btn-primary" id="table{{@index}}" {{#if (eq this 2)}} style="background-color: green; " {{else if this}}style="background-color: red; pointer-events: none;"{{/if}} href="/assign_table/{{../reservInfo.[0].reservID}}/toggletable/table{{@index}}/opensky">{{@index}}</a>
+        {{/if}}
+        {{/if}}
+    {{/each}}
 </div>

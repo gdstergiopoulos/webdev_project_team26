@@ -173,6 +173,49 @@ async function addReservation(date,time,people,comments,username,area_id){
     }
 }
 
+async function toggleTable(reservID,tableID){
+    const sql = `SELECT * FROM "HASTABLES" WHERE "reservID" = '${reservID}' AND "tableID" = '${tableID}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+
+        if (res.rows.length > 0) {
+
+            const sql2 = `DELETE FROM "HASTABLES" WHERE "reservID" = '${reservID}' AND "tableID" = '${tableID}';`;
+            try {
+                const client = await connect();
+                const res = await client.query(sql2);
+                await client.release();
+                console.log("Deleted table from reservation succesfully") // επιστρέφει array
+                // callback(null, res.rows) // επιστρέφει array
+            }
+            catch (err) {
+                // callback(err, null);
+                console.log(err)
+            }
+        } else {
+
+        const sql = `INSERT INTO "HASTABLES" ("reservID","tableID") VALUES ('${reservID}','${tableID}');`;
+        try {
+            const client = await connect();
+            const res = await client.query(sql)
+            await client.release()
+            console.log("Inserted table to reservation succesfully") // επιστρέφει array
+            // callback(null, res.rows) // επιστρέφει array
+        }
+        catch (err) {
+            // callback(err, null);
+            console.log(err)
+        }
+    }}
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+}
+
+
 async function deleteFoodItem(itemID){
     const sql = `DELETE FROM "FOODITEM" WHERE "itemID" = '${itemID}';`;
     try {
@@ -305,5 +348,116 @@ async function getReservInfo(reservID){
     }
 }
 
+// TABLES USED BY OTHER RESERVATIONS IN A 2 HOUR WINDOW
+async function getTablesUsed(reservID){
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getActiveReserv, addReservation, updateReservStatus, getAllActiveReserv,getReservInfo}
+    const sql1 = `SELECT date,time FROM "RESERVATION" WHERE "reservID" = $1;`;
+    let time,date,lessTime,moreTime;
+    const tablesUsed = Array(60).fill(0); // Initialize the array with 0s
+
+    try {
+        const client = await connect();
+        const res = await client.query(sql1, [reservID])
+        await client.release()
+
+        time = res.rows[0].time;
+        date = res.rows[0].date;
+
+        let datefake = new Date(`1970-01-01T${time}Z`); // Create a date object
+        datefake.setHours(datefake.getHours() - 2); // Subtract 2 hours
+        lessTime = datefake.toISOString().substr(11, 8); // Format the date object back to a time string
+
+        let datefake2 = new Date(`1970-01-01T${time}Z`); // Create a date object    
+        datefake2.setHours(datefake2.getHours() + 2); // Add 2 hours
+        moreTime = datefake2.toISOString().substr(11, 8); // Format the date object back to a time string
+
+        console.log("in here " + lessTime);
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+    const sql2 = `SELECT "H"."tableID"
+    FROM "HASTABLES" "H"
+    JOIN "RESERVATION" "R" ON "H"."reservID" = "R"."reservID"
+    WHERE "R"."time" BETWEEN $1 AND $2
+      AND "R"."date" = $3
+      AND "R"."reservID" != $4;`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql2, [lessTime, moreTime, date, reservID]);
+        await client.release()
+        //const tablesUsed = Array(60).fill(0); // Initialize the array with 0s
+
+
+        // Set the indexes corresponding to the used tables to 1
+        res.rows.forEach(row => {
+            const tableID = parseInt(row.tableID.replace('table', '')); // Extract numeric part
+            tablesUsed[tableID] = 1; // Subtract 1 because arrays are 0-indexed
+        });
+        console.log("Tables used: ", tablesUsed);
+        
+
+    } catch (err) {
+        console.error("Error fetching tables used:", err);
+        return []; // Return an empty array in case of error
+    }
+
+
+    const sql3 = `SELECT "tableID" FROM "HASTABLES" WHERE "reservID" = $1;`;
+    try {
+        console.log("in tables in reeserv here");
+        const client = await connect();
+        const res = await client.query(sql3, [reservID]);
+        await client.release()
+
+
+        // Set the indexes corresponding to the used tables to 1
+        res.rows.forEach(row => {
+            const tableID = parseInt(row.tableID.replace('table', '')); // Extract numeric part
+            tablesUsed[tableID] = 2; // Subtract 1 because arrays are 0-indexed
+        });
+        console.log("Tables in resv: ", tablesUsed);
+        return tablesUsed;
+        // console.log(res.rows)
+        // callback(null, res.rows) // επιστρέφει array
+    }
+    catch (err) {
+        // callback(err, null);
+        console.log(err)
+    }
+
+}
+
+// async function getTablesInReserv(reservID){
+//     const sql = `SELECT "tableID" FROM "HASTABLES" WHERE "reservID" = '${reservID}';`;
+//     try {
+//         console.log("in tables in reeserv here");
+//         const client = await connect();
+//         const res = await client.query(sql)
+//         await client.release()
+//         const tablesInReserv = Array(60).fill(0); // Initialize the array with 0s
+
+//         // Initialize the array with 0s
+//         for (let i = 0; i < 60; i++) {
+//             tablesInReserv.push(0);
+//         }
+
+//         // Set the indexes corresponding to the used tables to 1
+//         res.rows.forEach(row => {
+//             const tableID = parseInt(row.tableID.replace('table', '')); // Extract numeric part
+//             tablesInReserv[tableID] = 1; // Subtract 1 because arrays are 0-indexed
+//         });
+//         console.log("Tables in resv: ", tablesInReserv);
+//         return tablesInReserv;
+//         // console.log(res.rows)
+//         // callback(null, res.rows) // επιστρέφει array
+//     }
+//     catch (err) {
+//         // callback(err, null);
+//         console.log(err)
+//     }
+// }
+
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getActiveReserv, addReservation, updateReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed}

@@ -134,122 +134,407 @@ hr{
     width: 9%;
     height: 9%;
 }
-#table1{
+#table1 {
     position: absolute;
     top: 0.2%;
     left: 3.5%;
-
 }
 
-#table2{
+#table2 {
     position: absolute;
     top: 0.2%;
     left: 20.5%;
 }
 
-#table3{
+#table3 {
     position: absolute;
     top: 0.2%;
     left: 38.5%;
-
 }
 
-#table4{
+#table4 {
     position: absolute;
     top: 0.2%;
     left: 53.5%;
-
 }
 
-#table5{
+#table5 {
     position: absolute;
     top: 17%;
     left: 6.5%;
     rotate: 45deg;
- 
 }
 
-#table6{
+#table6 {
     position: absolute;
     top: 17%;
     left: 21%;
     rotate: 45deg;
- 
 }
-#table7{
+
+#table7 {
     position: absolute;
     top: 17%;
     left: 36.5%;
     rotate: 45deg;
- 
 }
-#table8{
+
+#table8 {
     position: absolute;
     top: 17%;
     left: 52%;
     rotate: 45deg;
- 
 }
-#table9{
+
+#table9 {
     position: absolute;
     top: 33%;
     left: 45%;
     rotate: 45deg;
- 
 }
-#table10{
+
+#table10 {
     position: absolute;
     top: 33%;
     left: 60%;
     rotate: 45deg;
- 
 }
 
-#table11{
+#table11 {
     position: absolute;
     top: 50%;
     left: 42%;
     border-radius: 50%;
 }
 
-#table12{
+#table12 {
     position: absolute;
     top: 50%;
     left: 59%;
     border-radius: 50%;
 }
 
-#table13{
+#table13 {
     position: absolute;
     top: 50%;
     left: 76%;
     border-radius: 50%;
 }
 
-#table14{
+#table14 {
     position: absolute;
     top: 65%;
     left: 32%;
     border-radius: 50%;
 }
-#table15{
+
+#table15 {
     position: absolute;
     top: 65%;
     left: 50%;
     border-radius: 50%;
 }
-#table16{
+
+#table16 {
     position: absolute;
     top: 65%;
     left: 68%;
     border-radius: 50%;
 }
-#table17{
+
+#table17 {
     position: absolute;
     top: 65%;
     left: 86%;
     border-radius: 50%;
 }
+
+#table18 {
+    position: absolute;
+    top: 17%;
+    left: 6.5%;
+    rotate: 45deg;
+}
+
+#table19 {
+    position: absolute;
+    top: 17%;
+    left: 21%;
+    rotate: 45deg;
+}
+
+#table20 {
+    position: absolute;
+    top: 17%;
+    left: 36.5%;
+    rotate: 45deg;
+}
+
+#table21 {
+    position: absolute;
+    top: 17%;
+    left: 52%;
+    rotate: 45deg;
+}
+
+#table22 {
+    position: absolute;
+    top: 33%;
+    left: 45%;
+    rotate: 45deg;
+}
+
+#table23 {
+    position: absolute;
+    top: 33%;
+    left: 60%;
+    rotate: 45deg;
+}
+
+#table24 {
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    border-radius: 50%;
+}
+
+#table25 {
+    position: absolute;
+    top: 50%;
+    left: 59%;
+    border-radius: 50%;
+}
+
+#table26 {
+    position: absolute;
+    top: 50%;
+    left: 76%;
+    border-radius: 50%;
+}
+
+#table27 {
+    position: absolute;
+    top: 65%;
+    left: 32%;
+    border-radius: 50%;
+}
+
+#table28 {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    border-radius: 50%;
+}
+
+#table29 {
+    position: absolute;
+    top: 65%;
+    left: 68%;
+    border-radius: 50%;
+}
+
+#table30 {
+    position: absolute;
+    top: 65%;
+    left: 86%;
+    border-radius: 50%;
+}
+
+#table31 {
+    position: absolute;
+    top: 0.2%;
+    left: 3.5%;
+}
+
+#table32 {
+    position: absolute;
+    top: 0.2%;
+    left: 20.5%;
+}
+
+#table33 {
+    position: absolute;
+    top: 0.2%;
+    left: 38.5%;
+}
+
+#table34 {
+    position: absolute;
+    top: 0.2%;
+    left: 53.5%;
+}
+
+#table35 {
+    position: absolute;
+    top: 17%;
+    left: 6.5%;
+    rotate: 45deg;
+}
+
+#table36 {
+    position: absolute;
+    top: 17%;
+    left: 21%;
+    rotate: 45deg;
+}
+
+#table37 {
+    position: absolute;
+    top: 17%;
+    left: 36.5%;
+    rotate: 45deg;
+}
+
+#table38 {
+    position: absolute;
+    top: 17%;
+    left: 52%;
+    rotate: 45deg;
+}
+
+#table39 {
+    position: absolute;
+    top: 65%;
+    left: 32%;
+    border-radius: 50%;
+}
+
+#table40 {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    border-radius: 50%;
+}
+
+#table41 {
+    position: absolute;
+    top: 65%;
+    left: 68%;
+    border-radius: 50%;
+}
+
+#table42 {
+    position: absolute;
+    top: 65%;
+    left: 86%;
+    border-radius: 50%;
+}
+
+#table43 {
+    position: absolute;
+    top: 0.2%;
+    left: 3.5%;
+}
+
+#table44 {
+    position: absolute;
+    top: 0.2%;
+    left: 20.5%;
+}
+
+#table45 {
+    position: absolute;
+    top: 0.2%;
+    left: 38.5%;
+}
+
+#table46 {
+    position: absolute;
+    top: 0.2%;
+    left: 53.5%;
+}
+
+#table47 {
+    position: absolute;
+    top: 17%;
+    left: 6.5%;
+    rotate: 45deg;
+}
+
+#table48 {
+    position: absolute;
+    top: 17%;
+    left: 21%;
+    rotate: 45deg;
+}
+
+#table49 {
+    position: absolute;
+    top: 17%;
+    left: 36.5%;
+    rotate: 45deg;
+}
+
+#table50 {
+    position: absolute;
+    top: 17%;
+    left: 52%;
+    rotate: 45deg;
+}
+
+#table51 {
+    position: absolute;
+    top: 33%;
+    left: 45%;
+    rotate: 45deg;
+}
+
+#table52 {
+    position: absolute;
+    top: 33%;
+    left: 60%;
+    rotate: 45deg;
+}
+
+#table53 {
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    border-radius: 50%;
+}
+
+#table54 {
+    position: absolute;
+    top: 50%;
+    left: 59%;
+    border-radius: 50%;
+}
+
+#table55 {
+    position: absolute;
+    top: 50%;
+    left: 76%;
+    border-radius: 50%;
+}
+
+#table56 {
+    position: absolute;
+    top: 65%;
+    left: 32%;
+    border-radius: 50%;
+}
+
+#table57 {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    border-radius: 50%;
+}
+
+#table58 {
+    position: absolute;
+    top: 65%;
+    left: 68%;
+    border-radius: 50%;
+}
+
+#table59 {
+    position: absolute;
+    top: 65%;
+    left: 86%;
+    border-radius: 50%;
+}
+
 
 #inside_assign{
     margin-left: 10rem;

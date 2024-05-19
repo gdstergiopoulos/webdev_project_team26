@@ -197,22 +197,45 @@ async function makeResv(req,res){
     let comments = req.body.comments;
     let username = req.session.username;
     let area_id = req.body.area;
-    
-    if(req.session.loggedin==true){
-        if(area_id!=undefined && time!=undefined && date!=undefined && people){
-            await model.addReservation(date,time,people,comments,username,area_id);
-            res.redirect('/reservation');
-        }
-        else{
-            console.log('Please fill in all the fields');
-   
-            res.redirect('/reservation');
-        }}
-    else{
-        console.log('Login Required to make a reservation');
-        res.redirect('/login/redirect/reservation');
-    }
 
+        if(req.session.loggedin==true){
+            if(area_id!=undefined && time!=undefined && date!=undefined && people){
+                if(!checkDate(date)){
+                    console.log('Invalid date');
+                    // var showAlert = true;
+                    // var alertMessage = "Invalid date";
+                    // res.json({ showAlert: showAlert, message: alertMessage });
+                }
+                else{
+                    await model.addReservation(date,time,people,comments,username,area_id);
+                    // var showAlert = false;
+                    
+                }
+                
+            }
+            else{
+                console.log('Please fill in all the fields');
+                // var showAlert = true;
+                // var alertMessage = "Please fill in all the fields";
+                // res.json({ showAlert: showAlert, message: alertMessage });
+            }}
+
+        else{
+            // var showAlert = false;
+            console.log('Login Required to make a reservation');
+            res.redirect('/login/redirect/reservation');
+        }   
+        res.redirect('/reservation');
+    }
+    
+
+function checkDate(date){
+    let today = new Date();
+    let resdate = new Date(date);
+    if(resdate<today){
+        return false;
+    }
+    return true;
 }
 
 async function checkLoginRedirect(req,res){
@@ -329,17 +352,35 @@ async function goAdminReserv(req,res){
 async function goAssignTable(req,res){
     let area_id;
     let reservID = req.params.reservID;
+    console.log("this is the reserv id"+reservID);
     let reservInfo= await model.getReservInfo(reservID);
+    console.log("this is the reserv info"+reservInfo);
     area_id=reservInfo[0].desired_area;
-
-    res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,loggname: req.session.username,layout: 'admin_layout' });
+    let tablesUsed= await model.getTablesUsed(reservID);
+    //let tablesInReserv = await model.getTablesInReserv(reservID);
+    res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
 }
 async function goPickArea(req,res){
     let area_id;
     let reservID = req.params.reservID;
     let reservInfo= await model.getReservInfo(reservID);
     area_id=req.params.area;
-    res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,loggname: req.session.username,layout: 'admin_layout' });
+    let tablesUsed= await model.getTablesUsed(reservID);
+    //let tablesInReserv = await model.getTablesInReserv(reservID);
+    res.render('assign_table', { area_id: area_id,reservInfo:reservInfo, tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
+}
+
+async function goToggleTable(req,res){
+    let area_id;
+    let reservID = req.params.reservID;
+    let tableID = req.params.tableID;
+    area_id=req.params.area;
+    console.log("here!!");
+    let reservInfo= await model.getReservInfo(reservID);
+    await model.toggleTable(reservID,tableID);
+    let tablesUsed= await model.getTablesUsed(reservID);
+    //let tablesInReserv = await model.getTablesInReserv(reservID);
+    res.render('assign_table', { area_id: area_id,reservInfo:reservInfo, tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
 }
 
 // function goUserPickArea(req,res){
@@ -445,6 +486,8 @@ router.route('/adminreserv').get(goAdminReserv);
 router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table/:reservID').get(goAssignTable);
 router.route('/assign_table/:reservID/pickarea/:area').get(goPickArea);
+router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(goToggleTable);
+
 // router.route('/userpickarea').get(goUserPickArea);
 router.route('/addFoodItem').get(goAddFoodItem);
 router.route('/addFoodItem').post(AddFoodItem);

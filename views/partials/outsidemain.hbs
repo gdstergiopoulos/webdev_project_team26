@@ -1,14 +1,9 @@
-<div id="insidemain" style="position: relative; background: url('/media/outsidemain.png') no-repeat; background-size: contain; width: 600px; height: 600px;">
-   <button class="table btn btn-primary" id="table1" >1</button>
-    <button class="table btn btn-primary" id="table2">2</button>
-    <button class="table btn btn-primary" id="table3">3</button>
-    <button class="table btn btn-primary" id="table4">4</button>
-    <button class="table btn btn-primary" id="table5">5</button>
-    <button class="table btn btn-primary" id="table6">6</button>
-    <button class="table btn btn-primary" id="table7">7</button>
-    <button class="table btn btn-primary" id="table8">8</button>
-    <button class="table btn btn-primary" id="table14">14</button>
-    <button class="table btn btn-primary" id="table15">15</button>
-    <button class="table btn btn-primary" id="table16">16</button>
-    <button class="table btn btn-primary" id="table17">17</button>
+<div id="outsidemain" style="position: relative; background: url('/media/outsidemain.png') no-repeat; background-size: contain; width: 600px; height: 600px;">
+    {{#each tablesUsed}}
+        {{#if (gt @index 30)}} 
+        {{#if (lt @index 43)}}
+                <a class="table btn btn-primary" id="table{{@index}}" {{#if (eq this 2)}} style="background-color: green; " {{else if this}}style="background-color: red; pointer-events: none;"{{/if}} href="/assign_table/{{../reservInfo.[0].reservID}}/toggletable/table{{@index}}/outsidemain">{{@index}}</a>
+        {{/if}}
+        {{/if}}
+    {{/each}}
 </div>

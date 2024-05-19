@@ -1,9 +1,9 @@
-<div id="insidemain" style="position: relative; background: url('/media/bythesea.png') no-repeat; background-size: contain; width: 600px; height: 600px;">
-    <button class="table btn btn-primary" id="table11">11</button>
-    <button class="table btn btn-primary" id="table12">12</button>
-    <button class="table btn btn-primary" id="table13">13</button>
-    <button class="table btn btn-primary" id="table14">14</button>
-    <button class="table btn btn-primary" id="table15">15</button>
-    <button class="table btn btn-primary" id="table16">16</button>
-    <button class="table btn btn-primary" id="table17">17</button>
+<div id="bythesea" style="position: relative; background: url('/media/bythesea.png') no-repeat; background-size: contain; width: 600px; height: 600px;">
+    {{#each tablesUsed}}
+        {{#if (gt @index 52)}} 
+        {{#if (lt @index 60)}}
+                <a class="table btn btn-primary" id="table{{@index}}" {{#if (eq this 2)}} style="background-color: green; " {{else if this}}style="background-color: red; pointer-events: none;"{{/if}} href="/assign_table/{{../reservInfo.[0].reservID}}/toggletable/table{{@index}}/bythesea">{{@index}}</a>
+        {{/if}}
+        {{/if}}
+    {{/each}}
 </div>

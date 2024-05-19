@@ -5,7 +5,7 @@
 <div  id="txtandform">
       <h1>Make a Reservation</h1>
       <div id="registerform">
-        <form action = "/reservation" method = "post">
+        <form action = "/reservation" method = "post" id = "reservationForm">
           <fieldset>
               <legend>When?</legend>
               <div class="form-field">
@@ -14,7 +14,7 @@
               </div>
               <div class="form-field">
                   <label for="time">Time:</label>
-                  <input type="time" class="form-control" id="time" name="time">
+                  <input type="time" class="form-control" id="time" name="time" min="08:00" max="22:00">
               </div>
             </fieldset>
             <fieldset>
@@ -35,11 +35,29 @@
                   <textarea id="comments" class="form-control" name="comments" placeholder="Feel free to tell us"></textarea>
               </div>
             </fieldset>
-            
+             
             <div class="form-field">
               <input class="btn btn-primary" id="makereservbtn" type="submit" value="Make Reservation">
           </div>
         </form>
+        {{!-- <script>
+            document.getElementById('reservationForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+
+                fetch('/reservation', {
+                    method: 'POST',
+                    body: new FormData(event.target) // Send the form data in the request
+                })
+                .then(response => response.json())
+    .then(data => {
+        if (data.showAlert) {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+document.getElementById('reservationForm').reset()
+            </script> --}}
     </div>
 </div>
   {{>floorplan page='userreserv'}}  
