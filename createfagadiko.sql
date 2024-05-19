@@ -111,3 +111,6 @@ ALTER TABLE public."RESERVATION"
 
 ALTER TABLE public."RESERVATION"
     ADD COLUMN status text;
+
+ALTER TABLE "RESERVATION"
+RENAME COLUMN datatimemade TO datetimemade;

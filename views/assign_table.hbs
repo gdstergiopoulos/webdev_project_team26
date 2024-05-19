@@ -5,7 +5,8 @@
             <p style="margin-right:auto">{{username}}</p>
             <p style="margin-right:auto">{{date}}</p>
             <p style="margin-right:auto">{{time}}</p>
-            <p style="margin-right:auto">{{people}}</p>
+            <p style="margin-right:auto">{{numofpeople}}</p>
+            <p style="margin-right:auto">{{desired_area}}</p>
         </div>
     {{/each}}
     <div class="assign_table_container">
@@ -45,6 +46,8 @@
         {{>bythesea}}
         </div>
         {{/if}}
-
+        <div id = "assign_back_btn"><a class = "btn btn-primary" href="/adminreserv">Back</a></div>
+        <div id = "assign_approve_btn" ><a class = "btn btn-primary" href="/approve_resv/{{reservInfo.[0].reservID}}" style = "background-color: green;" >Approve</a></div>
     </div>
+    
 </div>

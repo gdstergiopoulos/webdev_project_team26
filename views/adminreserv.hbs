@@ -2,9 +2,9 @@
 <div id="pagebody">
 <div class="container" id="pendinglist">
         <div class="tasks">
-            <h1>New Reservations</h1>
+            <h1>Reservation Requests</h1>
             <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
-              {{#each reservations}}
+              {{#each active_reservations}}
                 <li>
                   <span>{{username}}</span>
                   <span>{{date}}</span>
@@ -16,7 +16,7 @@
                       <span>Not Assigned</span>
                   {{/if}}
                   <a href="assign_table/{{reservID}}" class="btn btn-primary edit">Assign Table</a>
-                  <button class="btn btn-primary remove">Cancel</button>
+                  <a class="btn btn-primary remove" href="reject_resv/{{reservID}}" class="btn btn-primary edit">Reject</a>
                   <button class="btn btn-primary approve">Approve</button>
                   </li>
                   <hr>
@@ -30,24 +30,17 @@
       <div class="tasks">
           <h1>Confirmed Reservations</h1>
           <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+            {{#each confirmed_reservations}}
              <li>
-              <span>Να διαβάσω JS</span>
-              <button class="btn btn-primary edit">Edit</button>
-              <button class="btn btn-primary remove">Cancel</button>
+              <span>{{username}}</span>
+              <span>{{date}}</span>
+              <span>{{time}}</span>
+              <span>{{people}}</span>
+              <a class="btn btn-primary edit" href = "assign_table/{{reservID}}">Edit</a>
+              <a class="btn btn-primary remove" href = "reject_resv/{{reservID}}">Remove</a>
               </li>
               <hr>
-             <li class="done">
-              <span>Να ταΐσω τη γάτα</span>
-              <button class="btn btn-primary edit">Edit</button>
-              <button class="btn btn-primary remove">Cancel</button>
-             </li>
-             <hr>
-             <li>
-              <span>Να μαγειρέψω</span>
-              <button class="btn btn-primary edit">Edit</button>
-              <button class="btn btn-primary remove">Cancel</button>
-              </li>
-              <hr>
+              {{/each}} 
           </ul>
           <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
           <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
@@ -55,7 +48,7 @@
   </div>
   <div class="container" id="changeslist">
     <div class="tasks">
-        <h1>Changes</h1>
+        <h1>Changes Requests</h1>
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
            <li>
             <span>Να διαβάσω JS</span>

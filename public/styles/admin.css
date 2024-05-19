@@ -130,6 +130,15 @@ hr{
     display: flex;
 }
 
+#assign_back_btn{
+    margin-top: 35%;
+    margin-left: 5%;
+}
+#assign_approve_btn{
+    margin-top: 35%;
+    margin-left: 1%;
+}
+
 .table{
     width: 9%;
     height: 9%;
@@ -547,3 +556,4 @@ hr{
     margin-left: 25%;
     margin-top: 5%;
 }
+

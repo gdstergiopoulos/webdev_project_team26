@@ -159,7 +159,7 @@ async function addFoodItem(name,price,description,img){
 
 async function addReservation(date,time,people,comments,username,area_id){
     const currentDate = new Date();
-    const sql = `INSERT INTO "RESERVATION" ("desired_area","numofpeople","date","time","username","comments","datetimemade") VALUES ('${area_id}','${people}','${date}','${time}','${username}','${comments}','${currentDate.toISOString()}');`;
+    const sql = `INSERT INTO "RESERVATION" ("desired_area","numofpeople","date","time","username","comments","datetimemade","status") VALUES ('${area_id}','${people}','${date}','${time}','${username}','${comments}','${currentDate.toISOString()}','active');`;
     try {
         const client = await connect();
         const res = await client.query(sql)
@@ -172,6 +172,32 @@ async function addReservation(date,time,people,comments,username,area_id){
         console.log(err)
     }
 }
+
+async function rejectReserv(reservID){
+    const sql1 = `DELETE FROM "HASTABLES" WHERE "reservID" = $1;`;
+    const sql2 = 'DELETE FROM "RESERVATION" WHERE "reservID" = $1;';
+
+    try {
+        const client = await connect();
+        const res = await client.query(sql1, [reservID]);
+        await client.release();
+        console.log("Tables deleted successfully",res.rows);
+        // callback(null, res.rows) // επιστρέφει array
+        try {
+            const client = await connect();
+            const res = await client.query(sql2, [reservID]);
+            await client.release();
+            console.log("Reservation rejected successfully",res.rows);
+            // callback(null, res.rows) // επιστρέφει array
+        }catch (err) {
+            // callback(err, null);
+            console.log(err);
+    }}
+     catch (err) {
+        // callback(err, null);
+        console.log(err);
+
+}}
 
 async function toggleTable(reservID,tableID){
     const sql = `SELECT * FROM "HASTABLES" WHERE "reservID" = '${reservID}' AND "tableID" = '${tableID}';`;
@@ -263,9 +289,9 @@ async function addOnMenu(itemID){
     }
 }
 
-async function updateReservStatus(username){
+async function changeReservStatus(reservID,status){
     //TODO fix this function to update the status of the reservation to active or old depending on the current date and the date of the reservation
-    const sql = `UPDATE "RESERVATION" SET "status" = 'active' WHERE "username" = '${username}' AND date > CURRENT_DATE;`;
+    const sql = `UPDATE "RESERVATION" SET "status" = '${status}' WHERE "reservID" = '${reservID}';`;
     
     try {
         const client = await connect();
@@ -279,6 +305,19 @@ async function updateReservStatus(username){
     }
 }
 
+async function checkReservStatus(reservID){
+    current_date = new Date();
+    const sql = `UPDATE "RESERVATION" SET "status" = "old" WHERE date > '${current_date}'`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        console.log("Reservation status updated successfully",res.rows);
+        return res.rows;
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 async function getReservHistory(username){
     const sql = `SELECT * FROM "RESERVATION" WHERE "username" = '${username}' AND "status" = 'old';`;
@@ -296,9 +335,9 @@ async function getReservHistory(username){
     }
 }
 
-async function getActiveReserv(username){
+async function getAllReserv(status){
     {
-        const sql = `SELECT * FROM "RESERVATION" WHERE "username" = '${username}' AND "status" = 'active';`;
+        const sql = `SELECT * FROM "RESERVATION" WHERE "status" = '${status}';`;
         try {
             const client = await connect();
             const res = await client.query(sql)
@@ -345,6 +384,62 @@ async function getReservInfo(reservID){
     catch (err) {
         // callback(err, null);
         console.log(err)
+    }
+}
+
+async function checkAvailability(date, time, numofpeople, desired_area) {
+    const spaces = ['insidemain', 'outsidemain', 'bararea', 'opensky', 'bythesea'];
+    const spaces_capacity = Array(5).fill(0);
+    let lessTime, moreTime;
+    const sql1 = `SELECT SUM("capacity") 
+                    FROM "TABLE"
+                    WHERE "area" = $1
+                    AND "tableID" NOT IN (
+                        SELECT "tableID"
+                        FROM "HASTABLES" "H" 
+                        JOIN "RESERVATION" "R" ON "H"."reservID" = "R"."reservID"
+                        WHERE "R"."time" BETWEEN $2 AND $3
+                        AND "R"."date" = $4)`;
+    try {
+        for (let i = 0; i < spaces.length; i++) {
+            let datefake = new Date(`1970-01-01T${time}Z`);
+            datefake.setHours(datefake.getHours() - 2);
+            lessTime = datefake.toISOString().substr(11, 8);
+
+            let datefake2 = new Date(`1970-01-01T${time}Z`);
+            datefake2.setHours(datefake2.getHours() + 2);
+            moreTime = datefake2.toISOString().substr(11, 8);
+
+            console.log(spaces[i]);
+            const client = await connect();
+            const res = await client.query(sql1, [spaces[i], lessTime, moreTime, date]);
+            await client.release();
+            console.log("Capacity for", spaces[i], ":", res.rows[0].sum);
+            spaces_capacity[i] = res.rows[0].sum;
+        }
+
+        let check = 0;
+        for (let i = 0; i < spaces.length; i++) {
+            if (spaces_capacity[i] >= numofpeople) {
+            check =1000; // Insufficient capacity
+            }
+        }
+        if(!check){
+            return 0;
+        }
+
+        const client = await connect();
+        const res = await client.query(sql1, [desired_area, lessTime, moreTime, date]);
+        await client.release();
+        console.log("Capacity for desired area:", res.rows[0].sum);
+        if (res.rows[0].sum >= numofpeople) {
+            return 1; // Available
+        } else {
+            return 2; // Insufficient capacity for desired area
+        }
+    } catch (err) {
+        console.error("Error checking availability:", err);
+        throw err; // Throw error to be caught by caller
     }
 }
 
@@ -460,4 +555,5 @@ async function getTablesUsed(reservID){
 //     }
 // }
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getActiveReserv, addReservation, updateReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed}
+
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus}

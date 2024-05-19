@@ -207,12 +207,27 @@ async function makeResv(req,res){
                     // res.json({ showAlert: showAlert, message: alertMessage });
                 }
                 else{
-                    await model.addReservation(date,time,people,comments,username,area_id);
+                    let availability = await model.checkAvailability(date,time,people,area_id);
+                    if(availability==0){
+                        console.log('No tables available in the entrire restaurant at this time');
+                        // var showAlert = true;
+                        // var alertMessage = "No tables available";
+                        // res.json({ showAlert: showAlert, message: alertMessage });
+                    }
+
+                    else if (availability==1){
+                        console.log('All set, your reservation went through');   
+                        await model.addReservation(date,time,people,comments,username,area_id);
                     // var showAlert = false;
                     
                 }
+                else{
+                    console.log('No tables available in the desired area at this time, check other areas');
+                    // var showAlert = true;
+                    // var alertMessage = "There are tables available in the restaurant";
+                    // res.json({ showAlert: showAlert, message: alertMessage });
                 
-            }
+            }}}
             else{
                 console.log('Please fill in all the fields');
                 // var showAlert = true;
@@ -228,6 +243,17 @@ async function makeResv(req,res){
         res.redirect('/reservation');
     }
     
+async function goRejectResv(req,res){
+    let reservID = req.params.reservID;
+    await model.rejectReserv(reservID);
+    res.redirect('/adminreserv');
+}
+
+async function goApproveResv(req,res){
+    let reservID = req.params.reservID;
+    await model.changeReservStatus(reservID,'confirmed');
+    res.redirect('/adminreserv');
+}
 
 function checkDate(date){
     let today = new Date();
@@ -344,8 +370,9 @@ async function goAdminReserv(req,res){
         res.redirect('/home');
     }
     else{
-        let reservations= await model.getAllActiveReserv();
-        res.render('adminreserv', {loggname: req.session.username,reservations:reservations,layout: 'admin_layout' });
+        let active_reservations= await model.getAllReserv("active");
+        let confirmed_reservations= await model.getAllReserv("confirmed");
+        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,layout: 'admin_layout' });
     }
 }
 
@@ -360,6 +387,7 @@ async function goAssignTable(req,res){
     //let tablesInReserv = await model.getTablesInReserv(reservID);
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
 }
+
 async function goPickArea(req,res){
     let area_id;
     let reservID = req.params.reservID;
@@ -406,7 +434,7 @@ async function goMyProfile(req,res){
     //take username from session
     let userinfo= await model.getProfileInfo(req.session.username);
     //update reserv statys
-    await model.updateReservStatus();
+    await model.checkReservStatus();
     // console.log(info);
     if(req.params.page=='info'){
         profilepage='userprofile';
@@ -487,6 +515,9 @@ router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table/:reservID').get(goAssignTable);
 router.route('/assign_table/:reservID/pickarea/:area').get(goPickArea);
 router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(goToggleTable);
+router.route('/reject_resv/:reservID').get(goRejectResv);
+router.route('/approve_resv/:reservID').get(goApproveResv);
+
 
 // router.route('/userpickarea').get(goUserPickArea);
 router.route('/addFoodItem').get(goAddFoodItem);
