@@ -215,14 +215,14 @@ async function makeResv(req,res){
                         // res.json({ showAlert: showAlert, message: alertMessage });
                     }
 
-                    else if (availability==1){
+                    else if (availability===1){
                         console.log('All set, your reservation went through');   
                         await model.addReservation(date,time,people,comments,username,area_id);
                     // var showAlert = false;
                     
                 }
                 else{
-                    console.log('No tables available in the desired area at this time, check other areas');
+                    console.log('No tables available in the desired area at this time, check other areas',area_id);
                     // var showAlert = true;
                     // var alertMessage = "There are tables available in the restaurant";
                     // res.json({ showAlert: showAlert, message: alertMessage });
@@ -243,17 +243,25 @@ async function makeResv(req,res){
         res.redirect('/reservation');
     }
     
-async function goRejectResv(req,res){
+async function goChangeStatus(req,res){
+    let reservID = req.params.reservID;
+    let status = req.params.status;
+    await model.changeReservStatus(reservID,status);
+    if(req.session.role!='admin'){
+        res.redirect('/login');
+    }
+    else{
+        res.redirect('/adminreserv');
+    }
+    
+}
+
+async function goDeleteResv(req,res){
     let reservID = req.params.reservID;
     await model.rejectReserv(reservID);
     res.redirect('/adminreserv');
 }
 
-async function goApproveResv(req,res){
-    let reservID = req.params.reservID;
-    await model.changeReservStatus(reservID,'confirmed');
-    res.redirect('/adminreserv');
-}
 
 function checkDate(date){
     let today = new Date();
@@ -326,13 +334,20 @@ function goRegister(req,res){
 
 }
 
-function goReservation(req,res){
+async function goReservation(req,res){
     if(req.session.loggedin===false){
         res.redirect('/login/redirect/reservation');
     }
     else{
         console.log(req.session.loggedin)
-        res.render('reservation',{layout: 'main', loggname: req.session.username});
+        let active_resv = await model.getAllReservUser(req.session.username, "active");
+        if(active_resv.length>0){
+            var has_active_reserv = true;
+        }
+        else{
+            var has_active_reserv = false;
+        }
+        res.render('reservation',{layout: 'main', loggname: req.session.username, has_active_reserv: has_active_reserv});
     }
 }
 
@@ -372,7 +387,8 @@ async function goAdminReserv(req,res){
     else{
         let active_reservations= await model.getAllReserv("active");
         let confirmed_reservations= await model.getAllReserv("confirmed");
-        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,layout: 'admin_layout' });
+        let cancelled_reservations= await model.getAllReserv("cancelled");
+        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations, cancelled_reservations:cancelled_reservations,layout: 'admin_layout' });
     }
 }
 
@@ -430,6 +446,7 @@ async function goEditFoodItem(req,res){
 
 
 async function goMyProfile(req,res){
+    let role = req.session.role;
     let profilepage;
     //take username from session
     let userinfo= await model.getProfileInfo(req.session.username);
@@ -441,13 +458,13 @@ async function goMyProfile(req,res){
     }
     else if(req.params.page=='reservations'){
         profilepage='userreserv';
-        userinfo= await model.getActiveReserv(req.session.username);
+        userinfo= await model.getAllReservUser(req.session.username, "active");
     }
     else if(req.params.page=='history'){
         profilepage='reservhistory';
         userinfo= await model.getReservHistory(req.session.username);
     }
-    res.render('userprofile', {profilepage: profilepage,info: userinfo, loggname: req.session.username,layout: 'profile_layout'});
+    res.render('userprofile', {profilepage: profilepage,info: userinfo, loggname: req.session.username,role : role, layout: 'profile_layout'});
 }
 
 async function EditFoodItem(req,res){
@@ -515,8 +532,10 @@ router.route('/adminmenu').get(goAdminMenu);
 router.route('/assign_table/:reservID').get(goAssignTable);
 router.route('/assign_table/:reservID/pickarea/:area').get(goPickArea);
 router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(goToggleTable);
-router.route('/reject_resv/:reservID').get(goRejectResv);
-router.route('/approve_resv/:reservID').get(goApproveResv);
+router.route('/change_status/:reservID/:status').get(goChangeStatus);
+// router.route('/approve_resv/:reservID').get(goApproveResv);
+router.route('/delete_resv/:reservID').get(goDeleteResv);
+
 
 
 // router.route('/userpickarea').get(goUserPickArea);

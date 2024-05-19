@@ -1,5 +1,8 @@
-{{>navbar loggname=loggname}}
+
+{{#if (eq role 'admin')}} {{>adminnav loggname=loggname}} {{else if (eq role 'user')}}{{>navbar loggname=loggname}}{{/if}} 
+
 <div id="pagebody">
+
 <div id="myprofilepg">
     {{#if (eq profilepage 'userprofile')}}
         {{> profileinfo info=info}}

@@ -16,8 +16,7 @@
                       <span>Not Assigned</span>
                   {{/if}}
                   <a href="assign_table/{{reservID}}" class="btn btn-primary edit">Assign Table</a>
-                  <a class="btn btn-primary remove" href="reject_resv/{{reservID}}" class="btn btn-primary edit">Reject</a>
-                  <button class="btn btn-primary approve">Approve</button>
+                  <a class="btn btn-primary remove" href="change_status/{{reservID}}/'rejected" class="btn btn-primary edit">Reject</a>
                   </li>
                   <hr>
               {{/each}} 
@@ -37,7 +36,7 @@
               <span>{{time}}</span>
               <span>{{people}}</span>
               <a class="btn btn-primary edit" href = "assign_table/{{reservID}}">Edit</a>
-              <a class="btn btn-primary remove" href = "reject_resv/{{reservID}}">Remove</a>
+              <a class="btn btn-primary remove" href = "change_status/{{reservID}}/'rejected'">Remove</a>
               </li>
               <hr>
               {{/each}} 
@@ -48,15 +47,37 @@
   </div>
   <div class="container" id="changeslist">
     <div class="tasks">
-        <h1>Changes Requests</h1>
+        <h1>Cancelled Reservations</h1>
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
-           <li>
-            <span>Να διαβάσω JS</span>
-            <button class="btn btn-primary remove">Cancel</button>
-              <button class="btn btn-primary approve">Approve Changes</button>
-            </li>
-            <hr>
-        </ul>
+            {{#each cancelled_reservations}}
+             <li>
+              <span>{{username}}</span>
+              <span>{{date}}</span>
+              <span>{{time}}</span>
+              <span>{{people}}</span>
+              <a class="btn btn-primary remove" href = "delete_resv/{{reservID}}/">Permanently Delete</a>
+              </li>
+              <hr>
+              {{/each}} 
+          </ul>
+    </div>
+
+    <div class="container" id="rejectedlist">
+    <div class="tasks">
+        <h1>Rejected Reservations</h1>
+        <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+            {{#each rejected_reservations}}
+             <li>
+              <span>{{username}}</span>
+              <span>{{date}}</span>
+              <span>{{time}}</span>
+              <span>{{people}}</span>
+              <a class="btn btn-primary make_active" href = "change_status/{{reservID}}/'active'">Reinstall Status</a>
+              <a class="btn btn-primary delete" href = "delete_resv/{{reservID}}">Permanently Delete</a>
+              </li>
+              <hr>
+              {{/each}} 
+          </ul>
     </div>
         <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
         <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->

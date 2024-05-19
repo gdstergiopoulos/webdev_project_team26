@@ -305,17 +305,28 @@ async function changeReservStatus(reservID,status){
     }
 }
 
-async function checkReservStatus(reservID){
-    current_date = new Date();
-    const sql = `UPDATE "RESERVATION" SET "status" = "old" WHERE date > '${current_date}'`;
+async function checkReservStatus(reservID) {
+    let current_date = new Date();
+    current_date.setHours(0, 0, 0, 0); // Set the time part to 00:00:00 to compare only the date part
+
+    // Format the date to a string in the format YYYY-MM-DD
+    const formattedDate = current_date.toISOString().split('T')[0]; 
+    const sql = `UPDATE "RESERVATION" SET "status" = 'old' WHERE "date" < $1`;
+
+    let client;
     try {
-        const client = await connect();
-        const res = await client.query(sql);
-        await client.release();
-        console.log("Reservation status updated successfully",res.rows);
-        return res.rows;
+        client = await connect();
+        const res = await client.query(sql, [formattedDate]);
+        console.log("current date", formattedDate);
+        console.log("Reservation status updated successfully", res.rowCount);
+        return res.rowCount;
     } catch (err) {
-        console.log(err);
+        console.error("Error updating reservation status:", err);
+        throw err; // Optionally re-throw the error if you want it to propagate
+    } finally {
+        if (client) {
+            await client.release();
+        }
     }
 }
 
@@ -353,6 +364,23 @@ async function getAllReserv(status){
     }
 }
 
+async function getAllReservUser(username,status){
+    {
+        const sql = `SELECT * FROM "RESERVATION" WHERE "status" = '${status}' AND username = '${username}';`;
+        try {
+            const client = await connect();
+            const res = await client.query(sql)
+            await client.release()
+            // console.log(res.rows)
+            return res.rows;
+            // callback(null, res.rows) // επιστρέφει array
+        }
+        catch (err) {
+            // callback(err, null);
+            console.log(err)
+        }
+    }
+}
 async function getAllActiveReserv(username){
     {
         const sql = `SELECT * FROM "RESERVATION" WHERE "status" = 'active';`;
@@ -391,7 +419,7 @@ async function checkAvailability(date, time, numofpeople, desired_area) {
     const spaces = ['insidemain', 'outsidemain', 'bararea', 'opensky', 'bythesea'];
     const spaces_capacity = Array(5).fill(0);
     let lessTime, moreTime;
-    const sql1 = `SELECT SUM("capacity") 
+    const sql1 = `SELECT COALESCE(CAST(SUM("capacity") AS INTEGER), 0) AS total_capacity
                     FROM "TABLE"
                     WHERE "area" = $1
                     AND "tableID" NOT IN (
@@ -414,8 +442,8 @@ async function checkAvailability(date, time, numofpeople, desired_area) {
             const client = await connect();
             const res = await client.query(sql1, [spaces[i], lessTime, moreTime, date]);
             await client.release();
-            console.log("Capacity for", spaces[i], ":", res.rows[0].sum);
-            spaces_capacity[i] = res.rows[0].sum;
+            console.log("Capacity for", spaces[i], ":", res.rows[0].total_capacity);
+            spaces_capacity[i] = res.rows[0].total_capacity;
         }
 
         let check = 0;
@@ -431,10 +459,13 @@ async function checkAvailability(date, time, numofpeople, desired_area) {
         const client = await connect();
         const res = await client.query(sql1, [desired_area, lessTime, moreTime, date]);
         await client.release();
-        console.log("Capacity for desired area:", res.rows[0].sum);
-        if (res.rows[0].sum >= numofpeople) {
+        let sum = res.rows[0].total_capacity;
+        console.log("Capacity for desired area:", res.rows[0].total_capacity,numofpeople);
+        if (sum >= numofpeople) {
+            console.log("Available");
             return 1; // Available
         } else {
+            console.log("ALMOST Available");
             return 2; // Insufficient capacity for desired area
         }
     } catch (err) {
@@ -556,4 +587,4 @@ async function getTablesUsed(reservID){
 // }
 
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus}
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser}

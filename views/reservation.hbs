@@ -3,6 +3,7 @@
 {{!-- //TODO fix the padding tops to look nice --}}
 <div id="reservationpg">
 <div  id="txtandform">
+  {{#unless has_active_reserv}}
       <h1>Make a Reservation</h1>
       <div id="registerform">
         <form action = "/reservation" method = "post" id = "reservationForm">
@@ -62,6 +63,12 @@ document.getElementById('reservationForm').reset()
 </div>
   {{>floorplan page='userreserv'}}  
 </div>
+{{/unless}}
+{{#if has_active_reserv}}
+    <h1>You already have an active reservation</h1>
+    <div>You can review it here</div>
+    <div><a href = "/login">My Profile</a></div>
+{{/if}}
 </div>
 {{!-- <div id="shop_logo">
     <img src="/media/fagadiko_notext.jpg">
