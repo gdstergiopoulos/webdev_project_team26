@@ -174,7 +174,7 @@ async function addReservation(date,time,people,comments,username,area_id){
 }
 
 async function editReservation(reservID,date,time,numofpeople,comments,username,desired_area) {
-    const sql = `UPDATE "RESERVATION" SET "desired_area" = '${desired_area}', "numofpeople" = '${numofpeople}', "date" = '${date}', "time" = '${time}', "comments" = '${comments}', "status" = "changed" WHERE "reservID" = '${reservID}';`;
+    const sql = `UPDATE "RESERVATION" SET "desired_area" = '${desired_area}', "numofpeople" = '${numofpeople}', "date" = '${date}', time = '${time}', "comments" = '${comments}', "status" = 'changed' WHERE "reservID" = '${reservID}';`;
     
     try {
         const client = await connect();

@@ -528,17 +528,31 @@ async function moveToMenu(req,res){
     res.redirect('/adminmenu');
 }
 
+async function editReserv(req,res){
+    let reservID = req.params.reservID;
+    let time= req.body.time;
+    let date = req.body.date;
+    // let formattedDate = new Date(date).toISOString().split('T')[0];
+    let people = req.body.people;
+    let comments = req.body.comments;
+    let username = req.session.username;
+    let area_id = req.body.area;
+    console.log(reservID,date,time,people,comments,username,area_id);
+    await model.editReservation(reservID,date,time,people,comments,username,area_id);
+    
+}
 
 router.route('/').get((req,res)=>res.redirect('/home'));
 // router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
-router.route('/login').get(logincontroller.checkAuthenticated,goLogin);
+router.route('/login').get(goLogin);
 router.route('/login/redirect/:page').get(goLogin);
 router.route('/home').get(goHome);
 // router.route('/menu').get(goMenu);
 router.route('/register').get(goRegister);
 router.route('/reservation').get(goReservation);
+router.route('/reservation').post(makeResv);
 router.route('/location').get(goLocation);
 router.route('/adminhome').get(goAdminHome);
 router.route('/adminreserv').get(goAdminReserv);
@@ -550,6 +564,7 @@ router.route('/change_status/:reservID/:status').get(goChangeStatus);
 // router.route('/approve_resv/:reservID').get(goApproveResv);
 router.route('/delete_resv/:reservID').get(goDeleteResv);
 router.route('/reservation/edit/:reservID').get(goEditResv);
+router.route('/reservation/edit/:reservID').post(editReserv);
 
 
 

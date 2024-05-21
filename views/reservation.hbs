@@ -5,8 +5,49 @@
 <div  id="txtandform">
   {{#unless has_active_reserv}}
       <h1>{{#if reservInfo}}Edit your Reservation {{else}}Make a Reservation{{/if}}</h1>
+     
       <div id="registerform">
-        <form action = "/reservation/{{reservInfo.[0].reservID}}" method = "post" id = "reservationForm">
+         {{#if reservInfo}}
+        <form action = "/reservation/edit/{{reservInfo.[0].reservID}}" method = "post" id = "reservationForm">
+          <fieldset>
+              <legend>When?</legend>
+              <div class="form-field">
+                  <label for="date">Date:</label>
+                  <input type="date" class="form-control" id="date" name="date" placeholder="mm/dd/yyyy" value="{{reservInfo.[0].date}}">
+                  {{!-- //TODO this is the reason the update doesnt work. the format to make the placeholder is wrong --}}
+              </div>
+              <div class="form-field">
+                  <label for="time">Time:</label>
+                  <input type="time" class="form-control" id="time" name="time" placeholder="--:-- --" value="{{#if reservInfo}}{{reservInfo.[0].time}}{{/if}}">
+                  {{!-- onfocus="(this.type='time')"
+                  onblur="if(this.value === '') { this.type='text' }"> --}}
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>For who?</legend>
+              <div class="form-field">
+                  <input type="number" class="form-control" id="people" name="people" {{#if reservInfo}} value = {{reservInfo.[0].numofpeople}} {{else}} placeholder="Number of people" {{/if}}>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Desired Area</legend>
+              <div class="form-field">
+                <input type="dropdown" class="form-control" name="area" {{#if reservInfo}} value = {{reservInfo.[0].desired_area}} {{else}} placeholder="Select from the plan on the side" {{/if}} >
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Special Demands</legend>
+              <div class="form-field">
+                  <textarea id="comments" class="form-control" name="comments" placeholder="Feel free to tell us" {{#if reservInfo}} value = {{reservInfo.[0].comments}} {{/if}}>{{#if reservInfo}}{{reservInfo.[0].comments}}{{/if}}</textarea>
+              </div>
+            </fieldset>
+             
+            <div class="form-field">
+              <input class="btn btn-primary" id="makereservbtn" type="submit" value="Make Reservation">
+          </div>
+        </form>
+        {{else}}
+          <form action = "/reservation" method = "post" id = "reservationForm">
           <fieldset>
               <legend>When?</legend>
               <div class="form-field">
@@ -38,7 +79,7 @@
             <fieldset>
               <legend>Special Demands</legend>
               <div class="form-field">
-                  <textarea id="comments" class="form-control" name="comments" placeholder="Feel free to tell us" >{{#if reservInfo}}{{reservInfo.comments}}{{/if}}</textarea>
+                  <textarea id="comments" class="form-control" name="comments" placeholder="Feel free to tell us" >{{#if reservInfo}}{{reservInfo.[0].comments}}{{/if}}</textarea>
               </div>
             </fieldset>
              
@@ -46,24 +87,7 @@
               <input class="btn btn-primary" id="makereservbtn" type="submit" value="Make Reservation">
           </div>
         </form>
-        {{!-- <script>
-            document.getElementById('reservationForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the form from submitting normally
-
-                fetch('/reservation', {
-                    method: 'POST',
-                    body: new FormData(event.target) // Send the form data in the request
-                })
-                .then(response => response.json())
-    .then(data => {
-        if (data.showAlert) {
-            alert(data.message);
-        }
-    })
-    .catch(error => console.error('Error:', error));
-});
-document.getElementById('reservationForm').reset()
-            </script> --}}
+        {{/if}}
     </div>
 </div>
   {{>floorplan page='userreserv'}}  
@@ -75,7 +99,11 @@ document.getElementById('reservationForm').reset()
     <div><a href = "/login">My Profile</a></div>
 {{/if}}
 </div>
-{{!-- <div id="shop_logo">
-    <img src="/media/fagadiko_notext.jpg">
-</div> --}}
+ <script>
+    let datetoshow={{reservInfo.[0].date}}
+    console.log("datetoshow");
+    let formattedDate = new Date(datetoshow).toISOString().split('T')[0];
+    document.getElementById("date").value = formattedDate;
+</script>
+
 
