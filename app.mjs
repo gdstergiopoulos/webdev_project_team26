@@ -41,7 +41,7 @@ app.use(router);
 router.use(express.urlencoded({ extended: true }));
 
 router.use(session({
-    name: process.env.SESS_NAME,
+        
     secret: process.env.SESSION_SECRET || "PynOjAuHetAuWawtinAytVunar", // κλειδί για κρυπτογράφηση του cookie
     resave: false, // δεν χρειάζεται να αποθηκεύεται αν δεν αλλάξει
     saveUninitialized: false, // όχι αποθήκευση αν δεν έχει αρχικοποιηθεί
@@ -197,7 +197,11 @@ async function makeResv(req,res){
     let comments = req.body.comments;
     let username = req.session.username;
     let area_id = req.body.area;
-
+    let reservID = req.body.reservID;
+    if(reservID!=undefined){
+        await model.editReservation(time,date,people,comments,username,area_id,reservID);
+    }
+    else{
         if(req.session.loggedin==true){
             if(area_id!=undefined && time!=undefined && date!=undefined && people){
                 if(!checkDate(date)){
@@ -239,7 +243,7 @@ async function makeResv(req,res){
             // var showAlert = false;
             console.log('Login Required to make a reservation');
             res.redirect('/login/redirect/reservation');
-        }   
+        }}   
         res.redirect('/reservation');
     }
     
@@ -310,7 +314,7 @@ async function checkLoginRedirect(req,res){
 router.route('/login').post(checkLogin);
 router.route('/login/redirect/:page').post(checkLoginRedirect);
 router.route('/register').post(registerUser);
-router.route('/reservation').post(makeResv);
+router.route('/reservation/:reservID').post(makeResv);
 
 function goHome(req,res){
     // console.log(model.getuser('gster'));
@@ -341,7 +345,8 @@ async function goReservation(req,res){
     else{
         console.log(req.session.loggedin)
         let active_resv = await model.getAllReservUser(req.session.username, "active");
-        if(active_resv.length>0){
+        let changed_resv = await model.getAllReservUser(req.session.username, "changed");
+        if(active_resv.length>0 || changed_resv.length>0){
             var has_active_reserv = true;
         }
         else{
@@ -365,6 +370,12 @@ function goAdminHome(req,res){
         res.render('admin_home', {loggname: req.session.username,layout: 'admin_layout' });
     }
     
+}
+
+async function goEditResv(req,res){
+    let reservID = req.params.reservID;
+    let reservInfo= await model.getReservInfo(reservID);
+    res.render('reservation', { reservInfo: reservInfo,loggname: req.session.username,layout: 'admin_layout' });
 }
 
 async function goAdminMenu(req,res){
@@ -535,6 +546,7 @@ router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(goToggleT
 router.route('/change_status/:reservID/:status').get(goChangeStatus);
 // router.route('/approve_resv/:reservID').get(goApproveResv);
 router.route('/delete_resv/:reservID').get(goDeleteResv);
+router.route('/reservation/edit/:reservID').get(goEditResv);
 
 
 

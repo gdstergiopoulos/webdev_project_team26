@@ -4,36 +4,41 @@
 <div id="reservationpg">
 <div  id="txtandform">
   {{#unless has_active_reserv}}
-      <h1>Make a Reservation</h1>
+      <h1>{{#if reservInfo}}Edit your Reservation {{else}}Make a Reservation{{/if}}</h1>
       <div id="registerform">
-        <form action = "/reservation" method = "post" id = "reservationForm">
+        <form action = "/reservation/{{reservInfo.[0].reservID}}" method = "post" id = "reservationForm">
           <fieldset>
               <legend>When?</legend>
               <div class="form-field">
                   <label for="date">Date:</label>
-                  <input type="date" class="form-control" id="date" name="date">
+                  <input type="text" class="form-control" id="date" name="date" placeholder="mm/dd/yyyy" value="{{#if reservInfo}}{{reservInfo.[0].date}}{{/if}}"
+                  onfocus="(this.type='date')"
+                  onblur="if(this.value === '') { this.type='text' }">
+    
               </div>
               <div class="form-field">
                   <label for="time">Time:</label>
-                  <input type="time" class="form-control" id="time" name="time" min="08:00" max="22:00">
+                  <input type="text" class="form-control" id="time" name="time" placeholder="--:-- --" value="{{#if reservInfo}}{{reservInfo.[0].time}}{{/if}}"
+                  onfocus="(this.type='time')"
+                  onblur="if(this.value === '') { this.type='text' }">
               </div>
             </fieldset>
             <fieldset>
               <legend>For who?</legend>
               <div class="form-field">
-                  <input type="number" class="form-control" id="people" name="people" placeholder="Number of people">
+                  <input type="number" class="form-control" id="people" name="people" {{#if reservInfo}}placeholder = {{reservInfo.[0].numofpeople}} {{else}} placeholder="Number of people" {{/if}}>
               </div>
             </fieldset>
             <fieldset>
               <legend>Desired Area</legend>
               <div class="form-field">
-                <input type="dropdown" class="form-control" name="area" placeholder="Select from the plan on the side">
+                <input type="dropdown" class="form-control" name="area" {{#if reservInfo}}placeholder = {{reservInfo.[0].desired_area}} {{else}} placeholder="Select from the plan on the side" {{/if}} >
               </div>
             </fieldset>
             <fieldset>
               <legend>Special Demands</legend>
               <div class="form-field">
-                  <textarea id="comments" class="form-control" name="comments" placeholder="Feel free to tell us"></textarea>
+                  <textarea id="comments" class="form-control" name="comments" placeholder="Feel free to tell us" >{{#if reservInfo}}{{reservInfo.comments}}{{/if}}</textarea>
               </div>
             </fieldset>
              

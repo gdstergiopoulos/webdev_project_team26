@@ -173,6 +173,21 @@ async function addReservation(date,time,people,comments,username,area_id){
     }
 }
 
+async function editReservation(reservID,date,time,numofpeople,comments,username,desired_area) {
+    const sql = `UPDATE "RESERVATION" SET "desired_area" = '${desired_area}', "numofpeople" = '${numofpeople}', "date" = '${date}', "time" = '${time}', "comments" = '${comments}', "status" = "changed" WHERE "reservID" = '${reservID}';`;
+    
+    try {
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        console.log("Reservation updated successfully",res.rows);
+        // callback(null, res.rows) // επιστρέφει array
+    } catch (err) {
+        // callback(err, null);
+        console.log(err);
+
+}}
+
 async function rejectReserv(reservID){
     const sql1 = `DELETE FROM "HASTABLES" WHERE "reservID" = $1;`;
     const sql2 = 'DELETE FROM "RESERVATION" WHERE "reservID" = $1;';
@@ -587,4 +602,4 @@ async function getTablesUsed(reservID){
 // }
 
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser}
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation}
