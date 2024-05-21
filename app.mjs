@@ -5,7 +5,7 @@ import { engine } from 'express-handlebars'
 import * as model from './model/model.js';
 import session from 'express-session';
 import Handlebars from './helpers.js'; 
-
+import * as logincontroller from './appsetup/loginController.mjs';
 
 const app = express()
 const router = express.Router();
@@ -533,7 +533,7 @@ router.route('/').get((req,res)=>res.redirect('/home'));
 // router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
-router.route('/login').get(goLogin);
+router.route('/login').get(logincontroller.checkAuthenticated,goLogin);
 router.route('/login/redirect/:page').get(goLogin);
 router.route('/home').get(goHome);
 // router.route('/menu').get(goMenu);
