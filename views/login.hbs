@@ -14,6 +14,12 @@
                         <input type="submit" class="btn btn-primary" value="Login">
                     </fieldset>
                 </form>
+                {{#if (eq loginmsg 'noaccfound')}}
+                    <p class="text-danger">Create an account first</p>
+                {{/if}}
+                {{#if (eq loginmsg 'wrongpass')}}
+                    <p class="text-danger">Wrong username or password</p>
+                {{/if}}
                 <p id="linktoreg">Not a member? <a href="/register">Create</a> an account</p>
                 </div>
             </div>

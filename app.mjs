@@ -134,7 +134,8 @@ function goLogin(req,res){
         res.redirect('/myprofile');
     }
     else{
-        res.render('login',{src: req.params.page,layout: 'main'});
+        console.log(req.query.error);
+        res.render('login',{src: req.params.page,layout: 'main',loginmsg: req.query.error});
     }
 }
 
@@ -146,8 +147,8 @@ async function checkLogin(req,res){
     // console.log(model.getuser(username));
     let user = await model.getuser(username);
     if(user.length==0){
-        console.log('Create an account first');    
-        res.redirect('/login');
+        console.log('Create an account first');  
+        res.redirect('/login?error=noaccfound');
     }
     else{
         let storedpass = user[0].password;
@@ -166,6 +167,7 @@ async function checkLogin(req,res){
             }
         } else {
             console.log('Invalid username or password');
+            res.redirect('/login?error=wrongpass');
             // Handle the error or redirect to an error page
         }
     }
@@ -285,7 +287,7 @@ async function checkLoginRedirect(req,res){
     let user = await model.getuser(username);
     if(user.length==0){
         console.log('Create an account first');    
-        res.redirect('/login');
+        res.redirect('/login?error=noaccfound');
     }
     else{
         let storedpass = user[0].password;
@@ -304,6 +306,7 @@ async function checkLoginRedirect(req,res){
                 }
         } else {
             console.log('Invalid username or password');
+            res.redirect('/login?error=wrongpass');
             //TODO wrong password message
             
             // Handle the error or redirect to an error page
