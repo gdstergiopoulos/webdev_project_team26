@@ -106,6 +106,48 @@ router.use(session({
 //     });
 // };
 
+
+let checkAuthenticated = function (req, res, next) {
+    //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
+    if (req.session.loggedin === true) {
+        console.log("user is authenticated", req.originalUrl);
+        //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
+        next();
+    }
+
+    else {
+        //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
+        //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
+        // if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
+        //     next()
+        // }
+        // else {
+            //Στείλε το χρήστη στη "/login" 
+            console.log("not authenticated, redirecting to /login")
+            res.render('login',{src: req.params.page,layout: 'main',loginmsg: req.query.error});
+    }
+}
+
+let checkAccessRights = function (req, res, next) {
+    //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
+    if (req.session.loggedin === true && req.session.role=='admin') {
+        console.log("Admin is authenticated", req.originalUrl);
+        //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
+        next();
+    }
+    else {
+        //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
+        //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
+        // if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
+        //     next()
+        // }
+        // else {
+            //Στείλε το χρήστη στη "/login" 
+            console.log("not authenticated, redirecting to /login")
+            res.redirect('/home');
+    }
+}
+
 let listAllFoodsRender = async function (req, res) {
     // getAllFoods(function (err, foods) {
     //     if (err) {
@@ -129,14 +171,7 @@ function goAbout(req,res){
 }
 
 function goLogin(req,res){
-   
-    if(req.session.loggedin==true){
         res.redirect('/myprofile');
-    }
-    else{
-        console.log(req.query.error);
-        res.render('login',{src: req.params.page,layout: 'main',loginmsg: req.query.error});
-    }
 }
 
 async function checkLogin(req,res){
@@ -235,11 +270,9 @@ async function makeResv(req,res){
     let area_id = req.body.area;
     let reservID = req.body.reservID;
     let errormsg= '';
-    if(reservID!=undefined){
-        await model.editReservation(time,date,people,comments,username,area_id,reservID);
-    }
-    else{
-        if(req.session.loggedin==true){
+
+
+
             if(area_id!='' && time!=undefined && date!=undefined && people!=''){
                 if(checkDateTime(date,time)===1){
                     console.log('Invalid date');
@@ -286,24 +319,14 @@ async function makeResv(req,res){
                 // var showAlert = true;
                 // var alertMessage = "Please fill in all the fields";
                 // res.json({ showAlert: showAlert, message: alertMessage });
-            }}
-            else{
-                // var showAlert = false;
-                console.log('Login Required to make a reservation');
-                res.redirect('/login/redirect/reservation');
-            }}   
+            }
     }
     
 async function goChangeStatus(req,res){
     let reservID = req.params.reservID;
     let status = req.params.status;
     await model.changeReservStatus(reservID,status);
-    if(req.session.role!='admin'){
-        res.redirect('/login');
-    }
-    else{
-        res.redirect('/adminreserv');
-    }
+    res.redirect('/adminreserv');
     
 }
 
@@ -428,13 +451,8 @@ function goLocation(req,res){
 }
 
 function goAdminHome(req,res){
-    if(req.session.role!='admin'){
-        console.log('You are not an admin');
-        res.redirect('/home');
-    }
-    else{
         res.render('admin_home', {loggname: req.session.username,layout: 'admin_layout' });
-    }
+
     
 }
 
@@ -446,30 +464,18 @@ async function goEditResv(req,res){
 }
 
 async function goAdminMenu(req,res){
-    if(req.session.role!='admin'){
-        console.log('You are not an admin');
-        res.redirect('/home');
-    }
-    else{
         let foodsactive= await model.getMenuActive();
         let foodsinactive= await model.getMenuInactive();
         res.render('admin_menu', { layout: 'admin_layout',loggname: req.session.username,foodsactive: foodsactive, foodsinactive: foodsinactive});
-    }
 }
 
 async function goAdminReserv(req,res){
-    if(req.session.role!='admin'){
-        console.log('You are not an admin');
-        res.redirect('/home');
-    }
-    else{
         let active_reservations= await model.getAllReserv("active");
         let confirmed_reservations= await model.getAllReserv("confirmed");
         let cancelled_reservations= await model.getAllReserv("cancelled");
         let rejected_reservations= await model.getAllReserv("rejected");
         let changed_reservations= await model.getAllReserv("changed");
         res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,rejected_reservations:rejected_reservations, cancelled_reservations:cancelled_reservations, changed_reservations:changed_reservations,layout: 'admin_layout' });
-    }
 }
 
 async function goAssignTable(req,res){
@@ -674,46 +680,52 @@ async function editReserv(req,res){
 }
 
 router.route('/').get((req,res)=>res.redirect('/home'));
+
 // router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
-router.route('/login').get(goLogin);
-router.route('/login/redirect/:page').get(goLogin);
+router.route('/login').get(checkAuthenticated,goLogin);
+router.route('/login/redirect/:page').get(checkAuthenticated,goLogin);
 router.route('/home').get(goHome);
 // router.route('/menu').get(goMenu);
 router.route('/register').get(goRegister);
-router.route('/reservation').get(goReservation);
-router.route('/reservation').post(makeResv);
+router.route('/reservation').get(checkAuthenticated,goReservation);
+router.route('/reservation').post(checkAuthenticated,makeResv);
 router.route('/location').get(goLocation);
-router.route('/adminhome').get(goAdminHome);
-router.route('/adminreserv').get(goAdminReserv);
-router.route('/adminmenu').get(goAdminMenu);
-router.route('/assign_table/:reservID').get(goAssignTable);
-router.route('/assign_table/:reservID/pickarea/:area').get(goPickArea);
-router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(goToggleTable);
-router.route('/change_status/:reservID/:status').get(goChangeStatus);
+router.route('/adminhome').get(checkAccessRights,goAdminHome);
+router.route('/adminreserv').get(checkAccessRights,goAdminReserv);
+router.route('/adminmenu').get(checkAccessRights,goAdminMenu);
+router.route('/assign_table/:reservID').get(checkAccessRights,goAssignTable);
+router.route('/assign_table/:reservID/pickarea/:area').get(checkAccessRights,goPickArea);
+router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(checkAccessRights,goToggleTable);
+router.route('/change_status/:reservID/:status').get(checkAuthenticated,goChangeStatus);
 // router.route('/approve_resv/:reservID').get(goApproveResv);
-router.route('/delete_resv/:reservID').get(goDeleteResv);
-router.route('/reservation/edit/:reservID').get(goEditResv);
-router.route('/reservation/edit/:reservID').post(editReserv);
+router.route('/delete_resv/:reservID').get(checkAccessRights,goDeleteResv);
+router.route('/reservation/edit/:reservID').get(checkAuthenticated,goEditResv);
+router.route('/reservation/edit/:reservID').post(checkAuthenticated,editReserv);
 
 
 
 // router.route('/userpickarea').get(goUserPickArea);
-router.route('/addFoodItem').get(goAddFoodItem);
-router.route('/addFoodItem').post(AddFoodItem);
-router.route('/addFoodItem/:id').get(goEditFoodItem);
-router.route('/addFoodItem/:id').post(EditFoodItem);
-router.route('/deleteItem/:id').get(deleteItem);
-router.route('/removeItem/:id').get(removeItem);
-router.route('/addOnMenu/:id').get(moveToMenu);
-router.route('/myprofile/page/:page').get(goMyProfile);
+router.route('/addFoodItem').get(checkAccessRights,goAddFoodItem);
+router.route('/addFoodItem').post(checkAccessRights,AddFoodItem);
+router.route('/addFoodItem/:id').get(checkAccessRights,goEditFoodItem);
+router.route('/addFoodItem/:id').post(checkAccessRights,EditFoodItem);
+router.route('/deleteItem/:id').get(checkAccessRights,deleteItem);
+router.route('/removeItem/:id').get(checkAccessRights,removeItem);
+router.route('/addOnMenu/:id').get(checkAccessRights,moveToMenu);
+router.route('/myprofile/page/:page').get(checkAuthenticated,goMyProfile);
 router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
 router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.username=undefined; res.redirect('/home')});
 // Επίσης έτσι: 
 // Could also be done like this:
 // app.route('/api/tasks').get(listAllTasks);
 // app.route('/').get(listAllTasksRender);
+
+router.use((req, res) => {
+    res.status(404).send('<h1 style="font-family: Arial, sans-serif; color:#c17379; background-color:#181515; height: 100vh; display: flex; justify-content: center; align-items: center;">404: Page not Found</h1>');
+});
+
 
 const PORT=process.env.PORT || 3000;
 const server = app.listen(PORT, () => { console.log(`http://127.0.0.1:${PORT}`) });
