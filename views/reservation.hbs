@@ -11,6 +11,7 @@
       <div id="registerform">
          {{#if reservInfo}}
         <form action = "/reservation/edit/{{reservInfo.[0].reservID}}" method = "post" id = "reservationForm">
+        {{#if (neq errormsg undefined)}}<div class="alert {{#if (eq errormsg 'All set, your reservation went through!')}} alert-success {{else}}alert-danger{{/if}}">{{errormsg}}</div>{{/if}}
           <fieldset>
               <legend>When?</legend>
               <div class="form-field">
@@ -52,7 +53,7 @@
         </form>
         {{else}}
           <form action = "/reservation" method = "post" id = "reservationForm">
-          {{#if (neq errormsg undefined)}}<div class="alert alert-danger">{{errormsg}}</div>{{/if}}
+          {{#if (neq errormsg undefined)}}<div class="alert {{#if (eq errormsg 'All set, your reservation went through!')}} alert-success {{else}}alert-danger{{/if}}">{{errormsg}}</div>{{/if}}
           <fieldset>
               <legend>When?</legend>
               <div class="form-field">

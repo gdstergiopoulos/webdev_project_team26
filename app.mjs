@@ -221,7 +221,7 @@ async function makeResv(req,res){
                     let availability = await model.checkAvailability(date,time,people,area_id);
                     console.log(availability);
                     if(availability==0){
-                        console.log('No tables available in the entrire restaurant at this time');
+                        console.log('No tables available in the entrire restaurant at this time for the requested no. of people');
                         errormsg='No tables available in the entrire restaurant at this time';
                         res.redirect('/reservation?error='+errormsg);
                         // var showAlert = true;
@@ -230,8 +230,8 @@ async function makeResv(req,res){
                     }
                     else if (availability===1){ 
                         await model.addReservation(date,time,people,comments,username,area_id);
-                        console.log('All set, your reservation went through');
-                        errormsg='none';  
+                        console.log('All set, your reservation went through!');
+                        errormsg='All set, your reservation went through!';  
                         res.redirect('/reservation?error='+errormsg);
                     // var showAlert = false;  
                     }
@@ -345,7 +345,7 @@ async function checkLoginRedirect(req,res){
 router.route('/login').post(checkLogin);
 router.route('/login/redirect/:page').post(checkLoginRedirect);
 router.route('/register').post(registerUser);
-router.route('/reservation/:reservID').post(makeResv);
+// router.route('/reservation/:reservID').post(makeResv);
 
 function goHome(req,res){
     // console.log(model.getuser('gster'));
@@ -405,9 +405,10 @@ function goAdminHome(req,res){
 }
 
 async function goEditResv(req,res){
+    let errormsg= req.query.error;
     let reservID = req.params.reservID;
     let reservInfo= await model.getReservInfo(reservID);
-    res.render('reservation', { reservInfo: reservInfo,loggname: req.session.username,layout: 'admin_layout' });
+    res.render('reservation', { reservInfo: reservInfo,errormsg: errormsg,loggname: req.session.username,layout: 'admin_layout' });
 }
 
 async function goAdminMenu(req,res){
@@ -579,7 +580,62 @@ async function editReserv(req,res){
     let username = req.session.username;
     let area_id = req.body.area;
     console.log(reservID,date,time,people,comments,username,area_id);
-    await model.editReservation(reservID,date,time,people,comments,username,area_id);
+    //await model.editReservation(reservID,date,time,people,comments,username,area_id);
+
+    let errormsg= '';
+        if(req.session.loggedin==true){
+            if(area_id!=undefined && time!=undefined && date!=undefined && people){
+                if(checkDateTime(date,time)===1){
+                    console.log('Invalid date');
+                    errormsg='Invalid date';
+                    res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
+                }
+                else if(checkDateTime(date,time)===2){
+                    console.log('Invalid time');
+                    errormsg='Invalid time';
+                    res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
+                }
+                else{
+                    let availability = await model.checkAvailability(date,time,people,area_id);
+                    console.log(availability);
+                    if(availability==0){
+                        console.log('No tables available in the entrire restaurant at this time');
+                        errormsg='No tables available in the entrire restaurant at this time for the requested no. of people';
+                        res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
+                        // var showAlert = true;
+                        // var alertMessage = "No tables available";
+                        // res.json({ showAlert: showAlert, message: alertMessage });
+                    }
+                    else if (availability===1){ 
+                        await model.editReservation(date,time,people,comments,username,area_id);
+                        console.log('All set, your reservation went through!');
+                        errormsg='All set, your reservation went through!';  
+                        res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
+                    // var showAlert = false;  
+                    }
+                    else{
+                        console.log('No tables available in the desired area at this time, check other areas',area_id);
+                        errormsg='No tables available in the desired area at this time, check other areas';
+                        res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
+                    // var showAlert = true;
+                    // var alertMessage = "There are tables available in the restaurant";
+                    // res.json({ showAlert: showAlert, message: alertMessage });
+                    }
+                }
+            }
+            else{
+                console.log('hello Please fill in all the fields');
+                errormsg='Please fill in all the fields';
+                res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
+                // var showAlert = true;
+                // var alertMessage = "Please fill in all the fields";
+                // res.json({ showAlert: showAlert, message: alertMessage });
+            }}
+            else{
+                // var showAlert = false;
+                console.log('Login Required to make a reservation');
+                res.redirect('/login/redirect/reservation');
+            }   
     
 }
 
