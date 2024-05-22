@@ -6,11 +6,21 @@
             <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
             {{#each info}}
             <li>
+              {{#if (eq status 'active')}}
+              <span style="color:gray">Pending.. </span>
+              {{else if (eq status 'changed')}} 
+              <span style="color:gray">Pending.. </span>
+              {{else if (eq status 'confirmed')}} 
+              <span style="color:green">Confirmed</span>
+              {{else if (eq status 'rejected')}}
+              <span style="color:red">Rejected. Reason: {{comments}}</span>{{/if}}
               <span>{{reservID}}</span>
-              <span>{{date}}</span>
+              <span>{{formatDateMMDDYYYY date}}</span>
               <span>{{time}}</span>
               <span>{{numofpeople}}</span>
+              {{#if (neq status 'rejected')}}
               <a href="/reservation/edit/{{reservID}}" class="btn btn-primary edit">Edit</a>
+              {{/if}}
               <a href="/change_status/{{reservID}}/cancelled" class="btn btn-primary cancel">Cancel</a>
               </li>
               <hr>

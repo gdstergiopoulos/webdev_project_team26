@@ -1,0 +1,18 @@
+{{>adminnav loggname=loggname}}
+<div id="pagebody">
+<div id="addReason">
+    
+    <h1>Add reason for rejection</h1>
+    <form method="post" action="/add_reason/{{reservInfo.[0].reservID}}">
+        <label for="reason"style=" margin-left:2%">Reason:</label>
+        <input type="text" style="width:20%; margin-left:2%" id="reason" name="reason" class="form-control" required value="{{reservInfo.[0].comments}}">
+
+        <div style="justify-content:center; margin-top:1%; margin-left:3%;">
+            <a class="btn btn-primary back" style=" border-color:gray;background-color:gray;" href="/adminreserv"> Back </a>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+
+
+</div>
+</div>

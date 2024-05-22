@@ -273,7 +273,7 @@ async function makeResv(req,res){
 
 
 
-            if(area_id!='' && time!=undefined && date!=undefined && people!=''){
+            if(area_id!='' && time!='' && date!='' && people!=''){
                 if(checkDateTime(date,time)===1){
                     console.log('Invalid date');
                     errormsg='Invalid date';
@@ -281,7 +281,7 @@ async function makeResv(req,res){
                 }
                 else if(checkDateTime(date,time)===2){
                     console.log('Invalid time');
-                    errormsg='Invalid time';
+                    errormsg='Operating Hours: 09:00-22:30';
                     res.redirect('/reservation?error='+errormsg);
                 }
                 else{
@@ -490,6 +490,19 @@ async function goAssignTable(req,res){
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
 }
 
+async function goAddReason(req,res){
+    let reservInfo = await model.getReservInfo(req.params.reservID);
+
+    res.render('add_reason', { reservInfo: reservInfo,loggname: req.session.username,layout: 'admin_layout' });
+}
+
+async function addReason(req,res){
+    let reservID = req.params.reservID;
+    let reason = req.body.reason;
+    await model.addReason(reservID,reason);
+    res.redirect('/adminreserv');
+}
+
 async function goPickArea(req,res){
     let area_id;
     let reservID = req.params.reservID;
@@ -549,8 +562,10 @@ async function goMyProfile(req,res){
         let userinfo= await model.getAllReservUser(req.session.username, "active");
         let userinfo2 = await model.getAllReservUser(req.session.username, "changed");
         let userinfo3 = await model.getAllReservUser(req.session.username, "confirmed");
+        let userinfo4 = await model.getAllReservUser(req.session.username, "rejected");
         allReserv = userinfo.concat(userinfo2);
         info = allReserv.concat(userinfo3);
+        info = info.concat(userinfo4);
     }
     else if(req.params.page=='history'){
         profilepage='reservhistory';
@@ -615,6 +630,8 @@ async function editReserv(req,res){
     let time= req.body.time;
     let date = req.body.date;
     // let formattedDate = new Date(date).toISOString().split('T')[0];
+    // date = formattedDate;
+    // let formattedDate = new Date(date).toISOString().split('T')[0];
     let people = req.body.people;
     let comments = req.body.comments;
     let username = req.session.username;
@@ -624,7 +641,7 @@ async function editReserv(req,res){
 
     let errormsg= '';
         if(req.session.loggedin==true){
-            if(area_id!=undefined && time!=undefined && date!=undefined && people){
+            if(area_id!='' && time!='' && date!='' && people!=''){
                 if(checkDateTime(date,time)===1){
                     console.log('Invalid date');
                     errormsg='Invalid date';
@@ -647,7 +664,7 @@ async function editReserv(req,res){
                         // res.json({ showAlert: showAlert, message: alertMessage });
                     }
                     else if (availability===1){ 
-                        await model.editReservation(date,time,people,comments,username,area_id);
+                        await model.editReservation(reservID,date,time,people,comments,username,area_id);
                         console.log('All set, your reservation went through!');
                         errormsg='All set, your reservation went through!';  
                         res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
@@ -703,7 +720,8 @@ router.route('/change_status/:reservID/:status').get(checkAuthenticated,goChange
 router.route('/delete_resv/:reservID').get(checkAccessRights,goDeleteResv);
 router.route('/reservation/edit/:reservID').get(checkAuthenticated,goEditResv);
 router.route('/reservation/edit/:reservID').post(checkAuthenticated,editReserv);
-
+router.route('/add_reason/:reservID').get(checkAccessRights,goAddReason);
+router.route('/add_reason/:reservID').post(checkAccessRights,addReason);
 
 
 // router.route('/userpickarea').get(goUserPickArea);
@@ -723,7 +741,7 @@ router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.
 // app.route('/').get(listAllTasksRender);
 
 router.use((req, res) => {
-    res.status(404).send('<h1 style="font-family: Arial, sans-serif; color:#c17379; background-color:#181515; height: 100vh; display: flex; justify-content: center; align-items: center;">404: Page not Found</h1>');
+    res.render('catcherror');
 });
 
 

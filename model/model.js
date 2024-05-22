@@ -175,11 +175,27 @@ async function addReservation(date,time,people,comments,username,area_id){
 }
 
 async function editReservation(reservID,date,time,numofpeople,comments,username,desired_area) {
-    const sql = `UPDATE "RESERVATION" SET "desired_area" = '${desired_area}', "numofpeople" = '${numofpeople}', "date" = '${date}', time = '${time}', "comments" = '${comments}', "status" = 'changed' WHERE "reservID" = '${reservID}';`;
+    const sql = 'SELECT status FROM "RESERVATION" WHERE "reservID" = $1;';
+    let status;
+    try {
+        const client = await connect();
+        const res = await client.query(sql, [reservID]);
+        await client.release();
+        status = res.rows[0].status;
+    }
+    catch (err) {
+        console.error("Error fetching reservation status:", err);
+        throw err;
+    }
+    if(status == 'confirmed')
+        status = 'changed';
+    else
+        status = 'active';
+    const sql1 = `UPDATE "RESERVATION" SET "desired_area" = '${desired_area}', "numofpeople" = '${numofpeople}', "date" = '${date}', time = '${time}', "comments" = '${comments}', "status" = '${status}' WHERE "reservID" = '${reservID}';`;
     
     try {
         const client = await connect();
-        const res = await client.query(sql);
+        const res = await client.query(sql1);
         await client.release();
         console.log("Reservation updated successfully",res.rows);
         // callback(null, res.rows) // επιστρέφει array
@@ -332,6 +348,20 @@ async function changeReservStatus(reservID,status){
             console.log(err);
         }
     }
+
+    if(status == 'rejected'){
+        const sql2 ='DELETE "comments" FROM "RESERVATION" WHERE "reservID" = $1;';
+        try {
+            const client = await connect();
+            const res = await client.query(sql2, [reservID]);
+            await client.release();
+            console.log("Comments deleted successfully",res.rows);
+            // callback(null, res.rows) // επιστρέφει array
+        } catch (err) {
+            // callback(err, null);
+            console.log(err);
+        }
+    }
     try {
         const client = await connect();
         const res = await client.query(sql);
@@ -343,6 +373,22 @@ async function changeReservStatus(reservID,status){
         console.log(err);
     }
 }
+
+async function addReason(reservID,comments){
+    const sql = `UPDATE "RESERVATION" SET "comments" = '${comments}' WHERE "reservID" = '${reservID}';`;
+    try {
+        console.log("in here", reservID, comments);
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        console.log("Comments added successfully",res.rows);
+        // callback(null, res.rows) // επιστρέφει array
+    } catch (err) {
+        // callback(err, null);
+        console.log(err);
+    }
+}
+
 
 async function checkReservStatus(reservID) {
     let current_date = new Date();
@@ -647,4 +693,4 @@ async function checkMail(mail){
 
 }
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation,calcRoyaltyPoints,checkUsername,checkMail}
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation,calcRoyaltyPoints,checkUsername,checkMail,addReason}

@@ -22,7 +22,7 @@
                   {{!-- //TODO this is the reason the update doesnt work. the format to make the placeholder is wrong --}}
               </div>
               <div class="form-field">
-                  <label for="time">Time:</label>
+                  <label for="time">Time: (09:00 - 22:30)</label>
                   <input type="time" class="form-control" id="time" name="time" placeholder="--:-- --" value="{{#if reservInfo}}{{reservInfo.[0].time}}{{/if}}"
                   onfocus="(this.type='time')"
                   onblur="if(this.value === '') { this.type='text' }">
@@ -66,7 +66,7 @@
     
               </div>
               <div class="form-field">
-                  <label for="time">Time:</label>
+                  <label for="time">Time: (09:00 - 22:30)</label>
                   <input type="text" class="form-control" id="time" name="time" placeholder="--:-- --" value="{{#if reservInfo}}{{reservInfo.[0].time}}{{/if}}"
                   onfocus="(this.type='time')"
                   onblur="if(this.value === '') { this.type='text' }">
