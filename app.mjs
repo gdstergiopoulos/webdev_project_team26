@@ -230,7 +230,7 @@ async function makeResv(req,res){
     let reservID = req.body.reservID;
     let errormsg= '';
 
-    if(area_id!='' && time!=undefined && date!=undefined && people!=''){
+    if(area_id!='' && time!='' && date!='' && people!=''){
         if(checkDateTime(date,time)===1){
             console.log('Invalid date');
             errormsg='Invalid date';
@@ -635,10 +635,12 @@ async function goMyProfile(req,res){
         let userinfo;
         let userinfo2;
         let userinfo3;
+        let userinfo4;
         try{
             userinfo= await model.getAllReservUser(req.session.username, "active");
             userinfo2 = await model.getAllReservUser(req.session.username, "changed");
             userinfo3 = await model.getAllReservUser(req.session.username, "confirmed");
+            userinfo4 = await model.getAllReservUser(req.session.username, "rejected");
         }
         catch(err){
             res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });

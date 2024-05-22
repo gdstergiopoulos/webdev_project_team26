@@ -457,7 +457,7 @@ async function getReservHistory(username){
 
 async function getAllReserv(status){
     {
-        const sql = `SELECT * FROM "RESERVATION" WHERE "status" = '${status}';`;
+        const sql = `SELECT * FROM "RESERVATION" WHERE "status" = '${status}' ORDER BY "date", "datetimemade";`;
         try {
             const client = await connect();
             const res = await client.query(sql)
