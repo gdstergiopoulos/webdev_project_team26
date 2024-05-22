@@ -5,7 +5,7 @@ import { engine } from 'express-handlebars'
 import * as model from './model/model.js';
 import session from 'express-session';
 import Handlebars from './helpers.js'; 
-import * as logincontroller from './appsetup/loginController.mjs';
+
 
 const app = express()
 const router = express.Router();
