@@ -513,11 +513,13 @@ async function getTablesUsed(reservID){
         moreTime = datefake2.toISOString().substr(11, 8); // Format the date object back to a time string
 
         console.log("in here " + lessTime);
+
         // callback(null, res.rows) // επιστρέφει array
     }
     catch (err) {
         // callback(err, null);
         console.log(err)
+        return tablesUsed;
     }
     const sql2 = `SELECT "H"."tableID"
     FROM "HASTABLES" "H"
@@ -525,9 +527,11 @@ async function getTablesUsed(reservID){
     WHERE "R"."time" BETWEEN $1 AND $2
       AND "R"."date" = $3
       AND "R"."reservID" != $4;`;
+
     try {
         const client = await connect();
         const res = await client.query(sql2, [lessTime, moreTime, date, reservID]);
+        // console.log(lessTime, moreTime, date, time,reservID);
         await client.release()
         //const tablesUsed = Array(60).fill(0); // Initialize the array with 0s
 

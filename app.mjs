@@ -206,7 +206,7 @@ async function makeResv(req,res){
     else{
         if(req.session.loggedin==true){
             if(area_id!=undefined && time!=undefined && date!=undefined && people){
-                if(!checkDate(date)){
+                if(!checkDateTime(date,time)){
                     console.log('Invalid date');
                     // var showAlert = true;
                     // var alertMessage = "Invalid date";
@@ -269,10 +269,23 @@ async function goDeleteResv(req,res){
 }
 
 
-function checkDate(date){
+function checkDateTime(date,time){
     let today = new Date();
     let resdate = new Date(date);
-    if(resdate<today){
+    let resTime = new Date(`1970-01-01T${time}Z`); // Convert PostgreSQL time to Date object
+
+    // Extract hours, minutes, and seconds from resTime
+    let hours = resTime.getHours();
+    let minutes = resTime.getMinutes();
+    let seconds = resTime.getSeconds();
+
+    // Ensure two-digit format for minutes and seconds
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    resTime.setHours(hours, minutes, seconds);
+
+    if (resdate < today || resTime < new Date("1970-01-01T09:00:00Z") || resTime > new Date("1970-01-01T22:30:00Z")) {
         return false;
     }
     return true;
@@ -402,7 +415,8 @@ async function goAdminReserv(req,res){
         let active_reservations= await model.getAllReserv("active");
         let confirmed_reservations= await model.getAllReserv("confirmed");
         let cancelled_reservations= await model.getAllReserv("cancelled");
-        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations, cancelled_reservations:cancelled_reservations,layout: 'admin_layout' });
+        let rejected_reservations= await model.getAllReserv("rejected");
+        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,rejected_reservations:rejected_reservations, cancelled_reservations:cancelled_reservations,layout: 'admin_layout' });
     }
 }
 
@@ -463,7 +477,9 @@ async function goMyProfile(req,res){
     let role = req.session.role;
     let profilepage;
     //take username from session
-    let userinfo= await model.getProfileInfo(req.session.username);
+    let info= await model.getProfileInfo(req.session.username);
+    
+    let allReserv
     //update reserv statys
     await model.checkReservStatus();
     // console.log(info);
@@ -472,13 +488,17 @@ async function goMyProfile(req,res){
     }
     else if(req.params.page=='reservations'){
         profilepage='userreserv';
-        userinfo= await model.getAllReservUser(req.session.username, "active");
+        let userinfo= await model.getAllReservUser(req.session.username, "active");
+        let userinfo2 = await model.getAllReservUser(req.session.username, "changed");
+        let userinfo3 = await model.getAllReservUser(req.session.username, "confirmed");
+        allReserv = userinfo.concat(userinfo2);
+        info = allReserv.concat(userinfo3);
     }
     else if(req.params.page=='history'){
         profilepage='reservhistory';
-        userinfo= await model.getReservHistory(req.session.username);
+        info = await model.getReservHistory(req.session.username);
     }
-    res.render('userprofile', {profilepage: profilepage,info: userinfo, loggname: req.session.username,role : role, layout: 'profile_layout'});
+    res.render('userprofile', {profilepage: profilepage,info:info, loggname: req.session.username,role : role, layout: 'profile_layout'});
 }
 
 async function EditFoodItem(req,res){

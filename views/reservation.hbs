@@ -4,7 +4,7 @@
 <div id="reservationpg">
 <div  id="txtandform">
   {{#unless has_active_reserv}}
-      <h1>{{#if reservInfo}}Edit your Reservation {{else}}Make a Reservation{{/if}}</h1>
+      <h1>{{#if reservInfo}}Edit Reservation {{else}}Make a Reservation{{/if}}</h1>
      
       <div id="registerform">
          {{#if reservInfo}}
@@ -13,14 +13,16 @@
               <legend>When?</legend>
               <div class="form-field">
                   <label for="date">Date:</label>
-                  <input type="date" class="form-control" id="date" name="date" placeholder="mm/dd/yyyy" value="{{reservInfo.[0].date}}">
+                  <input type="text" class="form-control" id="date" name="date" placeholder="mm/dd/yyyy" value="{{reservInfo.[0].date}}"
+                  onfocus="(this.type='date')"
+                  onblur="if(this.value === '') { this.type='text' }">
                   {{!-- //TODO this is the reason the update doesnt work. the format to make the placeholder is wrong --}}
               </div>
               <div class="form-field">
                   <label for="time">Time:</label>
-                  <input type="time" class="form-control" id="time" name="time" placeholder="--:-- --" value="{{#if reservInfo}}{{reservInfo.[0].time}}{{/if}}">
-                  {{!-- onfocus="(this.type='time')"
-                  onblur="if(this.value === '') { this.type='text' }"> --}}
+                  <input type="time" class="form-control" id="time" name="time" placeholder="--:-- --" value="{{#if reservInfo}}{{reservInfo.[0].time}}{{/if}}"
+                  onfocus="(this.type='time')"
+                  onblur="if(this.value === '') { this.type='text' }">
               </div>
             </fieldset>
             <fieldset>
