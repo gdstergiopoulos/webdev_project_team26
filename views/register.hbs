@@ -38,6 +38,7 @@
                         <input type="password" class="form-control" id="confpass" name="confpass" placeholder="Confirm Password">
                         </div>
                         <div id="registerbtn">
+                        {{#if (neq errormsg undefined)}}<div class="alert alert-danger">{{errormsg}}</div>{{/if}}
                         <input type="submit" class="btn btn-primary" value="Register" id="regbtn">
                         </div>
                     </fieldset>

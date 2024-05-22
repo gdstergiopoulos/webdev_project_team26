@@ -173,7 +173,7 @@ async function checkLogin(req,res){
     }
 }
 
-function registerUser(req,res){
+async function registerUser(req,res){
     let username = req.body.username;
     let password = req.body.password;
     let firstname = req.body.firstname;
@@ -181,15 +181,49 @@ function registerUser(req,res){
     let email = req.body.email;
     let phone = req.body.phone;
     let confpass= req.body.confpass;
-
-    if(password!=confpass){
-        console.log('Passwords do not match');
-        res.redirect('/register');
+    let errormsg;
+    if(username=='' || password=='' || firstname=='' || lastname=='' || email=='' || phone=='' || confpass==''){
+        console.log('Please fill in all the fields');
+        errormsg='Please fill in all the fields';
+        res.redirect('/register?error='+errormsg);
+        return 0;
     }
     else{
-        model.adduser(username, password, firstname, lastname, email, phone);
-        res.redirect('/login');
+        let usertaken= await model.checkUsername(username);
+        let mailtaken= await model.checkMail(email);
+        if(usertaken===1){
+            console.log('Username already exists');
+            errormsg='There is already a user with this username';
+            res.redirect('/register?error='+errormsg);
+            return 0;
+        }
+        else if(mailtaken===1){
+            console.log('Email already exists');
+            errormsg='There is already a user with this email';
+            res.redirect('/register?error='+errormsg);
+            return 0;
+        }
+        else if(password!=confpass){
+            console.log('Passwords do not match');
+            errormsg='Passwords do not match';
+            res.redirect('/register?error='+errormsg);
+            return 0;
+        }
+        else if(phone.length!=10){
+            console.log('Invalid phone number');
+            errormsg='Invalid phone number';
+            res.redirect('/register?error='+errormsg);
+            return 0;
+        }
+        else if(email.indexOf('@')==-1){
+            console.log('Invalid email');
+            errormsg='Invalid email';
+            res.redirect('/register?error='+errormsg);
+            return 0;
+        }
     }
+    model.adduser(username, password, firstname, lastname, email, phone);
+    res.redirect('/login');
 }
 
 async function makeResv(req,res){
@@ -365,7 +399,7 @@ function goHome(req,res){
 // }
 
 function goRegister(req,res){
-    res.render('register');
+    res.render('register',{layout: 'main', errormsg: req.query.error});
 
 }
 
