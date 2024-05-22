@@ -1,0 +1,17 @@
+<p style="color:aliceblue">You have collected</p> 
+<p style="font-size:175%" id="counter">
+</p>
+<p style="color:aliceblue">Earn 5000 and we will offer you for free, 2 bottles of your selection, from our great Wine Collection</p>
+<img src="/media/FAGADIKOLOGO.png">
+
+<script>
+    let counts = setInterval(updated);
+    let upto = 0;
+    function updated() {
+        let count = document.getElementById("counter");
+        count.innerHTML = ++upto;
+        if (upto === {{info}}) {
+            clearInterval(counts);
+        }
+    }
+</script>

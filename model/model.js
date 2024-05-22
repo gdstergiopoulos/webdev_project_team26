@@ -599,35 +599,20 @@ async function getTablesUsed(reservID){
 
 }
 
-// async function getTablesInReserv(reservID){
-//     const sql = `SELECT "tableID" FROM "HASTABLES" WHERE "reservID" = '${reservID}';`;
-//     try {
-//         console.log("in tables in reeserv here");
-//         const client = await connect();
-//         const res = await client.query(sql)
-//         await client.release()
-//         const tablesInReserv = Array(60).fill(0); // Initialize the array with 0s
+async function calcRoyaltyPoints(username){
+    const sql = `SELECT SUM("numofpeople") * 10 AS points
+                 FROM "RESERVATION"
+                 WHERE "username" = '${username}'
+                 AND "status" = 'old';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        return res.rows[0].points;
+    } catch (err) {
+        console.error("Error calculating royalty points:", err);
+        throw err;
+    }
+}
 
-//         // Initialize the array with 0s
-//         for (let i = 0; i < 60; i++) {
-//             tablesInReserv.push(0);
-//         }
-
-//         // Set the indexes corresponding to the used tables to 1
-//         res.rows.forEach(row => {
-//             const tableID = parseInt(row.tableID.replace('table', '')); // Extract numeric part
-//             tablesInReserv[tableID] = 1; // Subtract 1 because arrays are 0-indexed
-//         });
-//         console.log("Tables in resv: ", tablesInReserv);
-//         return tablesInReserv;
-//         // console.log(res.rows)
-//         // callback(null, res.rows) // επιστρέφει array
-//     }
-//     catch (err) {
-//         // callback(err, null);
-//         console.log(err)
-//     }
-// }
-
-
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation}
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation,calcRoyaltyPoints}
