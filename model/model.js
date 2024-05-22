@@ -27,6 +27,7 @@ async function connect() {
     }
     catch (e) {
         console.error(`Failed to connect ${e}`)
+        throw e;
     }
 }
 
@@ -42,7 +43,8 @@ async function getuser(userID) {
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -57,7 +59,8 @@ async function adduser(username,password,Fname,Lname,email,phone){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 
 }
@@ -74,7 +77,8 @@ async function getMenuActive(){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -90,7 +94,8 @@ async function getMenuInactive(){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -106,7 +111,8 @@ async function getProfileInfo(username){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 
 }
@@ -123,7 +129,9 @@ async function getFoodItemInfo(id){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
+
     }
 }
 
@@ -139,7 +147,8 @@ async function updateFoodItem(itemID,name,price,description,img){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -154,7 +163,8 @@ async function addFoodItem(name,price,description,img){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -170,7 +180,8 @@ async function addReservation(date,time,people,comments,username,area_id){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -186,6 +197,7 @@ async function editReservation(reservID,date,time,numofpeople,comments,username,
     } catch (err) {
         // callback(err, null);
         console.log(err);
+        throw err;
 
 }}
 
@@ -208,10 +220,12 @@ async function rejectReserv(reservID){
         }catch (err) {
             // callback(err, null);
             console.log(err);
+            throw err;
     }}
      catch (err) {
         // callback(err, null);
         console.log(err);
+        throw err;
 
 }}
 
@@ -234,7 +248,8 @@ async function toggleTable(reservID,tableID){
             }
             catch (err) {
                 // callback(err, null);
-                console.log(err)
+                console.log(err);
+                throw err;
             }
         } else {
 
@@ -248,12 +263,14 @@ async function toggleTable(reservID,tableID){
         }
         catch (err) {
             // callback(err, null);
-            console.log(err)
+            console.log(err);
+            throw err;
         }
     }}
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -269,7 +286,8 @@ async function deleteFoodItem(itemID){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -285,7 +303,8 @@ async function removeFoodItem(itemID){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -301,7 +320,8 @@ async function addOnMenu(itemID){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -326,10 +346,12 @@ async function changeReservStatus(reservID,status){
             } catch (err) {
                 // callback(err, null);
                 console.log(err);
+                throw err;
             }
         } catch (err) {
             // callback(err, null);
             console.log(err);
+            throw err;
         }
     }
     try {
@@ -341,6 +363,7 @@ async function changeReservStatus(reservID,status){
     } catch (err) {
         // callback(err, null);
         console.log(err);
+        throw err;
     }
 }
 
@@ -381,7 +404,8 @@ async function getReservHistory(username){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -398,7 +422,8 @@ async function getAllReserv(status){
         }
         catch (err) {
             // callback(err, null);
-            console.log(err)
+            console.log(err);
+            throw err;
         }
     }
 }
@@ -416,7 +441,8 @@ async function getAllReservUser(username,status){
         }
         catch (err) {
             // callback(err, null);
-            console.log(err)
+            console.log(err);
+            throw err;
         }
     }
 }
@@ -433,7 +459,8 @@ async function getAllActiveReserv(username){
         }
         catch (err) {
             // callback(err, null);
-            console.log(err)
+            console.log(err);
+            throw err;
         }
     }
 }
@@ -450,7 +477,8 @@ async function getReservInfo(reservID){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 }
 
@@ -543,7 +571,9 @@ async function getTablesUsed(reservID){
     catch (err) {
         // callback(err, null);
         console.log(err)
+        throw err;
         return tablesUsed;
+
     }
     const sql2 = `SELECT "H"."tableID"
     FROM "HASTABLES" "H"
@@ -570,7 +600,9 @@ async function getTablesUsed(reservID){
 
     } catch (err) {
         console.error("Error fetching tables used:", err);
+        throw err; 
         return []; // Return an empty array in case of error
+
     }
 
 
@@ -594,7 +626,8 @@ async function getTablesUsed(reservID){
     }
     catch (err) {
         // callback(err, null);
-        console.log(err)
+        console.log(err);
+        throw err;
     }
 
 }

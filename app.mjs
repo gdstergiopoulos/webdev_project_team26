@@ -51,62 +51,6 @@ router.use(session({
     }
   }));
 
-
-// app.get('/assign_table', (req, res) => {
-//     let area_id = req.query['area_id'];
-//     console.log('area_id:', area_id); // This will log the area_id to the console
-//     res.render('assign_table', { area_id: area_id });
-// });
-
-
-
-// let foods = [
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-//     { name: 'Pizza Margherita Fresca', price: '$10', img: "/media/menu/pizza.png", description:"Experience the true essence of Italian cuisine with our Pizza Margherita Fresca. A thin, crispy crust topped with tangy tomato sauce, creamy mozzarella cheese, and fragrant basil leaves, drizzled with extra virgin olive oil. Simple yet sublime, this classic pizza celebrates the purity of its ingredients, delivering a taste of Italy with every slice."},
-//     { name: 'Burger Supreme', price: '$8', img: "/media/menu/burger.png" , description: "Indulge in our Burger Supreme, a culinary masterpiece that elevates the classic burger to new heights. Juicy Angus beef patty, perfectly grilled and topped with melted cheese, crispy bacon, fresh lettuce, ripe tomatoes, and our signature secret sauce, all sandwiched between a toasted brioche bun. Every bite is a symphony of flavors that will leave you craving more."},
-//     { name: 'Pita Gyros', price: '$12', img: "/media/menu/gyros.png" , description:"Treat your taste buds to our Pita Gyros Deluxe, a Greek classic reimagined for the modern palate. Tender slices of seasoned rotisserie meat, freshly grilled and nestled in a warm, fluffy pita bread, then generously topped with crisp lettuce, juicy tomatoes, onions, and creamy tzatziki sauce. Bursting with Mediterranean flavors, this dish is a true delight for the senses."},
-    
-//     // Add more items as needed
-//   ];
-
-// let getAllFoods = function (callback) {
-//     callback(null, foods);
-// };
-
-//   let listMenu = function (req, res) {
-//     getAllFoods(function (err, foods) {
-//         if (err) {
-//             res.send(err);
-//         }
-//         // console.log('res', tasks);
-//         res.send(foods); // sends the object to the client
-//     });
-// };
-
-
 let checkAuthenticated = function (req, res, next) {
     //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
     if (req.session.loggedin === true) {
@@ -114,17 +58,9 @@ let checkAuthenticated = function (req, res, next) {
         //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
         next();
     }
-
     else {
-        //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
-        //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
-        // if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
-        //     next()
-        // }
-        // else {
-            //Στείλε το χρήστη στη "/login" 
-            console.log("not authenticated, redirecting to /login")
-            res.render('login',{src: req.params.page,layout: 'main',loginmsg: req.query.error});
+        console.log("not authenticated, redirecting to /login")
+        res.render('login',{src: req.params.page,layout: 'main',loginmsg: req.query.error});
     }
 }
 
@@ -156,9 +92,18 @@ let listAllFoodsRender = async function (req, res) {
         // console.log('foods', foods);
         // στέλνει το object "tasks" στο template "tasks"
         // sends the "tasks" object to the "tasks" template
-        let foodsq= await model.getMenuActive()
-        // console.log(foodsq);
-        res.render('menu', { loggname: req.session.username ,foods: foodsq }); 
+        try{
+            let foodsq= await model.getMenuActive()
+            // console.log(foodsq);
+            res.render('menu', { loggname: req.session.username ,foods: foodsq }); 
+        }
+        catch(err){
+            console.log(err);
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        }
+        // let foodsq= await model.getMenuActive()
+        // // console.log(foodsq);
+        // res.render('menu', { loggname: req.session.username ,foods: foodsq }); 
 }
 
 // let loadPage = function(req,res){
@@ -180,7 +125,14 @@ async function checkLogin(req,res){
     console.log(username, password);
     //elegxos edw login klp
     // console.log(model.getuser(username));
-    let user = await model.getuser(username);
+    let user;
+    try{
+        user = await model.getuser(username);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    
     if(user.length==0){
         console.log('Create an account first');  
         res.redirect('/login?error=noaccfound');
@@ -224,8 +176,15 @@ async function registerUser(req,res){
         return 0;
     }
     else{
-        let usertaken= await model.checkUsername(username);
-        let mailtaken= await model.checkMail(email);
+        let usertaken;
+        let mailtaken;
+        try{
+            usertaken= await model.checkUsername(username);
+            mailtaken= await model.checkMail(email);
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        }
         if(usertaken===1){
             console.log('Username already exists');
             errormsg='There is already a user with this username';
@@ -271,68 +230,86 @@ async function makeResv(req,res){
     let reservID = req.body.reservID;
     let errormsg= '';
 
-
-
-            if(area_id!='' && time!=undefined && date!=undefined && people!=''){
-                if(checkDateTime(date,time)===1){
-                    console.log('Invalid date');
-                    errormsg='Invalid date';
-                    res.redirect('/reservation?error='+errormsg);
-                }
-                else if(checkDateTime(date,time)===2){
-                    console.log('Invalid time');
-                    errormsg='Invalid time';
-                    res.redirect('/reservation?error='+errormsg);
-                }
-                else{
-                    let availability = await model.checkAvailability(date,time,people,area_id);
-                    console.log(availability);
-                    if(availability==0){
-                        console.log('No tables available in the entrire restaurant at this time for the requested no. of people');
-                        errormsg='No tables available in the entrire restaurant at this time';
-                        res.redirect('/reservation?error='+errormsg);
-                        // var showAlert = true;
-                        // var alertMessage = "No tables available";
-                        // res.json({ showAlert: showAlert, message: alertMessage });
-                    }
-                    else if (availability===1){ 
-                        await model.addReservation(date,time,people,comments,username,area_id);
-                        console.log('All set, your reservation went through!');
-                        errormsg='All set, your reservation went through!';  
-                        res.redirect('/reservation?error='+errormsg);
-                    // var showAlert = false;  
-                    }
-                    else{
-                        console.log('No tables available in the desired area at this time, check other areas',area_id);
-                        errormsg='No tables available in the desired area at this time, check other areas';
-                        res.redirect('/reservation?error='+errormsg);
-                    // var showAlert = true;
-                    // var alertMessage = "There are tables available in the restaurant";
-                    // res.json({ showAlert: showAlert, message: alertMessage });
-                    }
-                }
+    if(area_id!='' && time!=undefined && date!=undefined && people!=''){
+        if(checkDateTime(date,time)===1){
+            console.log('Invalid date');
+            errormsg='Invalid date';
+            res.redirect('/reservation?error='+errormsg);
+        }
+        else if(checkDateTime(date,time)===2){
+            console.log('Invalid time');
+            errormsg='Invalid time';
+            res.redirect('/reservation?error='+errormsg);
+        }
+        else{
+            let availability;
+            try{
+                availability= await model.checkAvailability(date,time,people,area_id);
             }
-            else{
-                console.log('Please fill in all the fields');
-                errormsg='Please fill in all the fields';
+            catch(err){
+                res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+            }
+            console.log(availability);
+            if(availability==0){
+                console.log('No tables available in the entrire restaurant at this time for the requested no. of people');
+                errormsg='No tables available in the entrire restaurant at this time';
                 res.redirect('/reservation?error='+errormsg);
                 // var showAlert = true;
-                // var alertMessage = "Please fill in all the fields";
+                // var alertMessage = "No tables available";
                 // res.json({ showAlert: showAlert, message: alertMessage });
             }
+            else if (availability===1){
+                try{
+                    await model.addReservation(date,time,people,comments,username,area_id);
+                } 
+                catch(err){
+                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+                }
+                console.log('All set, your reservation went through!');
+                errormsg='All set, your reservation went through!';  
+                res.redirect('/reservation?error='+errormsg);
+            // var showAlert = false;  
+            }
+            else{
+                console.log('No tables available in the desired area at this time, check other areas',area_id);
+                errormsg='No tables available in the desired area at this time, check other areas';
+                res.redirect('/reservation?error='+errormsg);
+            // var showAlert = true;
+            // var alertMessage = "There are tables available in the restaurant";
+            // res.json({ showAlert: showAlert, message: alertMessage });
+            }
+        }
+    }
+    else{
+        console.log('Please fill in all the fields');
+        errormsg='Please fill in all the fields';
+        res.redirect('/reservation?error='+errormsg);
+        // var showAlert = true;
+        // var alertMessage = "Please fill in all the fields";
+        // res.json({ showAlert: showAlert, message: alertMessage });
+    }
     }
     
 async function goChangeStatus(req,res){
     let reservID = req.params.reservID;
     let status = req.params.status;
-    await model.changeReservStatus(reservID,status);
-    res.redirect('/adminreserv');
-    
+    try{
+        await model.changeReservStatus(reservID,status);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    res.redirect('/adminreserv');   
 }
 
 async function goDeleteResv(req,res){
     let reservID = req.params.reservID;
-    await model.rejectReserv(reservID);
+    try{
+        await model.deleteReserv(reservID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     res.redirect('/adminreserv');
 }
 
@@ -369,7 +346,14 @@ async function checkLoginRedirect(req,res){
     console.log(username, password);
     //elegxos edw login klp
     // console.log(model.getuser(username));
-    let user = await model.getuser(username);
+    let user;
+    try{
+        user = await model.getuser(username);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+
     if(user.length==0){
         console.log('Create an account first');    
         res.redirect('/login?error=noaccfound');
@@ -416,10 +400,6 @@ function goHome(req,res){
 
 }
 
-// function goMenu(req,res){
-//     res.render('menu');
-
-// }
 
 function goRegister(req,res){
     res.render('register',{layout: 'main', errormsg: req.query.error});
@@ -432,9 +412,16 @@ async function goReservation(req,res){
     }
     else{
         let errormsg= req.query.error;
-        console.log(req.session.loggedin)
-        let active_resv = await model.getAllReservUser(req.session.username, "active");
-        let changed_resv = await model.getAllReservUser(req.session.username, "changed");
+        console.log(req.session.loggedin);
+        let active_resv;
+        let changed_resv;
+        try{
+            active_resv = await model.getAllReservUser(req.session.username, "active");
+            changed_resv = await model.getAllReservUser(req.session.username, "changed");
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        }
         if(active_resv.length>0 || changed_resv.length>0){
             var has_active_reserv = true;
         }
@@ -459,33 +446,70 @@ function goAdminHome(req,res){
 async function goEditResv(req,res){
     let errormsg= req.query.error;
     let reservID = req.params.reservID;
-    let reservInfo= await model.getReservInfo(reservID);
+    let reservInfo;
+    try{
+        reservInfo= await model.getReservInfo(reservID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     res.render('reservation', { reservInfo: reservInfo,errormsg: errormsg,loggname: req.session.username,layout: 'admin_layout' });
 }
 
 async function goAdminMenu(req,res){
-        let foodsactive= await model.getMenuActive();
-        let foodsinactive= await model.getMenuInactive();
-        res.render('admin_menu', { layout: 'admin_layout',loggname: req.session.username,foodsactive: foodsactive, foodsinactive: foodsinactive});
+    let foodsactive;
+    let foodsinactive;
+    try{
+        foodsactive= await model.getMenuActive();
+        foodsinactive= await model.getMenuInactive();
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    res.render('admin_menu', { layout: 'admin_layout',loggname: req.session.username,foodsactive: foodsactive, foodsinactive: foodsinactive});
 }
 
 async function goAdminReserv(req,res){
-        let active_reservations= await model.getAllReserv("active");
-        let confirmed_reservations= await model.getAllReserv("confirmed");
-        let cancelled_reservations= await model.getAllReserv("cancelled");
-        let rejected_reservations= await model.getAllReserv("rejected");
-        let changed_reservations= await model.getAllReserv("changed");
-        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,rejected_reservations:rejected_reservations, cancelled_reservations:cancelled_reservations, changed_reservations:changed_reservations,layout: 'admin_layout' });
+    let active_reservations;
+    let confirmed_reservations;
+    let cancelled_reservations;
+    let rejected_reservations;
+    let changed_reservations;
+    try{
+        active_reservations= await model.getAllReserv("active");
+        confirmed_reservations= await model.getAllReserv("confirmed");
+        cancelled_reservations= await model.getAllReserv("cancelled");
+        rejected_reservations= await model.getAllReserv("rejected");
+        changed_reservations= await model.getAllReserv("changed");
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+        
+    res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,rejected_reservations:rejected_reservations, cancelled_reservations:cancelled_reservations, changed_reservations:changed_reservations,layout: 'admin_layout' });
 }
 
 async function goAssignTable(req,res){
     let area_id;
     let reservID = req.params.reservID;
     console.log("this is the reserv id"+reservID);
-    let reservInfo= await model.getReservInfo(reservID);
+    let reservInfo;
+    try{
+        reservInfo= await model.getReservInfo(reservID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    
     console.log("this is the reserv info"+reservInfo);
     area_id=reservInfo[0].desired_area;
-    let tablesUsed= await model.getTablesUsed(reservID);
+    let tablesUsed;
+    try{
+        tablesUsed= await model.getTablesUsed(reservID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     //let tablesInReserv = await model.getTablesInReserv(reservID);
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
 }
@@ -493,9 +517,22 @@ async function goAssignTable(req,res){
 async function goPickArea(req,res){
     let area_id;
     let reservID = req.params.reservID;
-    let reservInfo= await model.getReservInfo(reservID);
+    let reservInfo;
+    let tablesUsed;
+    try{
+        reservInfo= await model.getReservInfo(reservID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+
     area_id=req.params.area;
-    let tablesUsed= await model.getTablesUsed(reservID);
+    try{    
+        tablesUsed= await model.getTablesUsed(reservID);
+    }
+    catch{
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     //let tablesInReserv = await model.getTablesInReserv(reservID);
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo, tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
 }
@@ -506,9 +543,29 @@ async function goToggleTable(req,res){
     let tableID = req.params.tableID;
     area_id=req.params.area;
     console.log("here!!");
-    let reservInfo= await model.getReservInfo(reservID);
-    await model.toggleTable(reservID,tableID);
-    let tablesUsed= await model.getTablesUsed(reservID);
+    let reservInfo;
+    let tablesUsed;
+    try{
+        reservInfo= await model.getReservInfo(reservID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+
+    try{
+        await model.toggleTable(reservID,tableID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    
+    
+    try{
+        tablesUsed= await model.getTablesUsed(reservID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     //let tablesInReserv = await model.getTablesInReserv(reservID);
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo, tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
 }
@@ -525,7 +582,13 @@ function goAddFoodItem(req,res){
 }
 
 async function goEditFoodItem(req,res){
-    let fooditeminfo= await model.getFoodItemInfo(req.params.id);
+    let fooditeminfo;
+    try{
+        fooditeminfo= await model.getFoodItemInfo(req.params.id);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     console.log(fooditeminfo);
     res.render('addFoodItem', { method: 'edit' ,fooditeminfo: fooditeminfo,loggname: req.session.username,layout: 'admin_layout' });
 }
@@ -535,30 +598,58 @@ async function goMyProfile(req,res){
     let role = req.session.role;
     let profilepage;
     //take username from session
-    let info= await model.getProfileInfo(req.session.username);
-    
-    let allReserv
+    let info;
+    try{
+        info= await model.getProfileInfo(req.session.username);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    let allReserv;
     //update reserv statys
-    await model.checkReservStatus();
+    try{
+        await model.checkReservStatus();
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     // console.log(info);
     if(req.params.page=='info'){
         profilepage='userprofile';
     }
     else if(req.params.page=='reservations'){
         profilepage='userreserv';
-        let userinfo= await model.getAllReservUser(req.session.username, "active");
-        let userinfo2 = await model.getAllReservUser(req.session.username, "changed");
-        let userinfo3 = await model.getAllReservUser(req.session.username, "confirmed");
+        let userinfo;
+        let userinfo2;
+        let userinfo3;
+        try{
+            userinfo= await model.getAllReservUser(req.session.username, "active");
+            userinfo2 = await model.getAllReservUser(req.session.username, "changed");
+            userinfo3 = await model.getAllReservUser(req.session.username, "confirmed");
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        }
         allReserv = userinfo.concat(userinfo2);
         info = allReserv.concat(userinfo3);
     }
     else if(req.params.page=='history'){
         profilepage='reservhistory';
-        info = await model.getReservHistory(req.session.username);
+        try{
+            info = await model.getReservHistory(req.session.username);
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        }
     }
     else if(req.params.page=='royalty'){
         profilepage='royalty';
-        info = await model.calcRoyaltyPoints(req.session.username);
+        try{
+            info = await model.calcRoyaltyPoints(req.session.username);
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        }
     }
     res.render('userprofile', {profilepage: profilepage,info:info, loggname: req.session.username,role : role, layout: 'profile_layout'});
 }
@@ -569,10 +660,16 @@ async function EditFoodItem(req,res){
     let price = req.body.price;
     let description = req.body.description;
     let img=null;
+    let newitem;
     // let onmenu = req.body.onmenu;
     // let img = req.body.img;
     // let category = req.body.category;
-    let newitem = await model.updateFoodItem(itemID, name, price, description,img);
+    try{
+        newitem = await model.updateFoodItem(itemID, name, price, description,img);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     res.redirect('/adminmenu');
 }
 
@@ -582,31 +679,54 @@ async function AddFoodItem(req,res){
     let description = req.body.description;
     let img='default.png';
     console.log(img);
+    let newitem;
     // let onmenu = req.body.onmenu;
     // let img = req.body.img;
     // let category = req.body.category;
-    let newitem = await model.addFoodItem(name, price, description,img);
+    
+    try{
+        newitem = await model.addFoodItem(name, price, description,img);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     res.redirect('/adminmenu');
 }
 
 async function deleteItem(req,res){
     let itemID = req.params.id;
     console.log(itemID);
-    let deleteditem = await model.deleteFoodItem(itemID);
+    let deleteditem;
+    try{
+        deleteditem = await model.deleteFoodItem(itemID);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     res.redirect('/adminmenu');
 }
 
 async function removeItem(req,res){
     let itemId=req.params.id;
     // we will toggle status from true to false (onmenu)
-    let removeditem = await model.removeFoodItem(itemId);
+    try{
+        await model.removeFoodItem(itemId);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     res.redirect('/adminmenu');
 }
 
 async function moveToMenu(req,res){
     let itemId=req.params.id;
     // we will toggle status from true to false (onmenu)
-    let removeditem = await model.addOnMenu (itemId);
+    try{
+        await model.addOnMenu (itemId);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
     res.redirect('/adminmenu');
 }
 
@@ -636,7 +756,13 @@ async function editReserv(req,res){
                     res.redirect(`/reservation/edit/${reservID}?error=${encodeURIComponent(errormsg)}`);
                 }
                 else{
-                    let availability = await model.checkAvailability(date,time,people,area_id);
+                    let availability;
+                    try{
+                        availability= await model.checkAvailability(date,time,people,area_id);
+                    }
+                    catch(err){
+                        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+                    }
                     console.log(availability);
                     if(availability==0){
                         console.log('No tables available in the entrire restaurant at this time');
