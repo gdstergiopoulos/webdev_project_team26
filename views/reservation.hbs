@@ -48,9 +48,11 @@
             </fieldset>
              
             <div class="form-field">
-              <input class="btn btn-primary" id="makereservbtn" type="submit" value="Make Reservation">
+              <a class="btn btn-primary back" style="margin-top:12%; background-color:gray;" href="/myprofile/page/reservations"> Back </a>
+              <input class="btn btn-primary" id="makereservbtn" type="submit" value="Submit Changes">
           </div>
         </form>
+        
         {{else}}
           <form action = "/reservation" method = "post" id = "reservationForm">
           {{#if (neq errormsg undefined)}}<div class="alert {{#if (eq errormsg 'All set, your reservation went through!')}} alert-success {{else}}alert-danger{{/if}}">{{errormsg}}</div>{{/if}}

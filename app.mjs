@@ -206,7 +206,7 @@ async function makeResv(req,res){
     }
     else{
         if(req.session.loggedin==true){
-            if(area_id!=undefined && time!=undefined && date!=undefined && people){
+            if(area_id!='' && time!=undefined && date!=undefined && people!=''){
                 if(checkDateTime(date,time)===1){
                     console.log('Invalid date');
                     errormsg='Invalid date';

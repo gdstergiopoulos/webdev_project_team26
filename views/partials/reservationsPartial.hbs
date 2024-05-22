@@ -2,6 +2,7 @@
         <div class="tasks">
             <h1>Active Reservations</h1>
             {{!-- //TODO Create and position the title of each column --}}
+            {{#if info}}
             <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
             {{#each info}}
             <li>
@@ -15,5 +16,9 @@
               <hr>
             {{/each}}
             </ul>
+            {{else}}
+            <div style="color:gray;">No active reservations currently</div>
+            {{/if}}
+            
     </div>
 </div>

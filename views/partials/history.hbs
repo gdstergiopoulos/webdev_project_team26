@@ -1,8 +1,10 @@
 <div  id="oldResev">
       <div class="tasks">
           <h1>Old Reservations</h1>
-          <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+          
             {{!-- //TODO Create and position the title of each column --}}
+            {{#if info}}
+            <ul class="task-list" style="overflow-y: scroll; max-height: 200px;"></ul>
             {{#each info}}
             <li>
               <span>{{reservID}}</span>
@@ -14,6 +16,11 @@
               <hr>
             {{/each}}
           </ul>
+            {{else}}
+            <div style="color:gray;">No reservations to show</div>
+            {{/if}}
+            
+            
           
       </div>
     </div>
