@@ -200,6 +200,7 @@ async function makeResv(req,res){
     let username = req.session.username;
     let area_id = req.body.area;
     let reservID = req.body.reservID;
+    let errormsg= '';
     if(reservID!=undefined){
         await model.editReservation(time,date,people,comments,username,area_id,reservID);
     }
@@ -208,6 +209,7 @@ async function makeResv(req,res){
             if(area_id!=undefined && time!=undefined && date!=undefined && people){
                 if(!checkDate(date)){
                     console.log('Invalid date');
+                    errormsg='Invalid date';
                     // var showAlert = true;
                     // var alertMessage = "Invalid date";
                     // res.json({ showAlert: showAlert, message: alertMessage });
@@ -216,19 +218,22 @@ async function makeResv(req,res){
                     let availability = await model.checkAvailability(date,time,people,area_id);
                     if(availability==0){
                         console.log('No tables available in the entrire restaurant at this time');
+                        errormsg='No tables available in the entrire restaurant at this time';
                         // var showAlert = true;
                         // var alertMessage = "No tables available";
                         // res.json({ showAlert: showAlert, message: alertMessage });
                     }
 
                     else if (availability===1){
-                        console.log('All set, your reservation went through');   
+                        console.log('All set, your reservation went through');
+                        errormsg='none';   
                         await model.addReservation(date,time,people,comments,username,area_id);
                     // var showAlert = false;
                     
                 }
                 else{
                     console.log('No tables available in the desired area at this time, check other areas',area_id);
+                    errormsg='No tables available in the desired area at this time, check other areas';
                     // var showAlert = true;
                     // var alertMessage = "There are tables available in the restaurant";
                     // res.json({ showAlert: showAlert, message: alertMessage });
@@ -236,6 +241,7 @@ async function makeResv(req,res){
             }}}
             else{
                 console.log('Please fill in all the fields');
+                errormsg='Please fill in all the fields';
                 // var showAlert = true;
                 // var alertMessage = "Please fill in all the fields";
                 // res.json({ showAlert: showAlert, message: alertMessage });
@@ -246,7 +252,7 @@ async function makeResv(req,res){
             console.log('Login Required to make a reservation');
             res.redirect('/login/redirect/reservation');
         }}   
-        res.redirect('/reservation');
+        res.redirect('/reservation?error='+errormsg);
     }
     
 async function goChangeStatus(req,res){
