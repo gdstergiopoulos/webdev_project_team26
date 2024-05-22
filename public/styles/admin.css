@@ -76,6 +76,13 @@ li>span{
     margin:1%;
 }
 
+li>span:first-child{
+    width: 50%;
+}
+li>span:nth-child(2){
+    width: 25%;
+}
+
 li>a{
     margin-right:1%
 }
@@ -83,6 +90,27 @@ li>a{
 li>button{
     margin-right:1%
 }
+
+.menuheader li>span:first-child{
+    width: 46%;
+}
+
+.inactivefoods li>span:first-child{
+    width: 68%;
+}
+
+.inactivefoods .movetomenu{
+    font-size: 80%;
+    width: 11%
+}
+
+/* .menuheader>li>span:nth-child(2){
+    text-align: center;
+}
+
+.menuheader>li>span:last-child{
+    text-align: right;
+} */
 
 .remove{
     background-color: #F83544;
