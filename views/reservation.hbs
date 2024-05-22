@@ -3,7 +3,9 @@
 {{!-- //TODO fix the padding tops to look nice --}}
 <div id="reservationpg">
 <div  id="txtandform">
-  {{#unless has_active_reserv}}
+    {{#if has_active_reserv}}
+    <p class="alert alert-primary" style="margin-top:6%;">Be careful, you already have an <a style="text-decoration:none;" href="/myprofile/page/reservations">active reservation</a></p>
+    {{/if}}
       <h1>{{#if reservInfo}}Edit Reservation {{else}}Make a Reservation{{/if}}</h1>
      
       <div id="registerform">
@@ -50,6 +52,7 @@
         </form>
         {{else}}
           <form action = "/reservation" method = "post" id = "reservationForm">
+          {{#if (neq errormsg undefined)}}<div class="alert alert-danger">{{errormsg}}</div>{{/if}}
           <fieldset>
               <legend>When?</legend>
               <div class="form-field">
@@ -94,18 +97,7 @@
 </div>
   {{>floorplan page='userreserv'}}  
 </div>
-{{/unless}}
-{{#if has_active_reserv}}
-    <h1>You already have an active reservation</h1>
-    <div>You can review it here</div>
-    <div><a href = "/login">My Profile</a></div>
-{{/if}}
+
 </div>
- <script>
-    let datetoshow={{reservInfo.[0].date}}
-    console.log("datetoshow");
-    let formattedDate = new Date(datetoshow).toISOString().split('T')[0];
-    document.getElementById("date").value = formattedDate;
-</script>
 
 

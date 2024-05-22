@@ -207,52 +207,57 @@ async function makeResv(req,res){
     else{
         if(req.session.loggedin==true){
             if(area_id!=undefined && time!=undefined && date!=undefined && people){
-                if(!checkDateTime(date,time)){
+                if(checkDateTime(date,time)===1){
                     console.log('Invalid date');
                     errormsg='Invalid date';
-                    // var showAlert = true;
-                    // var alertMessage = "Invalid date";
-                    // res.json({ showAlert: showAlert, message: alertMessage });
+                    res.redirect('/reservation?error='+errormsg);
+                }
+                else if(checkDateTime(date,time)===2){
+                    console.log('Invalid time');
+                    errormsg='Invalid time';
+                    res.redirect('/reservation?error='+errormsg);
                 }
                 else{
                     let availability = await model.checkAvailability(date,time,people,area_id);
+                    console.log(availability);
                     if(availability==0){
                         console.log('No tables available in the entrire restaurant at this time');
                         errormsg='No tables available in the entrire restaurant at this time';
+                        res.redirect('/reservation?error='+errormsg);
                         // var showAlert = true;
                         // var alertMessage = "No tables available";
                         // res.json({ showAlert: showAlert, message: alertMessage });
                     }
-
-                    else if (availability===1){
-                        console.log('All set, your reservation went through');
-                        errormsg='none';   
+                    else if (availability===1){ 
                         await model.addReservation(date,time,people,comments,username,area_id);
-                    // var showAlert = false;
-                    
-                }
-                else{
-                    console.log('No tables available in the desired area at this time, check other areas',area_id);
-                    errormsg='No tables available in the desired area at this time, check other areas';
+                        console.log('All set, your reservation went through');
+                        errormsg='none';  
+                        res.redirect('/reservation?error='+errormsg);
+                    // var showAlert = false;  
+                    }
+                    else{
+                        console.log('No tables available in the desired area at this time, check other areas',area_id);
+                        errormsg='No tables available in the desired area at this time, check other areas';
+                        res.redirect('/reservation?error='+errormsg);
                     // var showAlert = true;
                     // var alertMessage = "There are tables available in the restaurant";
                     // res.json({ showAlert: showAlert, message: alertMessage });
-                
-            }}}
+                    }
+                }
+            }
             else{
                 console.log('Please fill in all the fields');
                 errormsg='Please fill in all the fields';
+                res.redirect('/reservation?error='+errormsg);
                 // var showAlert = true;
                 // var alertMessage = "Please fill in all the fields";
                 // res.json({ showAlert: showAlert, message: alertMessage });
             }}
-
-        else{
-            // var showAlert = false;
-            console.log('Login Required to make a reservation');
-            res.redirect('/login/redirect/reservation');
-        }}   
-        res.redirect('/reservation?error='+errormsg);
+            else{
+                // var showAlert = false;
+                console.log('Login Required to make a reservation');
+                res.redirect('/login/redirect/reservation');
+            }}   
     }
     
 async function goChangeStatus(req,res){
@@ -291,10 +296,14 @@ function checkDateTime(date,time){
 
     resTime.setHours(hours, minutes, seconds);
 
-    if (resdate < today || resTime < new Date("1970-01-01T09:00:00Z") || resTime > new Date("1970-01-01T22:30:00Z")) {
-        return false;
+    if (resdate < today) {
+        return 1;
     }
-    return true;
+    if (resTime < new Date("1970-01-01T09:00:00Z") || resTime > new Date("1970-01-01T22:30:00Z"))
+        {
+            return 2;
+        }
+    return 0;
 }
 
 async function checkLoginRedirect(req,res){
@@ -365,6 +374,7 @@ async function goReservation(req,res){
         res.redirect('/login/redirect/reservation');
     }
     else{
+        let errormsg= req.query.error;
         console.log(req.session.loggedin)
         let active_resv = await model.getAllReservUser(req.session.username, "active");
         let changed_resv = await model.getAllReservUser(req.session.username, "changed");
@@ -374,7 +384,7 @@ async function goReservation(req,res){
         else{
             var has_active_reserv = false;
         }
-        res.render('reservation',{layout: 'main', loggname: req.session.username, has_active_reserv: has_active_reserv});
+        res.render('reservation',{layout: 'main', loggname: req.session.username, has_active_reserv: has_active_reserv,errormsg: errormsg});
     }
 }
 
@@ -503,6 +513,10 @@ async function goMyProfile(req,res){
     else if(req.params.page=='history'){
         profilepage='reservhistory';
         info = await model.getReservHistory(req.session.username);
+    }
+    else if(req.params.page=='royalty'){
+        profilepage='royalty';
+        info = await model.calcRoyaltyPoints(req.session.username);
     }
     res.render('userprofile', {profilepage: profilepage,info:info, loggname: req.session.username,role : role, layout: 'profile_layout'});
 }
