@@ -1,6 +1,7 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
+import { stat } from 'fs';
 
 //TODO remove the comments that do not need to be there
 dotenv.config();
@@ -308,6 +309,29 @@ async function changeReservStatus(reservID,status){
     //TODO fix this function to update the status of the reservation to active or old depending on the current date and the date of the reservation
     const sql = `UPDATE "RESERVATION" SET "status" = '${status}' WHERE "reservID" = '${reservID}';`;
     
+    if(status == 'cancelled'|| status == 'rejected'){
+        const sql1 = `DELETE FROM "HASTABLES" WHERE "reservID" = '${reservID}';`;
+        try {
+            const client = await connect();
+            const res = await client.query(sql1);
+            await client.release();
+            console.log("Tables deleted successfully",res.rows);
+            // callback(null, res.rows) // επιστρέφει array
+            try {
+                const client = await connect();
+                const res = await client.query(sql);
+                await client.release();
+                console.log("Reservation status updated successfully",res.rows);
+                // callback(null, res.rows) // επιστρέφει array
+            } catch (err) {
+                // callback(err, null);
+                console.log(err);
+            }
+        } catch (err) {
+            // callback(err, null);
+            console.log(err);
+        }
+    }
     try {
         const client = await connect();
         const res = await client.query(sql);

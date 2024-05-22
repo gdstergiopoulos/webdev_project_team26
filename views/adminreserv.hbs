@@ -3,23 +3,42 @@
 <div class="container" id="pendinglist">
         <div class="tasks">
             <h1>Reservation Requests</h1>
+            
+            <div class="equal-spacing2">
+              <span>Reserv. Id</span>
+              <span>User</span>
+              <span>Date</span>
+              <span>Time</span>
+              <span>People In Resv.</span>
+              </div> 
             <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+              {{#if active_reservations}}
               {{#each active_reservations}}
                 <li>
-                  <span>{{username}}</span>
-                  <span>{{date}}</span>
-                  <span>{{time}}</span>
-                  <span>{{people}}</span>
-                  {{#if (neq tableID 'null')}}
-                    <span>{{tableID}}</span>
-                  {{else}}
-                      <span>Not Assigned</span>
-                  {{/if}}
-                  <a href="assign_table/{{reservID}}" class="btn btn-primary edit">Assign Table</a>
-                  <a class="btn btn-primary remove" href="change_status/{{reservID}}/rejected" class="btn btn-primary edit">Reject</a>
+                  <div class="equal-spacing">
+                    <span>{{reservID}}</span>
+                    <span>{{username}}</span>
+                    <span>{{formatDate date}}</span>
+                    <span>{{time}}</span>
+                    <span>{{numofpeople}}</span>
+              </div>
+                
+                  <a href="assign_table/{{reservID}}" class="btn btn-primary assign">Assign Table</a>
+                  <a class="btn btn-primary reject" href="change_status/{{reservID}}/rejected">Reject</a>
                   </li>
                   <hr>
-              {{/each}} 
+              {{/each}}
+              {{else}}
+              <li>
+                  <div class="equal-spacing2">
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+              </div>
+              </li>
+              {{/if}} 
             </ul>
             <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
             <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
@@ -28,55 +47,161 @@
     <div class="container" id="confirmedlist">
       <div class="tasks">
           <h1>Confirmed Reservations</h1>
+          <div class="equal-spacing2">
+              <span>Reserv. Id</span>
+              <span>User</span>
+              <span>Date</span>
+              <span>Time</span>
+              <span>People In Resv.</span>
+              </div>  
           <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+            {{#if confirmed_reservations}}
             {{#each confirmed_reservations}}
              <li>
-              <span>{{username}}</span>
-              <span>{{date}}</span>
-              <span>{{time}}</span>
-              <span>{{people}}</span>
+              <div class="equal-spacing">
+              <span>{{reservID}}</span>
+                    <span>{{username}}</span>
+                    <span>{{formatDate date}}</span>
+                    <span>{{time}}</span>
+                    <span>{{numofpeople}}</span>
+              </div>
               <a class="btn btn-primary edit" href = "assign_table/{{reservID}}">Edit</a>
               <a class="btn btn-primary remove" href = "change_status/{{reservID}}/rejected">Remove</a>
               </li>
               <hr>
               {{/each}} 
+              {{else}}
+              <li>
+                  <div class="equal-spacing2">
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+              </div>
+              </li>
+              {{/if}} 
           </ul>
           <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->
           <!-- <div class="statistics">Δεν έχουν ολοκληρωθεί: <span class="left-todo">0</span></div> -->
   </div>
   </div>
+
   <div class="container" id="changeslist">
     <div class="tasks">
-        <h1>Cancelled Reservations</h1>
+        <h1>Changed Reservations</h1>
+        <div class="equal-spacing2">
+              <span>Reserv. Id</span>
+              <span>User</span>
+              <span>Date</span>
+              <span>Time</span>
+              <span>People In Resv.</span>
+              </div> 
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
-            {{#each cancelled_reservations}}
+          {{#if changed_reservations}}
+            {{#each changed_reservations}}
              <li>
-              <span>{{username}}</span>
-              <span>{{date}}</span>
-              <span>{{time}}</span>
-              <span>{{people}}</span>
-              <a class="btn btn-primary remove" href = "delete_resv/{{reservID}}/">Permanently Delete</a>
+              <div class="equal-spacing">
+              <span>{{reservID}}</span>
+                    <span>{{username}}</span>
+                    <span>{{formatDate date}}</span>
+                    <span>{{time}}</span>
+                    <span>{{numofpeople}}</span>
+              </div>
+              <a class="btn btn-primary edit" href = "assign_table/{{reservID}}">Edit</a>
+              <a class="btn btn-primary remove" href = "change_status/{{reservID}}/rejected">Remove</a>
               </li>
               <hr>
               {{/each}} 
+              {{else}}
+              <li>
+                  <div class="equal-spacing2">
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+              </div>
+              </li>
+              {{/if}} 
+          </ul>
+    </div>
+  <div class="container" id="cancelledlist">
+    <div class="tasks">
+        <h1>Cancelled Reservations</h1>
+        <div class="equal-spacing2">
+              <span>Reserv. Id</span>
+              <span>User</span>
+              <span>Date</span>
+              <span>Time</span>
+              <span>People In Resv.</span>
+              </div> 
+        <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+          {{#if cancelled_reservations}}
+            {{#each cancelled_reservations}}
+             <li>
+              <div class="equal-spacing">
+              <span>{{reservID}}</span>
+                    <span>{{username}}</span>
+                    <span>{{formatDate date}}</span>
+                    <span>{{time}}</span>
+                    <span>{{numofpeople}}</span>
+              </div>
+              <a class="btn btn-primary permdel" href = "delete_resv/{{reservID}}/">Permanently Delete</a>
+              </li>
+              <hr>
+              {{/each}} 
+              {{else}}
+              <li>
+                  <div class="equal-spacing2">
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+              </div>
+              </li>
+              {{/if}} 
           </ul>
     </div>
 
     <div class="container" id="rejectedlist">
     <div class="tasks">
         <h1>Rejected Reservations</h1>
+        <div class="equal-spacing2">
+              <span>Reserv. Id</span>
+              <span>User</span>
+              <span>Date</span>
+              <span>Time</span>
+              <span>People In Resv.</span>
+              </div> 
         <ul class="task-list" style="overflow-y: scroll; max-height: 200px;">
+          {{#if rejected_reservations}}
             {{#each rejected_reservations}}
              <li>
-              <span>{{username}}</span>
-              <span>{{date}}</span>
-              <span>{{time}}</span>
-              <span>{{people}}</span>
+              <div class="equal-spacing">
+              <span>{{reservID}}</span>
+                    <span>{{username}}</span>
+                    <span>{{formatDate date}}</span>
+                    <span>{{time}}</span>
+                    <span>{{numofpeople}}</span>
+              </div>
               <a class="btn btn-primary make_active" href = "change_status/{{reservID}}/active">Reinstall Status</a>
               <a class="btn btn-primary delete" href = "delete_resv/{{reservID}}">Permanently Delete</a>
               </li>
               <hr>
               {{/each}} 
+              {{else}}
+              <li>
+                  <div class="equal-spacing2">
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+                    <span style="color:white">-</span>
+              </div>
+              </li>
+              {{/if}} 
           </ul>
     </div>
         <!-- <div class="statistics">Σύνολο: <span class="total">0</span></div> -->

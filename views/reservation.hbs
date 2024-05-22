@@ -13,7 +13,7 @@
               <legend>When?</legend>
               <div class="form-field">
                   <label for="date">Date:</label>
-                  <input type="text" class="form-control" id="date" name="date" placeholder="mm/dd/yyyy" value="{{reservInfo.[0].date}}"
+                  <input type="text" class="form-control" id="date" name="date" placeholder="mm/dd/yyyy" value="{{ formatDateMMDDYYYY reservInfo.[0].date}}"
                   onfocus="(this.type='date')"
                   onblur="if(this.value === '') { this.type='text' }">
                   {{!-- //TODO this is the reason the update doesnt work. the format to make the placeholder is wrong --}}

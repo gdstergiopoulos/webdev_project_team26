@@ -422,7 +422,8 @@ async function goAdminReserv(req,res){
         let confirmed_reservations= await model.getAllReserv("confirmed");
         let cancelled_reservations= await model.getAllReserv("cancelled");
         let rejected_reservations= await model.getAllReserv("rejected");
-        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,rejected_reservations:rejected_reservations, cancelled_reservations:cancelled_reservations,layout: 'admin_layout' });
+        let changed_reservations= await model.getAllReserv("changed");
+        res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,rejected_reservations:rejected_reservations, cancelled_reservations:cancelled_reservations, changed_reservations:changed_reservations,layout: 'admin_layout' });
     }
 }
 

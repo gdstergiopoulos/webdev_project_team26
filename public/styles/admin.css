@@ -130,7 +130,18 @@ li>button{
 .reject{
     background-color: #eb0014;
     border-color: #eb0014;
+    width:10%;
 
+}
+
+.assign{
+    width:10%;
+}
+
+.permdel{
+    background-color: #eb0014;
+    border-color: #eb0014;
+    width:21%;
 }
 
 .approve, .newitembtn{
@@ -166,6 +177,72 @@ hr{
     margin-top: 35%;
     margin-left: 1%;
 }
+
+.equal-spacing {
+    display: flex; /* This makes the child divs line up horizontally */
+    justify-content: space-between; /* This distributes the space evenly between the child divs */
+    width: 100%;
+}
+
+.equal-spacing > span:first-child {
+    width:25%; /* Reset margin to remove default spacing */
+    color: white; /* Set text color to white */
+}
+
+.equal-spacing > span:nth-child(2) {
+    width:20%; /* Reset margin to remove default spacing */
+    color: white; /* Set text color to white */
+}
+
+.equal-spacing > span:nth-child(3) {
+    width:40%; /* Reset margin to remove default spacing */
+    color: white; /* Set text color to white */
+}
+
+.equal-spacing > span:nth-child(4) {
+    width:30%; /* Reset margin to remove default spacing */
+    color: white; /* Set text color to white */
+}
+.equal-spacing > span:nth-child(5) {
+    width:20%; /* Reset margin to remove default spacing */
+    color: white; /* Set text color to white */
+}
+.equal-spacing2 {
+    display: flex; /* This makes the child divs line up horizontally */
+    justify-content: space-between; /* This distributes the space evenly between the child divs */
+}
+
+.equal-spacing2 {
+    display: flex; /* This makes the child divs line up horizontally */
+    justify-content: space-between; /* This distributes the space evenly between the child divs */
+    width: 80%;
+}
+
+.equal-spacing2 > span:first-child {
+    width:25%; /* Reset margin to remove default spacing */
+    /* color: white; Set text color to white */
+}
+
+.equal-spacing2 > span:nth-child(2) {
+    width:20%; /* Reset margin to remove default spacing */
+
+}
+
+.equal-spacing2 > span:nth-child(3) {
+    width:30%; /* Reset margin to remove default spacing */
+
+}
+
+.equal-spacing2 > span:nth-child(4) {
+    width:20%; /* Reset margin to remove default spacing */
+
+}
+.equal-spacing2 > span:nth-child(5) {
+    width:20%; /* Reset margin to remove default spacing */
+
+}
+
+
 
 .table{
     width: 9%;
