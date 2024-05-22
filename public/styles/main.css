@@ -223,6 +223,9 @@ a:hover{
     width:100%;
 }
 
+#regform{
+    padding-top: 3%;
+}
 #login_body{
     background-color: #181515;
     color: #c17379;

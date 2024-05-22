@@ -615,4 +615,36 @@ async function calcRoyaltyPoints(username){
     }
 }
 
-export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation,calcRoyaltyPoints}
+async function checkUsername(username){
+    const sql = `SELECT * FROM "USER" WHERE "username" = '${username}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        if(res.rows.length > 0){
+            return 1;
+        }
+        return 0;
+    } catch (err) {
+        console.error("Error checking username:", err);
+        throw err;
+    }
+}
+
+async function checkMail(mail){
+    const sql = `SELECT * FROM "USER" WHERE "mail" = '${mail}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        if(res.rows.length > 0)
+            return 1;
+        return 0;
+    } catch (err) {
+        console.error("Error checking mail:", err);
+        throw err;
+    }
+
+}
+
+export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation,calcRoyaltyPoints,checkUsername,checkMail}
