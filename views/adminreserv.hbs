@@ -16,7 +16,7 @@
                       <span>Not Assigned</span>
                   {{/if}}
                   <a href="assign_table/{{reservID}}" class="btn btn-primary edit">Assign Table</a>
-                  <a class="btn btn-primary remove" href="change_status/{{reservID}}/'rejected" class="btn btn-primary edit">Reject</a>
+                  <a class="btn btn-primary remove" href="change_status/{{reservID}}/rejected" class="btn btn-primary edit">Reject</a>
                   </li>
                   <hr>
               {{/each}} 
@@ -36,7 +36,7 @@
               <span>{{time}}</span>
               <span>{{people}}</span>
               <a class="btn btn-primary edit" href = "assign_table/{{reservID}}">Edit</a>
-              <a class="btn btn-primary remove" href = "change_status/{{reservID}}/'rejected'">Remove</a>
+              <a class="btn btn-primary remove" href = "change_status/{{reservID}}/rejected">Remove</a>
               </li>
               <hr>
               {{/each}} 
@@ -72,7 +72,7 @@
               <span>{{date}}</span>
               <span>{{time}}</span>
               <span>{{people}}</span>
-              <a class="btn btn-primary make_active" href = "change_status/{{reservID}}/'active'">Reinstall Status</a>
+              <a class="btn btn-primary make_active" href = "change_status/{{reservID}}/active">Reinstall Status</a>
               <a class="btn btn-primary delete" href = "delete_resv/{{reservID}}">Permanently Delete</a>
               </li>
               <hr>
