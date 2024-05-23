@@ -415,14 +415,16 @@ async function goReservation(req,res){
         console.log(req.session.loggedin);
         let active_resv;
         let changed_resv;
+        let confirmed_resv;
         try{
             active_resv = await model.getAllReservUser(req.session.username, "active");
             changed_resv = await model.getAllReservUser(req.session.username, "changed");
+            confirmed_resv= await model.getAllReservUser(req.session.username, "confirmed");
         }
         catch(err){
             res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
         }
-        if(active_resv.length>0 || changed_resv.length>0){
+        if(active_resv.length>0 || changed_resv.length>0 || confirmed_resv.length>0){
             var has_active_reserv = true;
         }
         else{
@@ -449,11 +451,12 @@ async function goEditResv(req,res){
     let reservInfo;
     try{
         reservInfo= await model.getReservInfo(reservID);
+        res.render('reservation', { reservInfo: reservInfo,errormsg: errormsg,loggname: req.session.username,layout: 'admin_layout' });
     }
     catch(err){
         res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
     }
-    res.render('reservation', { reservInfo: reservInfo,errormsg: errormsg,loggname: req.session.username,layout: 'admin_layout' });
+   
 }
 
 async function goAdminMenu(req,res){
