@@ -1,11 +1,41 @@
 #adminnavbarcont{
     width: 100%;
+    background-color: #181515;
+    color:#c17379;
     position: fixed;
     z-index: 1000;
     top: 0;
     left: 0;
 }
+/* #assign_back_btn, #assign_approve_btn{
+    display: inline;
+} */
 
+@media screen and (max-width: 1300px){
+    .assign_table_container{
+        flex-direction: column;
+    }
+
+    #floorplan_assign{
+       order:1;
+       margin-left: 3%;
+    }
+
+    #inside_assign{
+        margin-top: 5%;
+        margin-left: 0%;
+        order:2;
+    }
+
+    #assign_back_btn{
+        order:3;
+    }
+
+    #assign_approve_btn{
+        order:3;
+    }
+    
+}
 /* .navbar{
     display: flex;
 }
@@ -160,9 +190,8 @@ hr{
 }
 
 #floorplan_assign{
+    flex-grow: 1;
     margin-left: 5rem;
-    margin-top:10rem;
-
 }
 
 .assign_table_container{
@@ -170,12 +199,10 @@ hr{
 }
 
 #assign_back_btn{
-    margin-top: 35%;
-    margin-left: 5%;
+    margin-left: 70%;
 }
 #assign_approve_btn{
-    margin-top: 35%;
-    margin-left: 1%;
+    margin-left: 70%;
 }
 
 .equal-spacing {
@@ -652,9 +679,16 @@ hr{
 
 #inside_assign{
     margin-left: 10rem;
-    margin-top:10rem;
+    margin-right: 10%;
 }
 
+#reservinfo>p{
+    color:#E0E0E0;
+    padding-left: 4.5%;
+}
+#reservinfo>p>span{
+    color: #c17379;
+}
 
 #addEditFoodItem>form{
     width: 50%;
@@ -662,3 +696,9 @@ hr{
     margin-top: 5%;
 }
 
+@media screen and (max-width: 1635px){
+    #inside_assign{
+        margin-right:2%
+    }
+    
+}

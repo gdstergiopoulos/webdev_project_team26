@@ -1,12 +1,14 @@
 {{>adminnav loggname=loggname}}
 <div id="pagebody">
     {{#each reservInfo}}
-        <div style="display:flex;">
-            <p style="margin-right:auto">{{username}}</p>
-            <p style="margin-right:auto">{{date}}</p>
-            <p style="margin-right:auto">{{time}}</p>
-            <p style="margin-right:auto">{{numofpeople}}</p>
-            <p style="margin-right:auto">{{desired_area}}</p>
+        <div id="reservinfo">
+            <h1>Assign table to Reservation #{{reservID}}</h1>
+            <p><span>Username: </span>{{username}}</p>
+            <p><span>Date for the reservation: </span>{{date}}</p>
+            <p><span>Time for the reservation: </span>{{time}}</p>
+            <p><span>Number of people: </span>{{numofpeople}}</p>
+            <p><span>Desired Sitting area: </span>{{desired_area}}</p>
+            <p><span>Reservation Made (date and time):</span>{{datetimemade}}</p>
         </div>
     {{/each}}
     <div class="assign_table_container">
@@ -46,8 +48,9 @@
         {{>bythesea}}
         </div>
         {{/if}}
-        <div id = "assign_back_btn"><a class = "btn btn-primary" href="/adminreserv">Back</a></div>
-        <div id = "assign_approve_btn" ><a class = "btn btn-primary" href="/change_status/{{reservInfo.[0].reservID}}/confirmed" style = "background-color: green;" >Approve</a></div>
     </div>
-    
+    <div id="assignbtns">
+            <a id = "assign_back_btn" class = "btn btn-primary" href="/adminreserv">Back</a>
+            <a id = "assign_approve_btn" class = "btn btn-primary" href="/change_status/{{reservInfo.[0].reservID}}/confirmed" style = "background-color: green;" >Approve</a>
+    </div>
 </div>
