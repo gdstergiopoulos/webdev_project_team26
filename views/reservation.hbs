@@ -1,4 +1,4 @@
-{{>navbar loggname=loggname}}
+{{#if (eq role 'admin')}}{{>adminnav loggname=loggname}}{{else}}{{>navbar loggname=loggname}}{{/if}} 
 <div id="pagebody">
 {{!-- //TODO fix the padding tops to look nice --}}
 <div id="reservationpg">
@@ -54,7 +54,7 @@
         </form>
         
         {{else}}
-          <form action = "/reservation" method = "post" id = "reservationForm">
+          <form {{#if (eq role 'admin')}}action = "/adminreservation"{{else}}action = "/reservation"{{/if}}  method = "post" id = "reservationForm">
           {{#if (neq errormsg undefined)}}<div class="alert {{#if (eq errormsg 'All set, your reservation went through!')}} alert-success {{else}}alert-danger{{/if}}">{{errormsg}}</div>{{/if}}
           <fieldset>
               <legend>When?</legend>

@@ -290,6 +290,76 @@ async function makeResv(req,res){
     }
     }
     
+async function makeadminResv(req,res){
+    let time=req.body.time;
+    let date = req.body.date;
+    let people = req.body.people;
+    let comments = req.body.comments;
+    let username = req.session.username;
+    let area_id = req.body.area;
+    let reservID = req.body.reservID;
+    let errormsg= '';
+
+    if(area_id!='' && time!='' && date!='' && people!=''){
+        if(checkDateTime(date,time)===1){
+            console.log('Invalid date');
+            errormsg='Invalid date';
+            res.redirect('/adminreservation?error='+errormsg);
+        }
+        else if(checkDateTime(date,time)===2){
+            console.log('Invalid time');
+            errormsg='Invalid time';
+            res.redirect('/adminreservation?error='+errormsg);
+        }
+        else{
+            let availability;
+            try{
+                availability= await model.checkAvailability(date,time,people,area_id);
+            }
+            catch(err){
+                res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+            }
+            console.log(availability);
+            if(availability==0){
+                console.log('No tables available in the entrire restaurant at this time for the requested no. of people');
+                errormsg='No tables available in the entrire restaurant at this time';
+                res.redirect('/reservation?error='+errormsg);
+                // var showAlert = true;
+                // var alertMessage = "No tables available";
+                // res.json({ showAlert: showAlert, message: alertMessage });
+            }
+            else if (availability===1){
+                try{
+                    await model.addReservation(date,time,people,comments,username,area_id);
+                } 
+                catch(err){
+                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+                }
+                console.log('All set, your reservation went through!');
+                errormsg='All set, your reservation went through!';  
+                res.redirect('/adminreservation?error='+errormsg);
+            // var showAlert = false;  
+            }
+            else{
+                console.log('No tables available in the desired area at this time, check other areas',area_id);
+                errormsg='No tables available in the desired area at this time, check other areas';
+                res.redirect('/adminreservation?error='+errormsg);
+            // var showAlert = true;
+            // var alertMessage = "There are tables available in the restaurant";
+            // res.json({ showAlert: showAlert, message: alertMessage });
+            }
+        }
+    }
+    else{
+        console.log('Please fill in all the fields');
+        errormsg='Please fill in all the fields';
+        res.redirect('/adminreservation?error='+errormsg);
+        // var showAlert = true;
+        // var alertMessage = "Please fill in all the fields";
+        // res.json({ showAlert: showAlert, message: alertMessage });
+    }
+    }
+
 async function goChangeStatus(req,res){
     let reservID = req.params.reservID;
     let status = req.params.status;
@@ -409,7 +479,14 @@ function goHome(req,res){
     if(req.session.loggedin==undefined){
         req.session.loggedin = false;
     }
-    res.render('home_page',{layout: 'main', loggname: req.session.username});
+
+    if(req.session.role=='admin'){
+        res.redirect('/adminhome');
+    }
+    else{
+        res.render('home_page',{layout: 'main', loggname: req.session.username});
+    }
+    
 
 }
 
@@ -443,7 +520,17 @@ async function goReservation(req,res){
         else{
             var has_active_reserv = false;
         }
-        res.render('reservation',{layout: 'main', loggname: req.session.username, has_active_reserv: has_active_reserv,errormsg: errormsg});
+        res.render('reservation',{layout: 'main', role:'user',loggname: req.session.username, has_active_reserv: has_active_reserv,errormsg: errormsg});
+    }
+}
+
+async function goadminReservation(req,res){
+    if(req.session.loggedin===false){
+        res.redirect('/login/redirect/reservation');
+    }
+    else{
+        let errormsg= req.query.error;
+        res.render('reservation',{layout: 'admin_layout', role:'admin', loggname: req.session.username,errormsg: errormsg});
     }
 }
 
@@ -916,6 +1003,8 @@ router.route('/home').get(goHome);
 router.route('/register').get(goRegister);
 router.route('/reservation').get(checkAuthenticated,goReservation);
 router.route('/reservation').post(checkAuthenticated,makeResv);
+router.route('/adminreservation').get(checkAuthenticated,goadminReservation);
+router.route('/adminreservation').post(checkAuthenticated,makeadminResv);
 router.route('/location').get(goLocation);
 router.route('/adminhome').get(checkAccessRights,goAdminHome);
 router.route('/adminreserv').get(checkAccessRights,goAdminReserv);
@@ -944,7 +1033,7 @@ router.route('/addOnMenu/:id').get(checkAccessRights,moveToMenu);
 router.route('/myprofile/page/:page').get(checkAuthenticated,goMyProfile);
 router.route('/gouserProfile/:page/:username').get(checkAccessRights,goUserProfile);
 router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
-router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.username=undefined; res.redirect('/home')});
+router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.username=undefined; req.session.role=undefined; res.redirect('/home')});
 // Επίσης έτσι: 
 // Could also be done like this:
 // app.route('/api/tasks').get(listAllTasks);

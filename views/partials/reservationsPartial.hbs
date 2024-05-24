@@ -19,7 +19,7 @@
               <span>{{time}}</span>
               <span>{{numofpeople}}</span>
               {{#if (neq status 'rejected')}}
-              <a href="/reservation/edit/{{reservID}}" class="btn btn-primary edit">Edit</a>
+              {{#if (eq role 'user')}}<a href="/reservation/edit/{{reservID}}" class="btn btn-primary edit">Edit</a>{{/if}} 
               {{/if}}
               <a href="/change_status/my/{{reservID}}/cancelled" class="btn btn-primary cancel">Cancel</a>
               </li>
