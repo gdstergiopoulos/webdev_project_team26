@@ -191,6 +191,7 @@ async function addReservation(date,time,people,comments,username,area_id){
 }
 
 async function editReservation(reservID,date,time,numofpeople,comments,username,desired_area) {
+    date = formattedDate(date);
     const sql = 'SELECT status FROM "RESERVATION" WHERE "reservID" = $1;';
     let status;
     try {
@@ -420,10 +421,8 @@ async function addReason(reservID,comments){
 
 async function checkReservStatus(reservID) {
     let current_date = new Date();
-    current_date.setHours(0, 0, 0, 0); // Set the time part to 00:00:00 to compare only the date part
-
-    // Format the date to a string in the format YYYY-MM-DD
-    const formattedDate = current_date.toISOString().split('T')[0]; 
+    current_date.setUTCHours(0, 0, 0, 0); // Set the time part to 00:00:00 UTC to compare only the date part
+    const formattedDate = current_date.toISOString().split('T')[0];
     const sql = `UPDATE "RESERVATION" SET "status" = 'old' WHERE "date" < $1`;
 
     let client;
@@ -536,6 +535,8 @@ async function getReservInfo(reservID){
 async function checkAvailability(date, time, numofpeople, desired_area) {
     const spaces = ['insidemain', 'outsidemain', 'bararea', 'opensky', 'bythesea'];
     const spaces_capacity = Array(5).fill(0);
+    date = formattedDate(date);
+    console.log("Date:", date);
     let lessTime, moreTime;
     const sql1 = `SELECT COALESCE(CAST(SUM("capacity") AS INTEGER), 0) AS total_capacity
                     FROM "TABLE"
@@ -729,6 +730,14 @@ async function checkMail(mail){
         throw err;
     }
 
+}
+
+function formattedDate(date) {
+    const dateObj = new Date(date);
+    const year = dateObj.getFullYear();
+    const month = dateObj.getMonth() + 1;
+    const day = dateObj.getDate();
+    return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
 }
 
 export{getuser,adduser,getMenuActive,getMenuInactive,getProfileInfo,getFoodItemInfo,updateFoodItem,addFoodItem,deleteFoodItem,removeFoodItem,addOnMenu,getReservHistory,getAllReserv, addReservation, changeReservStatus, getAllActiveReserv,getReservInfo, toggleTable, getTablesUsed, checkAvailability, rejectReserv, checkReservStatus,getAllReservUser,editReservation,calcRoyaltyPoints,checkUsername,checkMail,addReason}
