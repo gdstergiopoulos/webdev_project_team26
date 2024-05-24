@@ -827,14 +827,11 @@ async function editReserv(req,res){
 }
 
 router.route('/').get((req,res)=>res.redirect('/home'));
-
-// router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
 router.route('/login').get(checkAuthenticated,goLogin);
 router.route('/login/redirect/:page').get(checkAuthenticated,goLogin);
 router.route('/home').get(goHome);
-// router.route('/menu').get(goMenu);
 router.route('/register').get(goRegister);
 router.route('/reservation').get(checkAuthenticated,goReservation);
 router.route('/reservation').post(checkAuthenticated,makeResv);
@@ -846,15 +843,11 @@ router.route('/assign_table/:reservID').get(checkAccessRights,goAssignTable);
 router.route('/assign_table/:reservID/pickarea/:area').get(checkAccessRights,goPickArea);
 router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(checkAccessRights,goToggleTable);
 router.route('/change_status/:reservID/:status').get(checkAuthenticated,goChangeStatus);
-// router.route('/approve_resv/:reservID').get(goApproveResv);
 router.route('/delete_resv/:reservID').get(checkAccessRights,goDeleteResv);
 router.route('/reservation/edit/:reservID').get(checkAuthenticated,goEditResv);
 router.route('/reservation/edit/:reservID').post(checkAuthenticated,editReserv);
 router.route('/add_reason/:reservID').get(checkAccessRights,goAddReason);
 router.route('/add_reason/:reservID').post(checkAccessRights,addReason);
-
-
-// router.route('/userpickarea').get(goUserPickArea);
 router.route('/addFoodItem').get(checkAccessRights,goAddFoodItem);
 router.route('/addFoodItem').post(checkAccessRights,AddFoodItem);
 router.route('/addFoodItem/:id').get(checkAccessRights,goEditFoodItem);
@@ -865,10 +858,6 @@ router.route('/addOnMenu/:id').get(checkAccessRights,moveToMenu);
 router.route('/myprofile/page/:page').get(checkAuthenticated,goMyProfile);
 router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
 router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.username=undefined; res.redirect('/home')});
-// Επίσης έτσι: 
-// Could also be done like this:
-// app.route('/api/tasks').get(listAllTasks);
-// app.route('/').get(listAllTasksRender);
 
 router.use((req, res) => {
     res.render('catcherror');

@@ -3,25 +3,24 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { stat } from 'fs';
 
-//TODO remove the comments that do not need to be there
 dotenv.config();
-
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
   
 const pool = new pg.Pool({
-    // connectionString: process.env.DATABASE_URL,
-    // ssl: {
-    //     rejectUnauthorized: false
-    // }
-    
+   //THIS IS USED FOR LOCAL HOSTING THE APP
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+
+
+    // THIS IS USED IN THE DEPLOYED VERSION OF OUR APP
+    // user: process.env.DB_USER,
+    // host: 'fagadikodb.internal',
+    // database: 'postgres',
+    // password: 'DzXvNY9fLLEyM8o',
+    // port: 5432,
+
 }
 ); 
 
