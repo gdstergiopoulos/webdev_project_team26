@@ -302,6 +302,19 @@ async function goChangeStatus(req,res){
     res.redirect('/adminreserv');   
 }
 
+async function gomyChangeStatus(req,res){
+    let reservID = req.params.reservID;
+    let status = 'cancelled';
+    try{
+        await model.changeReservStatus(reservID,status);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    res.redirect('/myprofile/page/reservations');   
+}
+
+
 async function goDeleteResv(req,res){
     let reservID = req.params.reservID;
     try{
@@ -845,7 +858,8 @@ router.route('/adminmenu').get(checkAccessRights,goAdminMenu);
 router.route('/assign_table/:reservID').get(checkAccessRights,goAssignTable);
 router.route('/assign_table/:reservID/pickarea/:area').get(checkAccessRights,goPickArea);
 router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(checkAccessRights,goToggleTable);
-router.route('/change_status/:reservID/:status').get(checkAuthenticated,goChangeStatus);
+router.route('/change_status/:reservID/:status').get(checkAccessRights,goChangeStatus);
+router.route('/change_status/my/:reservID/cancelled').get(checkAuthenticated,gomyChangeStatus);
 // router.route('/approve_resv/:reservID').get(goApproveResv);
 router.route('/delete_resv/:reservID').get(checkAccessRights,goDeleteResv);
 router.route('/reservation/edit/:reservID').get(checkAuthenticated,goEditResv);
