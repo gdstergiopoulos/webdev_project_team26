@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS public."USER"
 )
 TABLESPACE pg_default;
 
--- Change the table owner to postgres
 ALTER TABLE IF EXISTS public."USER"
     OWNER to postgres;
+
+
+INSERT INTO public."USER" (username, password, "Fname", "Lname", mail, phone, role) VALUES ('gster', '123456', 'George', 'Stergiopoulos', 'gster@fagadiko.com', '1234567890', 'admin');

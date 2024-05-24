@@ -12,6 +12,28 @@
         <link rel="stylesheet" href="/styles/main.css">
 </head>
 
+{{#if (eq role 'admin')}} 
+<body>
+    <div class="sidenav">
+        <a href="/gouserProfile/info/{{username}}">Profile</a>
+        <a href="/gouserProfile/reservations/{{username}}">Active Reservations</a>
+        <a href="/gouserProfile/history/{{username}}">Old Reservations</a>
+        <a href="/gouserProfile/royalty/{{username}}">Royalty Points</a>
+    </div>
+
+    <script>
+        $('#example-one a').click(function(e) {
+        $('#example-one a').removeClass('current_page_item');
+        $(this).addClass('current_page_item');
+    });
+    </script>
+
+        {{{body}}}
+
+</body> 
+
+
+{{else if (eq role 'user')}}
 <body>
     <div class="sidenav">
         <a href="/myprofile/page/info">My Profile</a>
@@ -29,5 +51,8 @@
     <div id="pagebody">
         {{{body}}}
     </div>
-</body>
+</body>{{/if}} 
+
+
+
 </html>

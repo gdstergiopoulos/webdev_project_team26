@@ -71,7 +71,7 @@ INSERT INTO public."FOODITEM" (foodname, description, price, onmenu, img) VALUES
 INSERT INTO public."FOODITEM" (foodname, description, price, onmenu, img) VALUES ('Sushi Platter', 'Embark on a culinary journey with our Sushi Platter, a delightful assortment of expertly crafted sushi rolls and sashimi. From classic California rolls to innovative specialty rolls, each piece is a work of art, showcasing the finest ingredients and meticulous preparation. Whether you are a sushi aficionado or a novice, this platter promises an unforgettable dining experience.', 18, false, '/media/menu/sushi.png');
 INSERT INTO public."FOODITEM" (foodname, description, price, onmenu, img) VALUES ('Vegetable Pad Thai', 'Treat yourself to the vibrant flavors of our Vegetable Pad Thai, a Thai street food classic bursting with freshness and spice. Stir-fried rice noodles tossed with crisp vegetables, tofu, bean sprouts, and crushed peanuts, all coated in a tangy tamarind sauce. This dish is a harmonious blend of sweet, sour, and savory, guaranteed to tantalize your taste buds.', 11, false, '/media/menu/padthai.png');
 INSERT INTO public."FOODITEM" (foodname, description, price, onmenu, img) VALUES ('Grilled Salmon', 'Indulge in the succulent flavors of our Grilled Salmon, a healthy and delicious choice for seafood lovers. Fresh Atlantic salmon fillet marinated in a zesty herb marinade, then grilled to perfection, resulting in tender, flaky fish with a subtle smoky char. Served with your choice of sides, this dish is a nutritious and flavorful option for any meal.', 16, false, '/media/menu/salmon.png');
-INSERT INTO public."FOODITEM" (foodname, description, price, onmenu, img) VALUES ('Spaghetti Carbonara', 'Indulge in the creamy goodness of our Spaghetti Carbonara. Al dente pasta tossed in a rich sauce made with eggs, Parmesan cheese, crispy pancetta, and freshly ground black pepper. This classic Roman dish is comfort food at its finest, perfect for a cozy night in.', 11, false, 'null');
+INSERT INTO public."FOODITEM" (foodname, description, price, onmenu, img) VALUES ('Spaghetti Carbonara', 'Indulge in the creamy goodness of our Spaghetti Carbonara. Al dente pasta tossed in a rich sauce made with eggs, Parmesan cheese, crispy pancetta, and freshly ground black pepper. This classic Roman dish is comfort food at its finest, perfect for a cozy night in.', 11, false, '/media/menu/spaghetti.png');
 
 ALTER TABLE ONLY public."RESERVATION"
     ADD CONSTRAINT "RESERVATION_pkey" PRIMARY KEY ("reservID");
@@ -129,3 +129,79 @@ ALTER TABLE public."HASTABLES"
 
 ALTER TABLE public."HASTABLES"
     ADD CONSTRAINT "HASTABLES_tableID_fkey" FOREIGN KEY ("tableID") REFERENCES public."TABLE"("tableID") ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+-- First, let's insert the rows for 'insidemain' area with capacity 5 and tableID from 1 to 17
+INSERT INTO public."TABLE"("tableID", area, capacity)
+VALUES 
+    ('table1', 'insidemain', 4),
+    ('table2', 'insidemain', 4),
+    ('table3', 'insidemain', 4),
+    ('table4', 'insidemain', 4),
+    ('table5', 'insidemain', 4),
+    ('table6', 'insidemain', 4),
+    ('table7', 'insidemain', 4),
+    ('table8', 'insidemain', 4),
+    ('table9', 'insidemain', 4),
+    ('table10', 'insidemain', 4),
+    ('table11', 'insidemain', 4),
+    ('table12', 'insidemain', 4),
+    ('table13', 'insidemain', 4),
+    ('table14', 'insidemain', 4),
+    ('table15', 'insidemain', 4),
+    ('table16', 'insidemain', 4),
+    ('table17', 'insidemain', 4);
+
+INSERT INTO public."TABLE"("tableID", area, capacity)
+VALUES 
+    ('table18', 'bararea', 3),
+    ('table19', 'bararea', 4),
+    ('table20', 'bararea', 5),
+    ('table21', 'bararea', 3),
+    ('table22', 'bararea', 4),
+    ('table23', 'bararea', 5),
+    ('table24', 'bararea', 3),
+    ('table25', 'bararea', 4),
+    ('table26', 'bararea', 5),
+    ('table27', 'bararea', 3),
+    ('table28', 'bararea', 4),
+    ('table29', 'bararea', 5),
+    ('table30', 'bararea', 3);
+
+    INSERT INTO public."TABLE"("tableID", area, capacity)
+VALUES 
+    ('table31', 'outsidemain', 4),
+    ('table32', 'outsidemain', 5),
+    ('table33', 'outsidemain', 3),
+    ('table34', 'outsidemain', 4),
+    ('table35', 'outsidemain', 5),
+    ('table36', 'outsidemain', 3),
+    ('table37', 'outsidemain', 4),
+    ('table38', 'outsidemain', 5),
+    ('table39', 'outsidemain', 3),
+    ('table40', 'outsidemain', 4),
+    ('table41', 'outsidemain', 5),
+    ('table42', 'outsidemain', 3);
+
+    INSERT INTO public."TABLE"("tableID", area, capacity)
+VALUES 
+    ('table43', 'opensky', 4),
+    ('table44', 'opensky', 5),
+    ('table45', 'opensky', 3),
+    ('table46', 'opensky', 4),
+    ('table47', 'opensky', 5),
+    ('table48', 'opensky', 3),
+    ('table49', 'opensky', 4),
+    ('table50', 'opensky', 5),
+    ('table51', 'opensky', 3),
+    ('table52', 'opensky', 4);
+
+    INSERT INTO public."TABLE"("tableID", area, capacity)
+VALUES 
+    ('table53', 'bythesea', 5),
+    ('table54', 'bythesea', 3),
+    ('table55', 'bythesea', 4),
+    ('table56', 'bythesea', 5),
+    ('table57', 'bythesea', 3),
+    ('table58', 'bythesea', 4),
+    ('table59', 'bythesea', 5);
