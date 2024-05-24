@@ -302,6 +302,19 @@ async function goChangeStatus(req,res){
     res.redirect('/adminreserv');   
 }
 
+async function gomyChangeStatus(req,res){
+    let reservID = req.params.reservID;
+    let status = 'cancelled';
+    try{
+        await model.changeReservStatus(reservID,status);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+    }
+    res.redirect('/myprofile/page/reservations');   
+}
+
+
 async function goDeleteResv(req,res){
     let reservID = req.params.reservID;
     try{
@@ -673,6 +686,71 @@ async function goMyProfile(req,res){
     res.render('userprofile', {profilepage: profilepage,info:info, loggname: req.session.username,role : role, layout: 'profile_layout'});
 }
 
+async function goUserProfile(req,res){
+    let role = req.session.role;
+    let profilepage;
+    let username = req.params.username;
+    //take username from session
+    let info;
+    try{
+        info= await model.getProfileInfo(username);
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack, username: username});
+    }
+    let allReserv;
+    //update reserv statys
+    try{
+        await model.checkReservStatus();
+    }
+    catch(err){
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack , username: username});
+    }
+    // console.log(info);
+    if(req.params.page=='info'){
+        profilepage='userprofile';
+    }
+    else if(req.params.page=='reservations'){
+        profilepage='userreserv';
+        let userinfo;
+        let userinfo2;
+        let userinfo3;
+        let userinfo4;
+        try{
+            userinfo= await model.getAllReservUser(username, "active");
+            userinfo2 = await model.getAllReservUser(username, "changed");
+            userinfo3 = await model.getAllReservUser(username, "confirmed");
+            userinfo4 = await model.getAllReservUser(username, "rejected");
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack , username: username});
+        }
+        allReserv = userinfo.concat(userinfo2);
+        info = allReserv.concat(userinfo3);
+        info = info.concat(userinfo4);
+    }
+    else if(req.params.page=='history'){
+        profilepage='reservhistory';
+        try{
+            info = await model.getReservHistory(username);
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack , username: username});
+        }
+    }
+    else if(req.params.page=='royalty'){
+        profilepage='royalty';
+        try{
+            info = await model.calcRoyaltyPoints(username);
+        }
+        catch(err){
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack , username: username});
+        }
+    }
+    res.render('userprofile', {profilepage: profilepage,info:info, loggname: username,role : role, layout: 'profile_layout', username: username});
+}
+
+
 async function EditFoodItem(req,res){
     let itemID = req.params.id;
     let name = req.body.name;
@@ -842,7 +920,13 @@ router.route('/adminmenu').get(checkAccessRights,goAdminMenu);
 router.route('/assign_table/:reservID').get(checkAccessRights,goAssignTable);
 router.route('/assign_table/:reservID/pickarea/:area').get(checkAccessRights,goPickArea);
 router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(checkAccessRights,goToggleTable);
+<<<<<<< HEAD
 router.route('/change_status/:reservID/:status').get(checkAuthenticated,goChangeStatus);
+=======
+router.route('/change_status/:reservID/:status').get(checkAccessRights,goChangeStatus);
+router.route('/change_status/my/:reservID/cancelled').get(checkAuthenticated,gomyChangeStatus);
+// router.route('/approve_resv/:reservID').get(goApproveResv);
+>>>>>>> 132f8c360fe89dfeef43f1b57d7c48e8a370e45e
 router.route('/delete_resv/:reservID').get(checkAccessRights,goDeleteResv);
 router.route('/reservation/edit/:reservID').get(checkAuthenticated,goEditResv);
 router.route('/reservation/edit/:reservID').post(checkAuthenticated,editReserv);
@@ -856,6 +940,7 @@ router.route('/deleteItem/:id').get(checkAccessRights,deleteItem);
 router.route('/removeItem/:id').get(checkAccessRights,removeItem);
 router.route('/addOnMenu/:id').get(checkAccessRights,moveToMenu);
 router.route('/myprofile/page/:page').get(checkAuthenticated,goMyProfile);
+router.route('/gouserProfile/:page/:username').get(checkAccessRights,goUserProfile);
 router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
 router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.username=undefined; res.redirect('/home')});
 

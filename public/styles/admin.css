@@ -216,9 +216,14 @@ hr{
     color: white; /* Set text color to white */
 }
 
-.equal-spacing > span:nth-child(2) {
+.equal-spacing > a {
     width:20%; /* Reset margin to remove default spacing */
-    color: white; /* Set text color to white */
+    color: rgb(154, 147, 147); /* Set text color to white */
+    text-decoration: none;
+}
+
+.equal-spacing > a:hover {
+    color: rgb(123, 83, 18); /* Set text color to white */
 }
 
 .equal-spacing > span:nth-child(3) {

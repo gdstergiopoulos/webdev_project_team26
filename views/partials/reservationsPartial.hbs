@@ -21,7 +21,7 @@
               {{#if (neq status 'rejected')}}
               <a href="/reservation/edit/{{reservID}}" class="btn btn-primary edit">Edit</a>
               {{/if}}
-              <a href="/change_status/{{reservID}}/cancelled" class="btn btn-primary cancel">Cancel</a>
+              <a href="/change_status/my/{{reservID}}/cancelled" class="btn btn-primary cancel">Cancel</a>
               </li>
               <hr>
             {{/each}}
