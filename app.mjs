@@ -479,15 +479,7 @@ function goHome(req,res){
     if(req.session.loggedin==undefined){
         req.session.loggedin = false;
     }
-
-    if(req.session.role=='admin'){
-        res.redirect('/adminhome');
-    }
-    else{
         res.render('home_page',{layout: 'main', loggname: req.session.username});
-    }
-    
-
 }
 
 
@@ -770,7 +762,7 @@ async function goMyProfile(req,res){
             res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
         }
     }
-    res.render('userprofile', {profilepage: profilepage,info:info, loggname: req.session.username,role : role, layout: 'profile_layout'});
+    res.render('userprofile', {profilepage: profilepage,info:info, loggname: req.session.username,role : req.session.role, layout: 'profile_layout'});
 }
 
 async function goUserProfile(req,res){
@@ -992,11 +984,14 @@ async function editReserv(req,res){
 }
 
 router.route('/').get((req,res)=>res.redirect('/home'));
+
+// router.route('/api/menu').get(listMenu);
 router.route('/menu').get(listAllFoodsRender);
 router.route('/about').get(goAbout);
 router.route('/login').get(checkAuthenticated,goLogin);
 router.route('/login/redirect/:page').get(checkAuthenticated,goLogin);
 router.route('/home').get(goHome);
+// router.route('/menu').get(goMenu);
 router.route('/register').get(goRegister);
 router.route('/reservation').get(checkAuthenticated,goReservation);
 router.route('/reservation').post(checkAuthenticated,makeResv);
@@ -1017,6 +1012,9 @@ router.route('/reservation/edit/:reservID').get(checkAuthenticated,goEditResv);
 router.route('/reservation/edit/:reservID').post(checkAuthenticated,editReserv);
 router.route('/add_reason/:reservID').get(checkAccessRights,goAddReason);
 router.route('/add_reason/:reservID').post(checkAccessRights,addReason);
+
+
+// router.route('/userpickarea').get(goUserPickArea);
 router.route('/addFoodItem').get(checkAccessRights,goAddFoodItem);
 router.route('/addFoodItem').post(checkAccessRights,AddFoodItem);
 router.route('/addFoodItem/:id').get(checkAccessRights,goEditFoodItem);
@@ -1028,9 +1026,13 @@ router.route('/myprofile/page/:page').get(checkAuthenticated,goMyProfile);
 router.route('/gouserProfile/:page/:username').get(checkAccessRights,goUserProfile);
 router.route('/myprofile').get((req,res)=>{res.redirect('/myprofile/page/info')});
 router.route('/logout').get((req,res)=>{req.session.loggedin=false; req.session.username=undefined; res.redirect('/home')});
+// Επίσης έτσι: 
+// Could also be done like this:
+// app.route('/api/tasks').get(listAllTasks);
+// app.route('/').get(listAllTasksRender);
 
 router.use((req, res) => {
-    res.render('catcherror');
+    res.render('catcherror',{role:req.session.role});
 });
 
 
