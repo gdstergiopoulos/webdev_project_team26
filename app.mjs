@@ -920,13 +920,9 @@ router.route('/adminmenu').get(checkAccessRights,goAdminMenu);
 router.route('/assign_table/:reservID').get(checkAccessRights,goAssignTable);
 router.route('/assign_table/:reservID/pickarea/:area').get(checkAccessRights,goPickArea);
 router.route('/assign_table/:reservID/toggletable/:tableID/:area').get(checkAccessRights,goToggleTable);
-<<<<<<< HEAD
-router.route('/change_status/:reservID/:status').get(checkAuthenticated,goChangeStatus);
-=======
 router.route('/change_status/:reservID/:status').get(checkAccessRights,goChangeStatus);
 router.route('/change_status/my/:reservID/cancelled').get(checkAuthenticated,gomyChangeStatus);
 // router.route('/approve_resv/:reservID').get(goApproveResv);
->>>>>>> 132f8c360fe89dfeef43f1b57d7c48e8a370e45e
 router.route('/delete_resv/:reservID').get(checkAccessRights,goDeleteResv);
 router.route('/reservation/edit/:reservID').get(checkAuthenticated,goEditResv);
 router.route('/reservation/edit/:reservID').post(checkAuthenticated,editReserv);
