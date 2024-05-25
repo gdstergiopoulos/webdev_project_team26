@@ -25,7 +25,7 @@ const pool = new pg.Pool({
     // user: process.env.DB_USER,
     // host: 'fagadikodb.internal',
     // database: 'postgres',
-    // password: 'DzXvNY9fLLEyM8o',
+    // password: '###############', //password is hidden for security reasons
     // port: 5432,
 }
 ); 
