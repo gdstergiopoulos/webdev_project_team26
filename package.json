@@ -1,7 +1,7 @@
 {
   "name": "fagadiko",
   "version": "1.0.0",
-  "description": "Παράδειγμα μιας απλής εφαρμογής express.js.",
+  "description": "Project Team 26 web dev",
   "main": "app.mjs",
   "scripts": {
     "clean": "rm -rf node_modules",
@@ -17,7 +17,7 @@
     ]
   },
   "keywords": [],
-  "author": "",
+  "author": "gstergiopoulos@ac.upatras.gr",
   "license": "ISC",
   "type": "module",
   "dependencies": {
