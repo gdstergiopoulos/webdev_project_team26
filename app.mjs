@@ -100,6 +100,7 @@ let listAllFoodsRender = async function (req, res) {
         catch(err){
             console.log(err);
             res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
+        }
         // let foodsq= await model.getMenuActive()
         // // console.log(foodsq);
         // res.render('menu', { loggname: req.session.username ,foods: foodsq }); 
@@ -247,6 +248,7 @@ async function makeResv(req,res){
             }
             catch(err){
                 res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
+            }
             console.log(availability);
             if(availability==0){
                 console.log('No tables available in the entrire restaurant at this time for the requested no. of people');
@@ -261,7 +263,7 @@ async function makeResv(req,res){
                     await model.addReservation(date,time,people,comments,username,area_id);
                 } 
                 catch(err){
-                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
+                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;}
                 console.log('All set, your reservation went through!');
                 errormsg='All set, your reservation went through!';  
                 res.redirect('/reservation?error='+errormsg);
