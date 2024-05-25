@@ -11,17 +11,22 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
   
-const pool = new pg.Pool({
-    // connectionString: process.env.DATABASE_URL,
-    // ssl: {
-    //     rejectUnauthorized: false
-    // }
+const pool = new pg.Pool({   
     
+    //for the local version of the App (with local postgresql server) SEE README
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+
+    //for the fly io version of the App (with fly io postgresql server) SEE README
+
+    // user: process.env.DB_USER,
+    // host: 'fagadikodb.internal',
+    // database: 'postgres',
+    // password: 'DzXvNY9fLLEyM8o',
+    // port: 5432,
 }
 ); 
 
