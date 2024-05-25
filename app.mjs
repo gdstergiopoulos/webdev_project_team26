@@ -99,8 +99,7 @@ let listAllFoodsRender = async function (req, res) {
         }
         catch(err){
             console.log(err);
-            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
-        }
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
         // let foodsq= await model.getMenuActive()
         // // console.log(foodsq);
         // res.render('menu', { loggname: req.session.username ,foods: foodsq }); 
@@ -130,7 +129,7 @@ async function checkLogin(req,res){
         user = await model.getuser(username);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     
     if(user.length==0){
@@ -183,7 +182,7 @@ async function registerUser(req,res){
             mailtaken= await model.checkMail(email);
         }
         catch(err){
-            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
         }
         if(usertaken===1){
             console.log('Username already exists');
@@ -247,8 +246,7 @@ async function makeResv(req,res){
                 availability= await model.checkAvailability(date,time,people,area_id);
             }
             catch(err){
-                res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
-            }
+                res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
             console.log(availability);
             if(availability==0){
                 console.log('No tables available in the entrire restaurant at this time for the requested no. of people');
@@ -263,8 +261,7 @@ async function makeResv(req,res){
                     await model.addReservation(date,time,people,comments,username,area_id);
                 } 
                 catch(err){
-                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
-                }
+                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
                 console.log('All set, your reservation went through!');
                 errormsg='All set, your reservation went through!';  
                 res.redirect('/reservation?error='+errormsg);
@@ -317,7 +314,7 @@ async function makeadminResv(req,res){
                 availability= await model.checkAvailability(date,time,people,area_id);
             }
             catch(err){
-                res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+                res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
             }
             console.log(availability);
             if(availability==0){
@@ -333,7 +330,7 @@ async function makeadminResv(req,res){
                     await model.addReservation(date,time,people,comments,username,area_id);
                 } 
                 catch(err){
-                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+                    res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
                 }
                 console.log('All set, your reservation went through!');
                 errormsg='All set, your reservation went through!';  
@@ -367,7 +364,7 @@ async function goChangeStatus(req,res){
         await model.changeReservStatus(reservID,status);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/adminreserv');   
 }
@@ -379,7 +376,7 @@ async function gomyChangeStatus(req,res){
         await model.changeReservStatus(reservID,status);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/myprofile/page/reservations');   
 }
@@ -391,7 +388,7 @@ async function goDeleteResv(req,res){
         await model.deleteReserv(reservID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/adminreserv');
 }
@@ -434,7 +431,7 @@ async function checkLoginRedirect(req,res){
         user = await model.getuser(username);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
 
     if(user.length==0){
@@ -504,7 +501,7 @@ async function goReservation(req,res){
             confirmed_resv= await model.getAllReservUser(req.session.username, "confirmed");
         }
         catch(err){
-            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
         }
         if(active_resv.length>0 || changed_resv.length>0 || confirmed_resv.length>0){
             var has_active_reserv = true;
@@ -546,7 +543,7 @@ async function goEditResv(req,res){
         res.render('reservation', { reservInfo: reservInfo,errormsg: errormsg,loggname: req.session.username,layout: 'admin_layout' });
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
    
 }
@@ -559,7 +556,7 @@ async function goAdminMenu(req,res){
         foodsinactive= await model.getMenuInactive();
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.render('admin_menu', { layout: 'admin_layout',loggname: req.session.username,foodsactive: foodsactive, foodsinactive: foodsinactive});
 }
@@ -578,7 +575,7 @@ async function goAdminReserv(req,res){
         changed_reservations= await model.getAllReserv("changed");
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
         
     res.render('adminreserv', {loggname: req.session.username,active_reservations:active_reservations,confirmed_reservations:confirmed_reservations,rejected_reservations:rejected_reservations, cancelled_reservations:cancelled_reservations, changed_reservations:changed_reservations,layout: 'admin_layout' });
@@ -593,7 +590,7 @@ async function goAssignTable(req,res){
         reservInfo= await model.getReservInfo(reservID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     
     console.log("this is the reserv info"+reservInfo);
@@ -603,7 +600,7 @@ async function goAssignTable(req,res){
         tablesUsed= await model.getTablesUsed(reservID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     //let tablesInReserv = await model.getTablesInReserv(reservID);
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo,tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
@@ -631,7 +628,7 @@ async function goPickArea(req,res){
         reservInfo= await model.getReservInfo(reservID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
 
     area_id=req.params.area;
@@ -639,7 +636,7 @@ async function goPickArea(req,res){
         tablesUsed= await model.getTablesUsed(reservID);
     }
     catch{
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     //let tablesInReserv = await model.getTablesInReserv(reservID);
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo, tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
@@ -657,14 +654,14 @@ async function goToggleTable(req,res){
         reservInfo= await model.getReservInfo(reservID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
 
     try{
         await model.toggleTable(reservID,tableID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     
     
@@ -672,7 +669,7 @@ async function goToggleTable(req,res){
         tablesUsed= await model.getTablesUsed(reservID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     //let tablesInReserv = await model.getTablesInReserv(reservID);
     res.render('assign_table', { area_id: area_id,reservInfo:reservInfo, tablesUsed: tablesUsed,loggname: req.session.username,layout: 'admin_layout' });
@@ -695,7 +692,7 @@ async function goEditFoodItem(req,res){
         fooditeminfo= await model.getFoodItemInfo(req.params.id);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     console.log(fooditeminfo);
     res.render('addFoodItem', { method: 'edit' ,fooditeminfo: fooditeminfo,loggname: req.session.username,layout: 'admin_layout' });
@@ -711,7 +708,7 @@ async function goMyProfile(req,res){
         info= await model.getProfileInfo(req.session.username);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     let allReserv;
     //update reserv statys
@@ -719,7 +716,7 @@ async function goMyProfile(req,res){
         await model.checkReservStatus();
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     // console.log(info);
     if(req.params.page=='info'){
@@ -738,7 +735,7 @@ async function goMyProfile(req,res){
             userinfo4 = await model.getAllReservUser(req.session.username, "rejected");
         }
         catch(err){
-            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
         }
         allReserv = userinfo.concat(userinfo2);
         info = allReserv.concat(userinfo3);
@@ -750,7 +747,7 @@ async function goMyProfile(req,res){
             info = await model.getReservHistory(req.session.username);
         }
         catch(err){
-            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
         }
     }
     else if(req.params.page=='royalty'){
@@ -759,7 +756,7 @@ async function goMyProfile(req,res){
             info = await model.calcRoyaltyPoints(req.session.username);
         }
         catch(err){
-            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+            res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
         }
     }
     res.render('userprofile', {profilepage: profilepage,info:info, loggname: req.session.username,role : req.session.role, layout: 'profile_layout'});
@@ -844,7 +841,7 @@ async function EditFoodItem(req,res){
         newitem = await model.updateFoodItem(itemID, name, price, description,img);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/adminmenu');
 }
@@ -864,7 +861,7 @@ async function AddFoodItem(req,res){
         newitem = await model.addFoodItem(name, price, description,img);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/adminmenu');
 }
@@ -877,7 +874,7 @@ async function deleteItem(req,res){
         deleteditem = await model.deleteFoodItem(itemID);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/adminmenu');
 }
@@ -889,7 +886,7 @@ async function removeItem(req,res){
         await model.removeFoodItem(itemId);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/adminmenu');
 }
@@ -901,7 +898,7 @@ async function moveToMenu(req,res){
         await model.addOnMenu (itemId);
     }
     catch(err){
-        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
     }
     res.redirect('/adminmenu');
 }
@@ -939,7 +936,7 @@ async function editReserv(req,res){
                         availability= await model.checkAvailability(date,time,people,area_id);
                     }
                     catch(err){
-                        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });
+                        res.render('servererror', { layout: 'main',error: err.message,stacktrace: err.stack });return 0;
                     }
                     console.log(availability);
                     if(availability==0){
